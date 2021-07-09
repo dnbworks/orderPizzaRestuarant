@@ -1,0 +1,19 @@
+{
+  "name": "pizza",
+  "version": "1.0.0",
+  "description": "pizza website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnbworks/pizza.git"
+  },
+  "author": "dnb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnbworks/pizza/issues"
+  },
+  "homepage": "https://github.com/dnbworks/pizza#readme"
+}
