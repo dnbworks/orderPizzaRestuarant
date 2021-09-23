@@ -18,7 +18,9 @@
 .fixed {
   position: fixed;
   top: -103px;
-  left: 0px;
+  max-width: 1420px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 7;
   width: 100%;
   -webkit-animation: down 0.5s ease-in forwards;
@@ -53,6 +55,8 @@
 nav {
   background-image: url("../imgs/bgcolor.jpg");
   background-color: #242424;
+  max-width: 1420px;
+  margin: 0 auto;
 }
 
 nav .links-contianer {
@@ -226,6 +230,9 @@ nav ul.links li a:hover {
 .slider-container {
   position: relative;
   background-color: #4e442f;
+  max-width: 1420px;
+  margin: 0 auto;
+  
 }
 
 .slider {
@@ -277,7 +284,7 @@ nav ul.links li a:hover {
   background-position: right top;
   background-repeat: no-repeat;
   background-size: 320%;
-  height: calc(100vh - 107px);
+  height: calc(100vh - 170px);
   max-height: 600px;
   position: relative;
 }
@@ -293,14 +300,14 @@ nav ul.links li a:hover {
 
 .banner-content h2 {
   color: #242424;
-  font-size: 2rem;
-  font-family: "NotoSans", sans-serif;
+  font-size: 1.4rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .banner-content p {
   color: #e0e0e0;
-  font-family: opensans;
-  font-size: 1rem;
+  font-family: 'Yaldevi', sans-serif;
+  font-size: 15px;
   line-height: 1.7;
 }
 
@@ -310,11 +317,11 @@ nav ul.links li a:hover {
     background-size: 200%;
   }
   .banner-content h2 {
-    font-size: 3rem;
+    font-size: 1.6rem;
   }
   
   .banner-content p {
-    font-size: 1.5rem;
+    font-size: 16px;
   }
 }
 
@@ -333,21 +340,21 @@ nav ul.links li a:hover {
 }
 
 .ones {
-  background-image: url("../imgs/restuarnt.jpg");
+  background-image: url("../img/restuarnt.jpg");
 }
 
 @media screen and (min-width: 576px) {
   .ones {
-    background-image: url("../imgs/banner.jpg");
+    background-image: url("../img/banner.jpg");
   }
 }
 
 .twos {
-  background-image: url("../imgs/banner3.jpg");
+  background-image: url("../img/banner3.jpg");
 }
 
 .threes {
-  background-image: url("../imgs/banner4.jpg");
+  background-image: url("../img/banner4.jpg");
 }
 
 
@@ -466,24 +473,24 @@ main a {
 }
 
 .one {
-  background-image: url("../imgs/type1.jpg");
+  background-image: url("../img/type1.jpg");
 }
 
 .two {
-  background-image: url("../imgs/type2.jpg");
+  background-image: url("../img/type2.jpg");
 }
 
 .three {
-  background-image: url("../imgs/type3.jpg");
+  background-image: url("../img/type3.jpg");
 }
 
 .four {
-  background-image: url("../imgs/type4.jpg");
+  background-image: url("../img/type4.jpg");
 }
 
 footer {
   background-color: rgb(27, 27, 27);
-  background-image: url("../imgs/footer.jpg");
+  background-image: url("../img/footer.jpg");
   background-size: 100%;
   padding: 20px 0px;
 }
@@ -601,6 +608,13 @@ footer .copyright {
 .map-section {
   background-color: #333;
   padding: 30px 0;
+  max-width:1320px ;
+  margin: 0 auto;
+}
+@media screen and (max-width:576px){
+.map-section #contact{
+ margin-top: 15px;
+} 
 }
 .map-section h4 {
   font-family: opensans;

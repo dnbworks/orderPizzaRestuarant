@@ -17,6 +17,8 @@
 nav {
   background-color: #242424;
   background-image: url("../imgs/bgcolor.jpg");
+  max-width: 1420px;
+  margin: 0 auto;
   
 }
 
@@ -191,20 +193,38 @@ nav ul.links li a:hover {
 }
 
 footer {
-  background-image: url("../imgs/footer.jpg");
+  background-image: url("../img/footer.jpg");
   background-size: 100%;
   padding: 20px 0px;
+  margin-top: 10px;
+  max-width: 1420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 footer .column {
   border-bottom: 1px dotted #686868;
   border-right: none;
+
+
+}
+
+
+footer .column:nth-child(2) {
+  border-bottom: none;
+ 
 }
 
 footer .column:nth-child(3) {
   border-right: none;
-}
 
+}
+@media screen and (max-width:576px){
+footer .column:nth-child(3) {
+  border-right: none;
+  display: none;
+}
+}
 @media screen and (min-width: 576px) {
   footer .column {
     border-right: 1px dotted #686868;
@@ -280,16 +300,5 @@ footer label {
   padding: 30px 0;
 }
 
-.catergory {
-  background-color: #202020;
-  color: #fff;
-}
 
-.catergory ul li {
-  padding: 15px 20px;
-  list-style: none;
-}
 
-.catergory ul li span {
-  font-family: opensans;
-}

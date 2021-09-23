@@ -2,3 +2,103 @@
     color: #fff;
     text-decoration: none;
 }
+
+.catergory {
+    background-color: #202020;
+    color: #fff;
+    font-family: opensans;
+}
+
+.order-here ul li{
+    list-style: none;
+    padding: 10px 12px;
+}
+
+.flex-item {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+@media screen and (max-width:576px){
+
+    .item {
+        max-width: 100%;
+    }
+
+    .catergory {
+        overflow: scroll;
+    }
+
+    .catergory::-webkit-scrollbar {
+        display: none;
+    }
+    .order {
+        display: none;
+    }
+    .order-here ul {
+        width: 660px;
+        overflow: hidden;
+        margin-left: 100px;
+    }
+
+    .order-here ul li{
+        float: left;
+        margin-right: 10px;
+    }
+
+    .catergory ul li {
+        padding: 8px;
+        list-style: none;
+    }
+
+    .fa-chevron-right {
+        display: none;
+    }
+}
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+.views-field-price__number {
+    font-family: 'Futura Medium',Calibri,Helvetica,sans-serif;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: #27251F;
+}
+
+.item {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    height: 374px;
+    margin-bottom: 10px;
+    max-width:250px;
+    width:100%;
+    margin: 0 5px;
+}
+
+
+.views-product-grid .views-field-body {
+    height: 130px;
+}
+.views-custom-grid .views-col .left-aligned, .views-product-grid .views-field-body {
+    font-size: 0.95em;
+    text-align: left;
+    padding: 25px 10px 10px 10px;
+    max-width: 255px;
+    width: 100%;
+    margin: 10px auto 10px auto;
+    height: 130px;
+}
+
+.b {
+    border: 1px solid#111;
+}
+
+
