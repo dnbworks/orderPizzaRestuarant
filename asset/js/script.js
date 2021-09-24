@@ -33,7 +33,6 @@ window.addEventListener("scroll", function () {
 
 
 
-
 $(document).ready(function(){
     $(".slider").slick({
         arrows:true,
@@ -46,23 +45,11 @@ $(document).ready(function(){
     });
 });
 
-class Elements {
-    constructor(){
-        this.nav = document.querySelector('nav');
-    }
-    
-}
-
-var domElements = new Elements();
-
-// console.log(domElements.nav);
 
 
 // mapbox 
 
  mapboxgl.accessToken = 'pk.eyJ1IjoiZG9veW9uZyIsImEiOiJja2xnbXJ5ZzAyNHFmMnVzNjl3anNiZWo1In0.gUrQIyXrRvO7xxMxrvxYLg';
-
-
 
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     enableHighAccuracy:true
@@ -90,6 +77,5 @@ function setMaps(center){
 }
 
 
-
-
 // form validation
+

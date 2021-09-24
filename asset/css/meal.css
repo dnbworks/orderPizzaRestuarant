@@ -129,3 +129,34 @@
 }
 
 
+.sidenav {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(39, 39, 39, 0.938);
+    z-index: 10;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .closebtn {
+    background-color: #7a7a1d;
+    width: 50px;
+    border-radius: 4px;
+    padding: 5px 0;
+    margin: 15px;
+  }
+  
+  .closebtn img {
+    width: 40px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .shownav {
+    top: 0;
+  }
+
+

@@ -1,0 +1,162 @@
+[
+    {
+        "type": "Special Offers",
+        "data" : [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            }
+        ]
+
+    },
+
+    {
+        "type": "Pizza",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/ANGUS STEAKHOUSE_71.png",
+                "title": "Angus steakhouse",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 290.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/angus-burger-pizza_0_0.png",
+                "title": "Angus burger pizza",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 270.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/BELLY BUSTER_67.png",
+                "title": "Belly Buster",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/classic_cheese_1.png",
+                "title": "Classic cheese",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/hawaiian_delight_5.png",
+                "title": "Hawaiian Delight",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/hi-protein_supreme_1.png",
+                "title": "High protein supreme",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/MANAGER'S CHOICE_48.png",
+                "title": "Manger choice",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/PEPPERONI CRRRUNCH_45.png",
+                "title": "PEPPERONI CRUNCH",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/PEPPERONI_48.png",
+                "title": "PEPPERONI",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            }
+            
+            
+            
+        ]
+    },
+
+    {
+        "type": "Pasta",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            }
+        ]
+    },
+
+    {
+        "type": "Group Meals",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            }     
+        ]
+    },
+
+    {
+        "type": "Solo Meals",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            }
+        ]
+    },
+
+    {
+        "type": "Sides",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            }
+        ]
+        
+    },
+
+    {
+        "type": "Drinks",
+        "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/",
+                "title": "",
+                "description": "",
+                "price": ""
+            } 
+        ]
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+
