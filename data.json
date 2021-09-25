@@ -3,16 +3,16 @@
         "type": "Special Offers",
         "data" : [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/SEAFOOD MARINARA_9.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
             },
             {
                 "img" : "http://127.0.0.1:5500/asset/img/",
@@ -31,7 +31,38 @@
                 "img" : "http://127.0.0.1:5500/asset/img/ANGUS STEAKHOUSE_71.png",
                 "title": "Angus steakhouse",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
-                "price": "PHP 290.00"
+                "price": "PHP 290.00",
+                "options": [
+                    {
+                        "size": [
+                            "Regular",
+                            "Large",
+                            "Party"
+                        ]
+                    },
+                    {
+                        "pizza_crust": [
+                            "Thin Crust",
+                            "Hand Tossed"
+                        ]
+                    },
+                    {
+                        "Special_Instruction": ""
+                    },
+                    {
+                        "QUANTITY": 1
+                    },
+                    {
+                        "Flavor": [
+                            "Hot Chix", "Sweet Soy", "Garlic Parmensa", "Sriracha"
+                        ]
+                    }, 
+                    {
+                        "cut": [
+                            "Regular Cut", "Square Cut"
+                        ]
+                    }
+                ]
             },
             {
                 "img" : "http://127.0.0.1:5500/asset/img/angus-burger-pizza_0_0.png",
@@ -91,10 +122,34 @@
         "type": "Pasta",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/pasta-1.png",
+                "title": "LARGE CHICKEN ALFREDO",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/pasta-2.png",
+                "title": "Large Shimp aglio olio",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/pasta-3.png",
+                "title": "LARGE  SHRIMP ALFREDO",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/pasta-4.png",
+                "title": "LARGE - SPAGHETTI AND MEATBALLS",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/pasta-5.png",
+                "title": "MYMIX - DEL",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
             }
         ]
     },
@@ -103,17 +158,79 @@
         "type": "Group Meals",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
-            }     
+                "img" : "http://127.0.0.1:5500/asset/img/basket_of_mojos_2.png",
+                "title": "basket of mojos",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/BUDDY PACK_45.png",
+                "title": "Buddy Pack",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/buffalo_wings_0.png",
+                "title": "buffalo wings",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/CALAMARI CRRRUNCH_4.png",
+                "title": "CALAMARI CRRRUNCH",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/FAMILY PACK_7.png",
+                "title": "FAMILY PACK",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/fmd_1_0.png",
+                "title": "FAMILY PACK",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/fmd_2_1.png",
+                "title": "FAMILY PACK",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/fmd_3_0.png",
+                "title": "FAMILY PACK",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/mmd.png",
+                "title": "FAMILY PACK",
+                "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, dolor repudiandae.",
+                "price": "PHP 235.00"
+            }
+            
+            
         ]
     },
 
     {
         "type": "Solo Meals",
         "data": [
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/SEAFOOD MARINARA_9.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
+            },
             {
                 "img" : "http://127.0.0.1:5500/asset/img/",
                 "title": "",
@@ -140,11 +257,29 @@
         "type": "Drinks",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
-            } 
+                "img" : "http://127.0.0.1:5500/asset/img/coke-large.png",
+                "title": "Large - Coca Cola",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 100.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/drink-1.png",
+                "title": "Glass of Coke",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 100.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/drink-2.png",
+                "title": "Glass of Coke",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 100.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/drink-3.png",
+                "title": "Glass of Royal",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 100.00"
+            }
         ]
     }
 ]

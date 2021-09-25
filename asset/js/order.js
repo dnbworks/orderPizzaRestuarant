@@ -19,21 +19,30 @@ window.onload = function(){
 
 }
 
-ul.addEventListener("click", function(e){
-    if(e.target.className == "type"){
+var lis = ul.querySelectorAll("li");
 
-        setTimeout(function(){
-            var url = new URLSearchParams(window.location.search);
-            url.append('type', e.target.textContent)
-            getMenu()
-            .then(data => render(data, menu, e.target.textContent))
-            .catch(err => console.log("error", err));
-        }, 500);
-        
-        
-    }
-  
-});
+lis.forEach(li => {
+    li.addEventListener('click', function(e){
+        var preloader = document.querySelector(".pre-loader");
+        preloader.style.display = "block";
+        e.preventDefault();
+        // Start highlighting tabs
+        lis.forEach(li => {
+            li.classList.remove('active');
+        });
+        this.classList.add('active');
+        // End highlighting tabs
+
+        // fetch data for clicked tab
+        let type = this.id;
+   
+        getMenu()
+        .then(data => render(data, menu, type))
+        .catch(err => console.log("error", err));
+      
+            
+    });
+})
 
 
 
@@ -45,28 +54,52 @@ const getMenu = async () => {
 
 
 function render(data, element, type){
-    
+    var items = Array.from(element.querySelectorAll(".item"));
+    var available;
     data.forEach(item => {
+        var item_data = item.data;
         if(type == item.type){
-            item.data.forEach((meal, index) => {
-                if(index < Array.from(element.querySelectorAll(".item")).length){
-                    Array.from(element.querySelectorAll(".item")).forEach((element, count) => {
-                        if(index == count){
-                            //  console.log(index);
-                             var price, title, img;
-                            price = element.querySelector(".views-field-price__number span").textContent = meal.price ,
-                            title = element.querySelector(".product-list-title a").textContent = meal.title,
-                            img = element.querySelector(".media img").src = meal.img;
-                        }
-                        
-                    });
-                   
-                }
-               
+            if(item.data.length < 6){
+                available = item.data.length;
+            } else {
+                available = 6;
+            }
+
+            items.forEach(item => {
+                // item.querySelector(".views-field-price__number span").textContent = "",
+                // item.querySelector(".product-list-title a").textContent = "",
+                // item.querySelector(".product-list-title a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
+                // item.querySelector(".media img").src = "",
+                // item.querySelector(".views-field-body p").textContent = "";
+
+                item.style.display = "none";
             });
+
+            var dispalyItems = items.slice(0, available);
+
+            for(let i = 0; i < item_data.length; i++){
+
+                dispalyItems.forEach((item, index ) => {
+                    item.style.display = "block";
+                    if(index == i){
+                        item.querySelector(".views-field-price__number span").textContent = item_data[i].price,
+                        item.querySelector(".product-list-title a").textContent = item_data[i].title,
+                        item.querySelector(".product-list-title a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
+                        item.querySelector(".media img").src = item_data[i].img,
+                        item.querySelector(".views-field-body p").textContent = item_data[i].description;
+                    }
+                    
+                   
+                   
+                });
+            
+            }
+
+     
         }
-    });
+    });   
+    var preloader = document.querySelector(".pre-loader");
+    preloader.style.display = "none"; 
     
-  
 }
 

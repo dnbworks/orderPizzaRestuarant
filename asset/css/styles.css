@@ -79,6 +79,9 @@ nav ul.links::after {
   clear: both;
 }
 
+.active-link {
+  color: #efefa4;
+}
 nav ul.links li {
   float: left;
   margin-right: 25px;
