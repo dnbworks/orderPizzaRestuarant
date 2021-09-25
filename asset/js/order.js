@@ -82,6 +82,7 @@ function render(data, element, type){
                 dispalyItems.forEach((item, index ) => {
                     item.style.display = "block";
                     if(index == i){
+                        item.querySelector(".field-content a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
                         item.querySelector(".views-field-price__number span").textContent = item_data[i].price,
                         item.querySelector(".product-list-title a").textContent = item_data[i].title,
                         item.querySelector(".product-list-title a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,

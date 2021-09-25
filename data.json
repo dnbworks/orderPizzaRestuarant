@@ -15,11 +15,24 @@
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/SHRIMP AGLIO OLIO_6.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/original_bunch_of_lunch.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
+            },
+            {
+                "img" : "http://127.0.0.1:5500/asset/img/PRIMA LASAGNA_7.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
             }
+
         ]
 
     },
@@ -232,10 +245,10 @@
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/PRIMA LASAGNA_7.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
             }
         ]
     },
@@ -244,10 +257,10 @@
         "type": "Sides",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/",
-                "title": "",
-                "description": "",
-                "price": ""
+                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "title": "Carbonara Supreme",
+                "description": "Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.",
+                "price": "PHP 290.00"
             }
         ]
         
