@@ -16,7 +16,16 @@ menubtn.addEventListener("click", function(){
 });
 
 window.onload = function(){
+    var items = document.querySelectorAll(".item");
+    if(window.innerWidth < 576){
 
+        console.log(window.innerWidth);
+        items.forEach(item => {
+            item.querySelector(".views-field-body p").textContent = item.querySelector(".views-field-body p").textContent.slice(0, 50) + "...";
+            // item.style.display = "none";
+        });
+    }
+    
 }
 
 var lis = ul.querySelectorAll("li");
@@ -82,10 +91,10 @@ function render(data, element, type){
                 dispalyItems.forEach((item, index ) => {
                     item.style.display = "block";
                     if(index == i){
-                        item.querySelector(".field-content a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
+                        item.querySelector(".field-content a").href = `meal.html?type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
                         item.querySelector(".views-field-price__number span").textContent = item_data[i].price,
                         item.querySelector(".product-list-title a").textContent = item_data[i].title,
-                        item.querySelector(".product-list-title a").href = `meal.html?pizza_type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
+                        item.querySelector(".product-list-title a").href = `meal.html?type=${type}&pizza_id=1&pizza_name=${item_data[i].title}`,
                         item.querySelector(".media img").src = item_data[i].img,
                         item.querySelector(".views-field-body p").textContent = item_data[i].description;
                     }
@@ -103,4 +112,14 @@ function render(data, element, type){
     preloader.style.display = "none"; 
     
 }
+
+
+const search = document.querySelector('.search-container')
+const btn = document.querySelector('.search-container span')
+const input = document.querySelector('.search-container input')
+
+btn.addEventListener('click', () => {
+    input.classList.toggle('active');
+    // input.focus();
+})
 

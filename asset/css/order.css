@@ -20,8 +20,10 @@
     flex-flow: row;
     flex-wrap: wrap;
     width: 100%;
-    /* justify-content: center; */
+    align-content: flex-start;
 }
+   
+
 
 .menu-content {
     min-height: 768px;
@@ -32,42 +34,19 @@
     color: #111;
 }
 
-@media screen and (max-width:576px){
 
-    .item {
-        max-width: 100%;
-    }
-
-    .catergory {
-        overflow: scroll;
-    }
-
-    .catergory::-webkit-scrollbar {
-        display: none;
-    }
-    .order {
-        display: none;
-    }
-    .order-here ul {
-        width: 660px;
-        overflow: hidden;
-        margin-left: 100px;
-    }
-
-    .order-here ul li{
-        float: left;
-        margin-right: 10px;
-    }
-
-    .catergory ul li {
-        padding: 8px;
-        list-style: none;
-    }
-
-    .fa-chevron-right {
-        display: none;
-    }
+.item {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    height: 374px;
+    margin-bottom: 10px !important;
+    max-width:250px;
+    width:100%;
+    margin: 0 5px;
+    padding: 10px;
 }
+
+
 
 
 
@@ -83,16 +62,7 @@
     color: #27251F;
 }
 
-.item {
-    border: 1px solid #eee;
-    border-radius: 6px;
-    height: 374px;
-    margin-bottom: 10px !important;
-    max-width:250px;
-    width:100%;
-    margin: 0 5px;
-    padding: 10px;
-}
+
 
 .product-list-title {
     /* width: 70%; */
@@ -188,6 +158,78 @@
     left: 50%;
     transform: translateX(-50%, -30%);
     z-index: 4;
+}
+
+@media screen and (max-width:576px){
+    .menu-content {
+        min-height: 668px;
+    }
+    .flex-item {
+        margin-top: 20px;
+        justify-content: space-around;
+    }
+    .item {
+       width: 155px;
+       padding: 5px;
+       height: 324px;
+    }
+
+    .media--image img {
+        width: 100%;
+        height: 170px;
+        -o-object-fit: contain;
+        object-fit: contain;
+    }
+
+    .views-field-price__number span {
+        font-size: 16px;
+    }
+
+    .product-list-title a{
+        font-size: 16px;
+    }
+
+    .catergory {
+        overflow: scroll;
+    }
+
+    .catergory::-webkit-scrollbar {
+        display: none;
+    }
+    .order {
+        display: none;
+    }
+    .order-here ul {
+        width: 660px;
+        overflow: hidden;
+        margin-left: 100px;
+    }
+
+    .order-here ul li{
+        float: left;
+        margin-right: 10px;
+    }
+
+    .order-here ul li a{
+        font-size: 14px;
+    }
+
+    .catergory ul li {
+        padding: 8px;
+        list-style: none;
+    }
+
+    .fa-chevron-right {
+        display: none;
+    }
+
+    .pre-loader img{
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%, -15%);
+        z-index: 4;
+    }
 }
 
 
