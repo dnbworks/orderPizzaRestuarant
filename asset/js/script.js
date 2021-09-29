@@ -1,17 +1,4 @@
-var menubtn = document.querySelector(".menu");
-var sidenav = document.querySelector(".sidenav");
-var closebtn = document.querySelector(".closebtn");
-
 var nav = document.querySelector("nav");
-
-closebtn.addEventListener("click", function(){
-    sidenav.classList.remove("shownav");
-});
-
-menubtn.addEventListener("click", function(){
-    sidenav.classList.add("shownav");
-});
-
 
 window.addEventListener("scroll", function () {
     var slider = this.document.querySelector('.slider-container');
@@ -31,25 +18,23 @@ window.addEventListener("scroll", function () {
     }
 });
 
-
-
+// slider
 $(document).ready(function(){
     $(".slider").slick({
         arrows:true,
         autoplay:true,
-        speed:1000,
+        speed:4000,
         dots:true,
         prevArrow: ".left",
         nextArrow: ".right",
-        //fade:true
+        fade:true
     });
 });
 
 
 
 // mapbox 
-
- mapboxgl.accessToken = 'pk.eyJ1IjoiZG9veW9uZyIsImEiOiJja2xnbXJ5ZzAyNHFmMnVzNjl3anNiZWo1In0.gUrQIyXrRvO7xxMxrvxYLg';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG9veW9uZyIsImEiOiJja2xnbXJ5ZzAyNHFmMnVzNjl3anNiZWo1In0.gUrQIyXrRvO7xxMxrvxYLg';
 
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     enableHighAccuracy:true

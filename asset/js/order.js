@@ -114,12 +114,4 @@ function render(data, element, type){
 }
 
 
-const search = document.querySelector('.search-container')
-const btn = document.querySelector('.search-container span')
-const input = document.querySelector('.search-container input')
-
-btn.addEventListener('click', () => {
-    input.classList.toggle('active');
-    // input.focus();
-})
 

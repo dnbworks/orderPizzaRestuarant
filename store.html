@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="asset/css/header.css">
 
     <link rel="stylesheet" href="asset/css/meal.css">
+    <link rel="stylesheet" href="asset/css/global.css">
+
     <link rel="shortcut icon" href="asset/img/logo.png" type="image/png">
 
     <script src="asset/js/font_awesome.js"></script>
+    <script src="asset/js/global.js" defer></script>
 </head>
 <body>
     <nav>
@@ -46,6 +49,10 @@
                             <li><span><i class="fab fa-twitter"></i></span></li>
                             <li><span><i class=" fab fa-instagram"></i></span></li>
                         </ul>
+                        <div class="cartBtn-div">
+                            <img src="asset/img/cart.png" alt="" srcset="" class="cartBtn">
+                            <span class="amount">0</span>
+                        </div>
                     </div>
                     <div class="links-contianer">
                         <ul class="links">
@@ -59,6 +66,18 @@
     
     
                 </div>
+            </div>
+            <div class="cart">
+                <div class="d-flex justify-content-between py-2">
+                    <span class="clearbtn">CLEAR CART</span>
+                    <img src="asset/img/cancel.png" alt="" srcset="" width="20px" height="20px">
+                </div>
+                <p class="py-2">Your cart is empty</p> 
+                <div class="d-flex justify-content-between py-2">
+                  <span>Total</span>
+                  <span>Php 0.00</span>      
+                </div>
+                <a href="#">CHECKOUT</a>
             </div>
         </div>
     </nav>
@@ -110,18 +129,24 @@
                     </ul>
                 </div>
             </div>
-            <p class="copyright">Copyright © 2021 Chris Pizza <sup>&reg;</sup> | All Rights Reseved.  Disclamer: This website is for educational purposes only. Contents are owned by respective creditors.</p>
+            <p class="copyright">Copyright © 2021 Chris Pizza <sup>&reg;</sup> | Disclamer: This website is for educational purposes only. Contents are owned by respective creditors.</p>
         </div>
     </footer>
 
 
-    <!-- <div class="sidenav">
-        <div class="container-fuild d-flex justify-content-end">
-            <div class="closebtn">
-                <img src="asset/img/closebtn.png" alt="" srcset="">
-            </div>
+    <div class="sidenav">
+        <div class="closebtn">
+            <img src="asset/img/closebtn.png" alt="" srcset="">
         </div>
-    </div> -->
+        <div class="container">
+            <ul>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="order.html">Menu</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </div>
+    </div>
 
     
     <script src="asset/js/jquery.min.js"></script>

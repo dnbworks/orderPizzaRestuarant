@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="asset/css/meal.css">
     <link rel="stylesheet" href="asset/css/global.css">
     <link rel="shortcut icon" href="asset/img/logo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="asset/css/magnifier.css">
 
     <script src="asset/js/font_awesome.js"></script>
     <script src="asset/js/global.js" defer></script>
+  
 </head>
 <body>
     <nav>
@@ -52,6 +54,7 @@
                             <img src="asset/img/cart.png" alt="" srcset="" class="cartBtn">
                             <span class="amount">0</span>
                         </div>
+                        
                     </div>
                     <div class="links-contianer">
                         <ul class="links">
@@ -67,28 +70,82 @@
                 </div>
             </div>
             <div class="cart">
-                <div class="d-flex justify-content-between py-2">
-                    <span class="clearbtn">CLEAR CART</span>
-                    <img src="asset/img/cancel.png" alt="" srcset="" width="20px" height="20px">
-                </div>
-                <p class="py-2">Your cart is empty</p> 
-                <div class="d-flex justify-content-between py-2">
-                  <span>Total</span>
-                  <span>Php 0.00</span>      
-                </div>
-                <a href="#">CHECKOUT</a>
+              <div class="d-flex justify-content-between py-2">
+                  <span class="clearbtn">CLEAR CART</span>
+                  <img src="asset/img/cancel.png" alt="" srcset="" width="20px" height="20px">
+              </div>
+              <p class="py-2">Your cart is empty</p> 
+              <div class="d-flex justify-content-between py-2">
+                <span>Total</span>
+                <span>Php 0.00</span>      
+              </div>
+              <a href="#">CHECKOUT</a>
             </div>
         </div>
     </nav>
 
     <main>
-        
-
-
+        <div class="container">
+            
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <h3>Checkout</h3>
+                    <p class="mb-4">Billing Details</p>
+                    <form action="" method="post">
+                        <div class="form-control">
+                            <label for="email">Email Address</label>
+                            <input type="text" name="email" id="email">
+                        </div>
+                        <div class="form-control">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="form-control">
+                            <label for="address">Address</label>
+                            <input type="text" name="address" id="address">
+                        </div>
+                        <div class="form-control">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" id="city">
+                                </div>
+                                <div class="col-6">
+                                    <label for="province">Province</label>
+                                    <input type="text" name="province" id="province">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="postal_code">Postal Code</label>
+                                    <input type="text" name="postal_code" id="postal_code">
+                                </div>
+                                <div class="col-6">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" name="phone" id="phone">
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <p class="mb-4">Payment Details</p>
+                        <div class="form-control">
+                            <label for="card_name">Name of Card</label>
+                            <input type="text" name="card_name" id="card_name">
+                        </div>
+                         <div class="form-control">
+                            <label for="card_type">Credit or debit card</label>
+                            <input type="text" name="card_type" id="card_type">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5">
+                    <p class="mb-4">Your Order</p>
+                </div>
+            </div>
+        </div>
     </main>
-
-
-
 
     
     <footer>
@@ -150,7 +207,13 @@
     
     <script src="asset/js/jquery.min.js"></script>
     <script src="asset/js/slick.js"></script>
-    <script src="asset/js/font_awesome.js"></script>
+    <script src="asset/js/Event.js"></script>
+    <script src="asset/js/Magnifier.js"></script>
+    <script src="asset/js/meal.js"></script>
+    <script>
+      
+        
+    </script>
 </body>
 </html>
 
