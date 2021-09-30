@@ -3,31 +3,31 @@
         "type": "Special Offers",
         "data" : [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/SEAFOOD MARINARA_9.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/SEAFOOD MARINARA_9.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/salad_chicken_n_pizza_0.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/SHRIMP AGLIO OLIO_6.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/SHRIMP AGLIO OLIO_6.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/original_bunch_of_lunch.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/original_bunch_of_lunch.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/PRIMA LASAGNA_7.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/PRIMA LASAGNA_7.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
@@ -41,7 +41,7 @@
         "type": "Pizza",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/ANGUS STEAKHOUSE_71.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/ANGUS STEAKHOUSE_71.png",
                 "title": "Angus steakhouse",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 290.00",
@@ -78,49 +78,49 @@
                 ]
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/angus-burger-pizza_0_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/angus-burger-pizza_0_0.png",
                 "title": "Angus burger pizza",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 270.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/BELLY BUSTER_67.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/BELLY BUSTER_67.png",
                 "title": "Belly Buster",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/classic_cheese_1.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/classic_cheese_1.png",
                 "title": "Classic cheese",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/hawaiian_delight_5.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/hawaiian_delight_5.png",
                 "title": "Hawaiian Delight",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/hi-protein_supreme_1.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/hi-protein_supreme_1.png",
                 "title": "High protein supreme",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/MANAGER'S CHOICE_48.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/MANAGER'S CHOICE_48.png",
                 "title": "Manger choice",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/PEPPERONI CRRRUNCH_45.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/PEPPERONI CRRRUNCH_45.png",
                 "title": "PEPPERONI CRUNCH",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/PEPPERONI_48.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/PEPPERONI_48.png",
                 "title": "PEPPERONI",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
@@ -135,31 +135,31 @@
         "type": "Pasta",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/pasta-1.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/pasta-1.png",
                 "title": "LARGE CHICKEN ALFREDO",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/pasta-2.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/pasta-2.png",
                 "title": "Large Shimp aglio olio",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/pasta-3.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/pasta-3.png",
                 "title": "LARGE  SHRIMP ALFREDO",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/pasta-4.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/pasta-4.png",
                 "title": "LARGE - SPAGHETTI AND MEATBALLS",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/pasta-5.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/pasta-5.png",
                 "title": "MYMIX - DEL",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
@@ -171,25 +171,25 @@
         "type": "Group Meals",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/fmd_2_1.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/fmd_2_1.png",
                 "title": "FAMILY PACK",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/fmd_3_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/fmd_3_0.png",
                 "title": "FAMILY PACK",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/mmd.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/mmd.png",
                 "title": "FAMILY PACK",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/fmd_1_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/fmd_1_0.png",
                 "title": "FAMILY PACK",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
@@ -202,19 +202,19 @@
         "type": "Solo Meals",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/SEAFOOD MARINARA_9.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/SEAFOOD MARINARA_9.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/salad_chicken_n_pizza_0.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/PRIMA LASAGNA_7.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/PRIMA LASAGNA_7.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
@@ -226,37 +226,37 @@
         "type": "Chicken",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/salad_chicken_n_pizza_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/salad_chicken_n_pizza_0.png",
                 "title": "Carbonara Supreme",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 290.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/basket_of_mojos_2.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/basket_of_mojos_2.png",
                 "title": "basket of mojos",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/BUDDY PACK_45.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/BUDDY PACK_45.png",
                 "title": "Buddy Pack",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/buffalo_wings_0.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/buffalo_wings_0.png",
                 "title": "buffalo wings",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/CALAMARI CRRRUNCH_4.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/CALAMARI CRRRUNCH_4.png",
                 "title": "CALAMARI CRRRUNCH",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/FAMILY PACK_7.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/FAMILY PACK_7.png",
                 "title": "FAMILY PACK",
                 "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
                 "price": "PHP 235.00"
@@ -269,25 +269,25 @@
         "type": "Drinks",
         "data": [
             {
-                "img" : "http://127.0.0.1:5500/asset/img/coke-large.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/coke-large.png",
                 "title": "Large - Coca Cola",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 100.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/drink-1.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/drink-1.png",
                 "title": "Glass of Coke",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 100.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/drink-2.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/drink-2.png",
                 "title": "Glass of Coke",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 100.00"
             },
             {
-                "img" : "http://127.0.0.1:5500/asset/img/drink-3.png",
+                "img" : "https://dnbworks.github.io/orderPizzaRestuarant/asset/img/drink-3.png",
                 "title": "Glass of Royal",
                 "description": "Olive oil-coated pasta lightly sauteed with fresh garlic.",
                 "price": "PHP 100.00"
