@@ -6,6 +6,10 @@
 }
 
 
+body {
+  background-image: url('../img/logo.png');
+  background-size: 90px;
+}
 
 @font-face {
   src: url("../fonts/OpenSans-Regular.ttf");
@@ -250,6 +254,7 @@ nav ul.links li a:hover {
   background-color: #4e442f;
   max-width: 1420px;
   margin: 0 auto;
+  min-height: 474px;
   
 }
 

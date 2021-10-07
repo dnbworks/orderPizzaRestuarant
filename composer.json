@@ -1,0 +1,15 @@
+{
+    "name": "dnbworks/order-pizza-restuarant",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dnbworks",
+            "email": "dooyongnsaakobalderama@gmail.com"
+        }
+    ],
+    "require": {}
+}
