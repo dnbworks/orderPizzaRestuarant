@@ -9,6 +9,7 @@ class Application {
     public Router $router;
     public Request $request;
     public Response $response;
+    public Render $render;
     public string $userClass;
     public static Application $app;
     public ?Controller $controller = null;
@@ -30,6 +31,7 @@ class Application {
         $this->db = new Database($config['db']);
         $this->session = new Session();
         $this->view = new View();
+        $this->render = new Render();
 
         $userId = Application::$app->session->get('user');
         if ($userId) {

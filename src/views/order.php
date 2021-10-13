@@ -67,7 +67,7 @@
                             <div class="item">
                             <div class="views-field views-field-field-product-image">
                                 <div class="field-content">
-                                    <a href="/order?type=<?= $type ?>&name=<?= $pizza["title"] ?>">
+                                    <a href="/order?type=<?= $pizza["category"] ?>&name=<?= $pizza["title"] ?>">
                                         <div class="media media--blazy  media--image">
                                             <img height="220" width="220" class="b-lazy media__image media__element b-loaded" alt="Carbonara Supreme" src="/asset/img/<?= $pizza["img"] ?>" typeof="foaf:Image">
                                         </div>

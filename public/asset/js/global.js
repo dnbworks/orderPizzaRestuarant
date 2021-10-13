@@ -4,7 +4,7 @@ var closebtn = document.querySelector(".closebtn");
 
 const cancel = document.querySelector(".cart img");
 const cart = document.querySelector(".cart");
-const cartBtn = document.querySelector(".cartBtn");
+const cartBtn = document.querySelector(".cartBtn-div");
 const shadow = document.querySelector(".shadow");
 
 var nav = document.querySelector("nav");

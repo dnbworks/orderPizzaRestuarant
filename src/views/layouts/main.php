@@ -46,14 +46,19 @@
                                 <input type="text">
                             </form>
                             <span><i class="fas fa-search"></i></span>
+                            <span>search</span>
                         </div>
                         <ul class="social-media">
                             <li><span><i class="fab fa-facebook-f"></i></span></li>
                             <li><span><i class="fab fa-twitter"></i></span></li>
                             <li><span><i class=" fab fa-instagram"></i></span></li>
                         </ul>
+                        <a href="/account" class="account" style="display: inline-block;">
+                            <img src="asset/img/account.png" alt="" srcset="" width="24px">
+                        </a>
+                            
                         <div class="cartBtn-div">
-                            <img src="asset/img/cart.png" alt="" srcset="" class="cartBtn">
+                            <img src="asset/img/cart.png" alt="" srcset="">
                             <span class="amount">0</span>
                         </div>
                     </div>
@@ -74,7 +79,7 @@
                   <span>Total</span>
                   <span>Php 0.00</span>      
                 </div>
-                <a href="#">CHECKOUT</a>
+                <a href="/checkout">CHECKOUT</a>
             </div>
         </div>
     </nav>

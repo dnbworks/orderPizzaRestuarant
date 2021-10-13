@@ -11,5 +11,8 @@
             "email": "dooyongnsaakobalderama@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.3",
+        "phpunit/phpunit": "^9.5"
+    }
 }

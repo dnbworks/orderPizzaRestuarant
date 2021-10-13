@@ -45,7 +45,7 @@ lis.forEach(li => {
         // fetch data for clicked tab
         let type = this.id;
         const url = `http://localhost:8080/api?type=${type}`;
-        // console.log(url);
+        console.log(url);
    
         getMenu(url)
         .then(data => render(data, menu, type))
@@ -59,7 +59,7 @@ lis.forEach(li => {
 const getMenu = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data.data);
+    // console.log(data);
     return data;
 };
 
@@ -67,6 +67,7 @@ const getMenu = async (url) => {
 function render(data, element, type){
     var items = Array.from(element.querySelectorAll(".item"));
     var available;
+    console.log(data);
 
     if(data.data.length < 6){
         available = data.data.length;

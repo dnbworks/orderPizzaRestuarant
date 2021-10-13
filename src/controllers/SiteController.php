@@ -23,7 +23,7 @@ class SiteController extends Controller {
         if(Application::IsGuest()){
             $this->setLayout('error');
         } 
-        $this->registerMiddleware(new AuthMiddleware(['edit', 'home', 'questionaire', 'profile', 'mismatch', 'account']));
+        $this->registerMiddleware(new AuthMiddleware(['edit', 'home', 'questionaire', 'profile', 'mismatch']));
     }
     
     public function index(Request $request, Response $response){
@@ -36,32 +36,52 @@ class SiteController extends Controller {
         return $this->render('index');
     }
 
-    public function order(Request $request, Response $response){
+    public function order(Request $request){
         $PizzaModel = new PizzaModel();
         $this->setLayout('main');
 
-        if(isset($request->getBody()['type']) && isset($request->getBody()['name'])){
-            $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
+        // echo $request->getBody()['type'];
+
+
+        if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
+
             
+            $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
+           
+   
             return $this->render('meal', [
                 'pizza' => $result[0]
             ]);
         }
      
         
+        $result = $PizzaModel->offer();
 
-       
-        $result = $PizzaModel->read(1);
+
         return $this->render('order', [
-            'type' => $result['type'],
+    
             'pizzas' => $result['data']
         ]);
     }
+
+    public function checkout(Request $request)
+    {
+        $this->setLayout('main');
+        return $this->render('checkout');
+    }
+
+   
 
     public function viewProduct(Request $request)
     {
         
         return $this->render('meal');
+    }
+
+    public function account()
+    {
+        $this->setLayout('main');
+        return $this->render('account');
     }
 
     public function home(){
@@ -199,10 +219,9 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function account()
-    {
-        $this->setLayout('main');
-        return $this->render('account');
-    }
+    
 }
+
+
+
 

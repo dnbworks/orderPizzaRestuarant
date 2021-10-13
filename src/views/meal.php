@@ -25,7 +25,8 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-5">
                     <span class="title">Select your options</span>
-                    <form action="" method="post" id="form_options">
+                    <?= Application::$app->render->renderHtml($pizza["category"]) ?>
+                    <!-- <form action="" method="post" id="form_options">
                         <label for="size">Choose your pizza size</label>
                         <div style="margin-bottom: 10px; position: relative;">
                             <i class="fas fa-angle-down"></i>
@@ -115,7 +116,7 @@
                             <img src="asset/img/loader.gif" alt="" srcset="">
                             Add to Tray
                         </button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>

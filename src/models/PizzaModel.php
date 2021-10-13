@@ -7,10 +7,24 @@ use app\core\DbModel;
 
 class PizzaModel 
 {
+    public function offer(): array
+    {
+        $sql = " SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id INNER JOIN offers USING (product_id)";
+        $statement = self::prepare($sql);
+        
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+   
+        return [
+            'data' => $result
+        ];
+     
+    }
 
     public function read(string|int $category): array
     {
-        $sql = "SELECT * FROM products WHERE category_id = '"  . (int) $category . "'";
+        $sql = "SELECT * FROM products WHERE featured = '"  . (int) $category . "'";
         $statement = self::prepare($sql);
         
         $statement->execute();
@@ -53,7 +67,8 @@ class PizzaModel
 
     public function getType(string $type): array
     {
-        $sql =  "SELECT p.id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "'";
+        
+        $sql =  "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "'";
         $statement = self::prepare($sql);
         
         $statement->execute();
@@ -66,7 +81,7 @@ class PizzaModel
     public function findOne(string $type, string $name): array
     {
        
-        $sql = "SELECT p.id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.title = '" . $name . "'" .  " AND c.name ='" .$type . "'";
+        $sql = "SELECT  p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.title = '" . $name . "'" .  " AND c.name ='" .$type . "'";
 
         $statement = self::prepare($sql);
         
@@ -99,3 +114,7 @@ class PizzaModel
 
   
 }
+
+// SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id INNER JOIN offers USING (product_id);
+
+// SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name = 'pizza' OR p.featured = '1';

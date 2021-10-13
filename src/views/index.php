@@ -122,11 +122,11 @@
             
             <div class="container-fluid">
                 <h3>Our location</h3>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-md-5 col-lg-5">
                         <div id='map'></div>
                     </div>
-                    <div class="col-12 col-md-5 col-lg-5">
+                    <div class="col-12 col-md-4 col-lg-4">
                         <div id='contact'>
                             <h4>Stay up to Date</h4>
                             <p>Don’t miss out on exclusive online offers</p>
