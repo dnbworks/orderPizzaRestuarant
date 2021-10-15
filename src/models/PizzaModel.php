@@ -92,6 +92,20 @@ class PizzaModel
        
     }
 
+    public function getById(int $id): array
+    {
+       
+        $sql = "SELECT  p.product_id, p.title, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.product_id ='" . $id . "'";
+
+        $statement = self::prepare($sql);
+        
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        return $result;
+       
+    }
+
     public function edit()
     {
         

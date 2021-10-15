@@ -75,6 +75,11 @@
                     <img src="asset/img/cancel.png" alt="" srcset="" width="20px" height="20px">
                 </div>
                 <p class="py-2">Your cart is empty</p> 
+                <?php foreach($_SESSION['cart'] as $item) : ?>
+                    <div>
+                        item
+                    </div>
+                <?php endforeach ; ?>
                 <div class="d-flex justify-content-between py-2">
                   <span>Total</span>
                   <span>Php 0.00</span>      

@@ -3,9 +3,9 @@
 use app\core\Session;
 
 $this->title = 'order';
-//     echo '<pre>';
-//    var_dump($_SESSION['cart']);
-//     echo '</pre>';
+    echo '<pre>';
+   var_dump($_SESSION['cart']);
+    echo '</pre>';
 ?>
 
 <div class="order-here" style="position: relative;">

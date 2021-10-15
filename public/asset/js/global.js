@@ -31,6 +31,8 @@ btn.addEventListener('click', () => {
 cartBtn.addEventListener("click", function(){
     cart.style.display = "block"; 
     shadow.style.display = "block"; 
+
+    
 });
 
 cancel.addEventListener("click", function(){

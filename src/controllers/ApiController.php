@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\core\cart\Cart;
+use app\core\cart\Product;
 use app\core\Controller;
 use app\core\Request;
 use app\models\PizzaModel;
@@ -37,11 +39,21 @@ class ApiController extends Controller
         // get the raw posted data
 
         $data = json_decode(file_get_contents("php://input"));
-        $_SESSION['cart'][] = $data;
+        $data[0]->id;
+
+
+        $pizzaModel = new PizzaModel();
+        $item = $pizzaModel->getById((int)$data[0]->id);
+
+        $product = new Product($item[0]['product_id'], $item[0]['title'], $item[0]['price'], 10);
+
+        $cart = $_SESSION['cart'] ?? new Cart();
+
+        $cart->addProduct($product, 1);
 
         if($data) {
             echo json_encode(
-                array('message' => 'Post Created', 'data' => $data)
+                array('message' => 'Post Created', 'data' => $product )
             );
             } else {
             echo json_encode(

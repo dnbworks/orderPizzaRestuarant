@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use app\core\cart\Cart;
+
 class Session {
 
    protected const FLASH_KEY = 'flash_messages';
@@ -17,7 +19,7 @@ class Session {
        $_SESSION[self::FLASH_KEY] = $flashMessages;  
 
        if(!isset($_SESSION['cart'])){
-        $_SESSION['cart'] = [];
+        $_SESSION['cart'] = new Cart;
        }
         
    }
