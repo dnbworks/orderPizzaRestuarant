@@ -1,0 +1,48 @@
+.checkout h2 {
+    font-family: sans-serif;
+}
+
+.checkout form label {
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: #303030;
+    margin-bottom: 13.5px;
+} 
+
+.checkout form input[type="text"] {
+    width: 100% !important;
+    color: #363636;
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: -0.01em;
+    border: 1px solid #E7E7E7;
+    padding: 15px 16px;
+    border-radius: 4px;
+    font-family: "Circular Std", sans-serif;
+    font-weight: 300;
+    height: 48px;
+    position: relative;
+    z-index: 3;
+    background-color: transparent;
+    cursor: default;
+    outline: 0;
+    margin-bottom: 13.5px;
+}
+
+
+.checkout form button {
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 10px;
+    display: block;
+    color: #fff;
+    margin-bottom: 13.5px;
+    text-align: center;
+    background:#303030 ;
+    display: inline-block;
+    padding: 15px 16px;
+    border: 0;
+} 

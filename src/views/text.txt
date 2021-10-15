@@ -1,0 +1,39 @@
+<?php
+   
+   $query = "SELECT * FROM mismatch_users ORDER BY join_date DESC";
+
+   $data = mysqli_query($dbc, $query);
+
+   echo '<table>';
+   while($row = mysqli_fetch_array($data)){
+    echo '<tr>';
+    if(is_file(location . $row['picture']) && filesize(location . $row['picture']) > 0) {
+      echo '<td class="img"><img src="' . location . $row['picture'] . '" width="100px" /></td>';
+   } else {
+      echo "<td class='img'><img width='100px' src='" . location . "profile.jpg" . "' /></td>";
+   }
+
+   if (isset($_SESSION['user_id'])) {
+
+    echo '<td><a href="user/view-profile.php?id='. $row['user_id'] .'">' . $row['first_name'] . ' ' . $row['last_name'] . '</a></td>';
+
+    }
+    else {
+    echo '<td>' . $row['first_name'] . ' ' . $row['last_name'] . '</td>';
+    } 
+
+    
+    echo '</tr>'; 
+
+  }
+
+  echo '</table>';
+
+  mysqli_close($dbc);
+   
+?>
+
+
+<!-- <?php foreach($users as $user): ?>
+ 
+<?php endforeach; ?> -->
