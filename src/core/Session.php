@@ -15,6 +15,10 @@ class Session {
            $flashMessage['remove'] = true;
        }
        $_SESSION[self::FLASH_KEY] = $flashMessages;  
+
+       if(!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = [];
+       }
         
    }
 

@@ -26,6 +26,32 @@ class ApiController extends Controller
         }
      
     }
+
+    public function post()
+    {
+        header('Access-control-Allow-Origin: *');
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
+        // get the raw posted data
+
+        $data = json_decode(file_get_contents("php://input"));
+        $_SESSION['cart'][] = $data;
+
+        if($data) {
+            echo json_encode(
+                array('message' => 'Post Created', 'data' => $data)
+            );
+            } else {
+            echo json_encode(
+                array('message' => 'Post Not Created')
+            );
+        }
+        // var_dump($data);
+     
+                
+    }
   
 }
 

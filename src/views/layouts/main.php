@@ -127,7 +127,8 @@
         include_once dirname(__DIR__). "/partials/footer.php";
         include_once dirname(__DIR__). "/partials/sidenav.php";
     ?>
-
+    <script src="/asset/js/Event.js"></script>
+    <script src="/asset/js/Magnifier.js"></script>
     <script src="/asset/js/<?= $this->title ?>.js"></script>
 </body>
 </html>

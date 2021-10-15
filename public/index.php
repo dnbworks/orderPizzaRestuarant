@@ -7,7 +7,7 @@ use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\ApiController;
 
-
+// session_start();
 require_once __DIR__ ."/../vendor/autoload.php";
 
 
@@ -19,6 +19,7 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 $app->router->get("/api", [ApiController::class, 'type']);
+$app->router->post("/api/create", [ApiController::class, 'post']);
 
 $app->router->get("/", [SiteController::class, 'index']);
 $app->router->get("/index", [SiteController::class, 'index']);

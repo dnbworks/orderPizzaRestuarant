@@ -1,80 +1,30 @@
 
 
-const getMenu = async () => {
-    const response = await fetch('https://dnbworks.github.io/orderPizzaRestuarant/data.json');
-    const data = await response.json();
-    return data;
-};
-
-
-function render(data, elementObject, type, pizza_name){
-    data.forEach(item => {
-        if(type == item.type){
-            var item_data = item.data;
-            
-
-            for(let i = 0; i < item_data.length; i++){
-               
-                if(item_data[i].title == pizza_name){
-                    // console.log(item_data[i].title);
-                    elementObject.title.innerText = item_data[i].title;
-                    elementObject.img.src = item_data[i].img;
-                    
-                }
-      
-            }
-        }
-    });   
-
-   // add zoom feature
-    var evt = new Event(),
-    m = new Magnifier(evt);
-    m.attach({
-        thumb: '#thumb',
-        largeWrapper: 'preview',
-        zoom:2,
-        zoomable: false,
-        mode: "inside"
-    });
-    
-    // var preloader = document.querySelector(".pre-loader");
-    // preloader.style.display = "none"; 
-    
+class Product {
+    constructor(option, value, id){
+        this.option = option;
+        this.value = value;
+        this.id = id;
+    }
 }
-
-
-
-const img = document.querySelector("figure #thumb");
-
-if(img.src){
-    console.log("hi");
-}
-
-
-
-
+ // add zoom feature
+    // var evt = new Event(),
+    // m = new Magnifier(evt);
+    // m.attach({
+    //     thumb: '#thumb',
+    //     // largeWrapper: 'preview',
+    //     zoom:2,
+    //     zoomable: false,
+    //     mode: "inside"
+    // });
 
 window.onload = function(){
-    const pizza_name = new URLSearchParams(window.location.search).get("pizza_name");
-    const type = new URLSearchParams(window.location.search).get("type");
-    const elementObject = {
-        title: document.querySelector("h4"),
-        img: document.querySelector("figure img#thumb")
-    }
-
-    getMenu()
-    .then(data => render(data, elementObject, type, pizza_name))
-    .catch(err => console.log("error", err));
-
-    // console.log(pizza_name, type);
+  
 
     const input_texts = document.querySelectorAll(".input-text");
     const drop_down = document.querySelector(".u-df-mb");
     const lis = drop_down.querySelectorAll("li");
-    const cancel = document.querySelector(".cart img");
-    const cart = document.querySelector(".cart");
-    const cartBtn = document.querySelector(".cartBtn-div");
-    const shadow = document.querySelector(".shadow");
+  
     const add_to_cart = document.querySelector("#form_options button");
     const img = document.querySelector("figure #thumb");
     const loader = document.querySelector(".loader-div");
@@ -84,21 +34,15 @@ window.onload = function(){
     }, 1000);
     
 
-    
-
     input_texts.forEach(input => {
 
-        if(!input.value){
-            add_to_cart.disabled = true;
-            add_to_cart.style.opacity = '0.6';
-        } else {
-            add_to_cart.disabled = false;
-            add_to_cart.style.opacity = '1';
-        }
-
-        // input.addEventListener("change", function(){
-        //     console.log("hi");
-        // });
+        // if(!input.value){
+        //     add_to_cart.disabled = true;
+        //     add_to_cart.style.opacity = '0.6';
+        // } else {
+        //     add_to_cart.disabled = false;
+        //     add_to_cart.style.opacity = '1';
+        // }
 
         input.addEventListener("focus", function(){
             var input = this;
@@ -130,34 +74,90 @@ window.onload = function(){
 
     add_to_cart.addEventListener("click", function(e){
         e.preventDefault();
-        if(!this.disabled){
+
+       let validate = checkValidation(input_texts);
+
+       if(validate.status && (validate.empty_fields.length == 0)){
+            // console.log('yes');
+            let data_array = [] ;
+            input_texts.forEach(input => {
+
+                data_array.push(new Product(input.id, input.value, parseInt(document.querySelector("h4").id)));
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/api/create", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(data_array));
+
             this.style.opacity = '0.6';
             this.firstElementChild.style.display = "block";
 
-            setTimeout(() => {
-                this.style.opacity = '1';
-                this.textContent = "Added to Tray";
-                this.firstElementChild.style.display = "none";
+
+            xhr.onload = function() {
+                // console.log("HELLO")
+                console.log(JSON.parse(this.responseText).message);
+                console.log(JSON.parse(this.responseText).data);
+                add_to_cart.style.opacity = '1';
+                add_to_cart.textContent = "Added to Tray";
+                add_to_cart.disabled = true;
+                // console.log(document.querySelector("h4").id)
+                // console.log(add_to_cart.firstElementChild);
+                // add_to_cart.firstElementChild.style.display = "none";
+                // var data = JSON.parse(this.responseText);
+                // console.log(data);
+            }
+
+            // console.log(data_array);
+
+        } else {
+            validate.empty_fields.forEach(field => {
+                field.classList.add('error');
+            });
+            console.log(validate.status);
+            console.log(validate.empty_fields);
+         }
+
+      
+        // if(!this.disabled){
+        //     this.style.opacity = '0.6';
+        //     this.firstElementChild.style.display = "block";
+
+        //     setTimeout(() => {
+        //         this.style.opacity = '1';
+        //         this.textContent = "Added to Tray";
+        //         this.firstElementChild.style.display = "none";
             
-            }, 1000);
-        }
-        this.disabled = true;
+        //     }, 1000);
+        // }
+        // this.disabled = true;
     
     });
 
 
+    function checkValidation(inputs){
+        let validate;
+        let empty_fields = [];
+        
 
-    cartBtn.addEventListener("click", function(){
-        cart.style.display = "block"; 
-        shadow.style.display = "block"; 
-    });
+        input_texts.forEach(input => {
+            if(input.value !== ""){
+                validate = true;
+                
+            } else {
+                validate = false;
+                empty_fields.push(input);
+            }
+            
+        });
 
-    cancel.addEventListener("click", function(){
-        cart.style.display = "none"; 
-        shadow.style.display = "none"; 
-    });
+        return {
+            status: validate,
+            empty_fields: empty_fields
+        };
+    }
+
 
 
 }
-
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2021 at 08:45 AM
+-- Generation Time: Oct 13, 2021 at 10:44 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -37,7 +37,6 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Special Offers'),
 (2, 'Pizza'),
 (3, 'Pasta'),
 (4, 'Group Meals'),
@@ -48,11 +47,34 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `id` int(11) NOT NULL,
+  `product_id` tinyint(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`id`, `product_id`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 22);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
-  `id` tinyint(3) UNSIGNED NOT NULL,
+  `product_id` tinyint(3) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `img` varchar(255) DEFAULT NULL,
@@ -64,12 +86,12 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `description`, `img`, `price`, `category_id`) VALUES
-(1, 'Carbonara Supreme', 'Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.', 'SEAFOOD_MARINARA_9.png', '134.00', 1),
-(2, 'chicken and pizza', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis praesentium accusamus provident in.', 'salad_chicken_n_pizza_0.png', '128.00', 1),
-(3, 'chicken and rice', 'Sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis praesentium accusamus provident in! Ducimus.', 'chicken_n_rice_0.png', '112.00', 1),
-(4, 'Prima Lasagna', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque. nam deserunt excepturi illum a, debitis praesentium accusamus provident in! Ducimus', 'PRIMA LASAGNA_7.png', '98.10', 1),
-(5, 'Shrimp Aglio Olio', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis.', 'SHRIMP AGLIO OLIO_6.png', '104.89', 1),
+INSERT INTO `products` (`product_id`, `title`, `description`, `img`, `price`, `category_id`) VALUES
+(1, 'Carbonara Supreme', 'Olive oil-coated pasta lightly sauteed with fresh garlic, succulent shrimps and red chili flakes.', 'SEAFOOD_MARINARA_9.png', '134.00', 5),
+(2, 'chicken and pizza', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis praesentium accusamus provident in.', 'salad_chicken_n_pizza_0.png', '128.00', 4),
+(3, 'chicken and rice', 'Sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis praesentium accusamus provident in! Ducimus.', 'chicken_n_rice_0.png', '112.00', 5),
+(4, 'Prima Lasagna', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque. nam deserunt excepturi illum a, debitis praesentium accusamus provident in! Ducimus', 'PRIMA LASAGNA_7.png', '98.10', 5),
+(5, 'Shrimp Aglio Olio', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, laborum ea nisi atque hic, nam deserunt excepturi illum a, debitis.', 'SHRIMP AGLIO OLIO_6.png', '104.89', 5),
 (6, 'Angus steakhouse', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eveniet facere? Eligendi voluptate ab id dolor harum fuga commodi illum eveniet qui vitae consequuntur recusandae, dignissimos repellat molestias? Quam', 'ANGUS_STEAKHOUSE_71.png', '77.00', 2),
 (7, 'Angus burger pizza', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eveniet facere? Eligendi voluptate ab id dolor harum fuga commodi illum eveniet qui vitae consequuntur recusandae, dignissimos repellat molestias', 'angus-burger-pizza_0_0.png', '347.00', 2),
 (8, 'Belly Buster', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eveniet facere? Eligendi voluptate ab id dolor harum fuga commodi illum eveniet qui vitae consequuntur recusandae, dignissimos repellat.', 'BELLY_BUSTER_67.png', '235.00', 2),
@@ -86,7 +108,7 @@ INSERT INTO `products` (`id`, `title`, `description`, `img`, `price`, `category_
 (19, 'Large - Coca Cola', 'Refresh drink adipisicing elit. Ipsam optio nulla deleniti quisquam maiores enim ullam doloribus eum perspiciatis esse vitae atque, iusto ducimus fugit at id.', 'coke-large.png', '87.00', 7),
 (20, 'Glass of Coke', 'Refresh drink adipisicing elit. Ipsam optio nulla deleniti quisquam maiores enim ullam doloribus eum perspiciatis esse vitae atque, iusto ducimus fugit at id.', 'drink-1.png', '24.00', 7),
 (21, 'Glass of Royal', 'Refresh drink adipisicing elit. Ipsam optio nulla deleniti quisquam maiores enim ullam doloribus eum perspiciatis esse vitae atque, iusto ducimus fugit at id.', 'drink-3.png', '24.00', 7),
-(22, 'CALAMARI CRRRUNCH', 'repellendus dolores beatae molestiae perspiciatis minus, explicabo quidem maxime illo quisquam vero voluptatum', 'CALAMARI_CRRRUNCH_4.png', '58.00', 1);
+(22, 'CALAMARI CRRRUNCH', 'repellendus dolores beatae molestiae perspiciatis minus, explicabo quidem maxime illo quisquam vero voluptatum', 'CALAMARI_CRRRUNCH_4.png', '58.00', 4);
 
 --
 -- Indexes for dumped tables
@@ -99,11 +121,19 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_products_category` (`category_id`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `fk_products_category` (`category_id`),
+  ADD KEY `id` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -116,14 +146,26 @@ ALTER TABLE `category`
   MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `product_id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `offers`
+--
+ALTER TABLE `offers`
+  ADD CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`

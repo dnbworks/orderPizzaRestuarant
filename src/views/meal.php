@@ -20,7 +20,7 @@
                         <img src="/asset/img/<?= $pizza["img"] ?>" alt="" srcset="" id="thumb">
                     </figure>
                     <!-- <div class="magnifier-preview" id="preview" style="width: 200px; height: 133px"></div> -->
-                    <h4><?= $pizza["title"] ?></h4>
+                    <h4 id="<?= $pizza["product_id"] ?>"><?= $pizza["title"] ?></h4>
                     <p><?= $pizza["description"] ?></p>
                 </div>
                 <div class="col-12 col-md-5 col-lg-5">

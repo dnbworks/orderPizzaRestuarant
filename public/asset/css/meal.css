@@ -9,6 +9,7 @@ p {
     font-size: 14px; 
     color: #363636;
     line-height: 1.7em;
+    hyphens: auto;
 }
 
 
@@ -195,4 +196,9 @@ form button img{
     width: 35px;
     z-index: 2;
     display: none;
+}
+
+
+.error {
+    border: 1px solid red;
 }
