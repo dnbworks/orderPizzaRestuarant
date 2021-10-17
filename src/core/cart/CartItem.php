@@ -6,6 +6,7 @@ class CartItem
 {
     private Product $product;
     private int $quantity;
+    
 
     /**
      * CartItem constructor.
@@ -17,6 +18,19 @@ class CartItem
     {
         $this->product = $product;
         $this->quantity = $quantity;
+        
+    }
+
+    public function itemSummary(): array
+    {
+        return [
+            'id' => $this->product->getId(),
+            'title' => $this->product->getTitle(),
+            'price' => $this->product->getPrice(),
+            'availableQuantity' => $this->product->getAvailableQuantity(),
+            'options' => $this->product->getPrice(),
+            'quantity' => $this->quantity
+        ];
     }
 
     /**

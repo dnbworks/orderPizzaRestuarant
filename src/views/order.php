@@ -1,11 +1,12 @@
 <?php
     use app\core\Application;
-use app\core\Session;
+    use app\core\Session;
 
-$this->title = 'order';
-    echo '<pre>';
-   var_dump($_SESSION['cart']);
-    echo '</pre>';
+    $this->title = 'order';
+    // echo '<pre>';
+    // var_dump($_SESSION['cart']);
+    // echo '</pre>';
+
 ?>
 
 <div class="order-here" style="position: relative;">
@@ -73,6 +74,9 @@ $this->title = 'order';
                                 <div class="field-content">
                                     <a href="/order?type=<?= $pizza["category"] ?>&name=<?= $pizza["title"] ?>">
                                         <div class="media media--blazy  media--image">
+                                            <div class="loader">
+                                                <img src="/asset/img/loader.svg" alt="" srcset="" id="loader">
+                                            </div>
                                             <img height="220" width="220" class="b-lazy media__image media__element b-loaded" alt="Carbonara Supreme" src="/asset/img/<?= $pizza["img"] ?>" typeof="foaf:Image">
                                         </div>
                                     </a>
@@ -85,7 +89,7 @@ $this->title = 'order';
                             </span>
                             <div class="views-field views-field-body">
                                 <div class="field-content">
-                                    <p><?= substr($pizza["description"], 0, 90) . '...'  ?></p>
+                                    <p><?= substr($pizza["description"], 0, 50) . '...'  ?></p>
                                 </div>
                             </div>
 

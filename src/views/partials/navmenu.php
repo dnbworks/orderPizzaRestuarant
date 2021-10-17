@@ -5,6 +5,7 @@
         <li><a href="/order">Order Online</a></li>
         <li><a href="menu.html">Menu</a></li>
         <li><a href="store.html">Store</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="store.html">Career</a></li>
+        <li><a href="/about">About us</a></li>
     </ul>
 </div>

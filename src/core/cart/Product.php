@@ -8,6 +8,7 @@ class Product
     private string $title;
     private float $price;
     private int $availableQuantity;
+    private array $options;
 
     /**
      * Product constructor.
@@ -17,12 +18,18 @@ class Product
      * @param float  $price
      * @param int    $availableQuantity
      */
-    public function __construct($id, $title, $price, $availableQuantity)
+    public function __construct($id, $title, $price, $availableQuantity, $options)
     {
         $this->id = $id;
         $this->title = $title;
         $this->price = $price;
         $this->availableQuantity = $availableQuantity;
+        $this->options = $options;
+    }
+
+    public function getOption(): array
+    {
+        return $this->options;
     }
 
     /**
@@ -31,6 +38,17 @@ class Product
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getProduct(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'price' => $this->price,
+            'availableQuantity' => $this->availableQuantity,
+            'options' => $this->options
+        ];
     }
 
     /**

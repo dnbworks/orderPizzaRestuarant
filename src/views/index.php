@@ -50,24 +50,24 @@
             <div class="container">
                 <h4>Our Specialities</h4>
                 <div class="row justify-content-center">
-                    <div class="col-6 col-md-6 col-lg-5">
+                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
                         <div class="img-container one">
                             <a href="#" >Vegan</a >
                         </div>
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5">
+                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
                         <div class="img-container two">
                             <a href="#" >Meat</a >
                         </div>
                 
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5">
+                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
                         <div class="img-container three">
                             <a href="#" >Veggie</a >
                         </div>
                         
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5">
+                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
                         <div class="img-container four">
                             <a href="#" >Vegan</a >
                         </div>

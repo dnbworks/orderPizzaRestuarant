@@ -30,7 +30,7 @@
 }
 
 .active {
-    background: rgb(134, 134, 134);
+    background: #6f703f;
     color: #111;
 }
 
@@ -52,6 +52,28 @@
 
 * {
     box-sizing: border-box;
+}
+
+.media {
+    position: relative;
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background: #fff;
+    
+}
+
+.loader img {
+    width: 40px;
 }
 
 .views-field-price__number {
@@ -174,7 +196,11 @@
        height: 324px;
     }
 
-    .media--image img {
+    .loader img {
+        width: 40px;
+    }
+
+    .media--image img.media__image {
         width: 100%;
         height: 170px;
         -o-object-fit: contain;

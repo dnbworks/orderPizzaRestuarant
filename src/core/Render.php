@@ -132,7 +132,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>
@@ -185,7 +185,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>
@@ -237,7 +237,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>
@@ -289,7 +289,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>
@@ -341,7 +341,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>
@@ -369,7 +369,7 @@ class Render
                 order Summary
                 </div>
                 <button type="submit">
-                <img src="asset/img/loader.gif" alt="" srcset="">
+                <img src="asset/img/loader.svg" alt="" srcset="">
                 Add to Tray
                 </button>
                 </form>

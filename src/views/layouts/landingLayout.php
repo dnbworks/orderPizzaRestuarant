@@ -48,7 +48,7 @@
                      <div class="top-section">
                         <div class="search-container">
                             <form action="" method="post">
-                                <input type="text">
+                                <input type="text" name="search" placeholder="what are you looking for..."> 
                             </form>
                             <span><i class="fas fa-search"></i></span>
                             <span>search</span>
@@ -72,6 +72,7 @@
                             <li><a href="/order">Order Online</a></li>
                             <li><a href="menu.html">Menu</a></li>
                             <li><a href="store.html">Store</a></li>
+                            <li><a href="store.html">Career</a></li>
                             <li><a href="about.html">About us</a></li>
                         </ul>
                      </div>

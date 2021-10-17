@@ -43,7 +43,7 @@
                     <div class="top-section">
                         <div class="search-container">
                             <form action="" method="post">
-                                <input type="text">
+                                <input type="text" name="search" placeholder="what are you looking for..."> 
                             </form>
                             <span><i class="fas fa-search"></i></span>
                             <span>search</span>

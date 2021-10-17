@@ -67,14 +67,21 @@ class PizzaModel
 
     public function getType(string $type): array
     {
-        
-        $sql =  "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "'";
+        $sql = "";
+      
+        if($type == 'Special Offers'){
+            $sql = "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id INNER JOIN offers USING (product_id)";
+        } else {
+            $sql =  "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "'";
+        }
+
+    
         $statement = self::prepare($sql);
-        
         $statement->execute();
         $result = $statement->fetchAll();
         return [
-            'data' => $result
+            'data' => $result,
+            'sql' => $sql
         ];
     }
 

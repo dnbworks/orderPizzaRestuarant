@@ -96,11 +96,12 @@ window.onload = function(){
 
             xhr.onload = function() {
                 // console.log("HELLO")
-                console.log(JSON.parse(this.responseText).message);
-                console.log(JSON.parse(this.responseText).data);
+                console.log(JSON.parse(this.responseText));
+                // console.log(JSON.parse(this.responseText).data);
                 add_to_cart.style.opacity = '1';
                 add_to_cart.textContent = "Added to Tray";
                 add_to_cart.disabled = true;
+                var amount = document.querySelector('.amount').textContent = JSON.parse(this.responseText).num_of_cart_items;
                 // console.log(document.querySelector("h4").id)
                 // console.log(add_to_cart.firstElementChild);
                 // add_to_cart.firstElementChild.style.display = "none";

@@ -36,15 +36,18 @@ class SiteController extends Controller {
         return $this->render('index');
     }
 
+    public function about(Request $request, Response $response){
+        
+        $this->setLayout('main');
+        return $this->render('about');
+    }
+
     public function order(Request $request){
         $PizzaModel = new PizzaModel();
         $this->setLayout('main');
 
-        // echo $request->getBody()['type'];
-
 
         if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
-
             
             $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
            
