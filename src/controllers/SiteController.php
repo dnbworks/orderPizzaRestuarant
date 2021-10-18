@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace app\controllers;
 
 use app\core\Application;
@@ -67,8 +67,13 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function checkout(Request $request)
+    public function checkout(Request $request, Response $response)
     {
+        if(!Application::IsGuest()){
+            $response->redirect('/account');
+            exit;
+        } 
+       
         $this->setLayout('main');
         return $this->render('checkout');
     }
@@ -85,6 +90,13 @@ class SiteController extends Controller {
     {
         $this->setLayout('main');
         return $this->render('account');
+    }
+
+    public function cart()
+    {
+        $cart = $_SESSION['cart'];
+        $this->setLayout('main');
+        return $this->render('cart', ['cart' => $cart]);
     }
 
     public function home(){

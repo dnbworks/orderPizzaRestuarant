@@ -6,11 +6,6 @@
 }
 
 
-body {
-  background-image: url('../img/logo.png');
-  background-size: 90px;
-}
-
 @font-face {
   src: url("../fonts/OpenSans-Regular.ttf");
   font-family: opensans;
@@ -35,8 +30,8 @@ body {
   width: 100%;
   -webkit-animation: down 0.5s ease-in forwards;
           animation: down 0.5s ease-in forwards;
-  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.616);
-          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.616);
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.616);
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.616);
 }
 
 @-webkit-keyframes down {
@@ -44,7 +39,7 @@ body {
     top: -103px;
   }
   100% {
-    top: 0px;
+    top: -2px;
   }
 }
 
@@ -53,7 +48,7 @@ body {
     top: -103px;
   }
   100% {
-    top: 0px;
+    top: -2px;
   }
 }
 

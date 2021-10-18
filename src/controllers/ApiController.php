@@ -51,7 +51,7 @@ class ApiController extends Controller
         $pizzaModel = new PizzaModel();
         $item = $pizzaModel->getById((int)$data[0]->id);
 
-        $product = new Product($item[0]['product_id'], $item[0]['title'], $item[0]['price'], 10, $array_options);
+        $product = new Product($item[0]['product_id'], $item[0]['title'], $item[0]['price'], 10, $array_options, $item[0]['img']);
 
         $cart = $_SESSION['cart'];
 
@@ -67,8 +67,7 @@ class ApiController extends Controller
             );
         }
         // var_dump($data);
-     
-                
+               
     }
   
 }

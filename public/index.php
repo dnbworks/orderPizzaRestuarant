@@ -25,6 +25,7 @@ $app->router->get("/", [SiteController::class, 'index']);
 $app->router->get("/index", [SiteController::class, 'index']);
 $app->router->get("/home", [SiteController::class, 'index']);
 
+$app->router->get("/cart", [SiteController::class, 'cart']);
 $app->router->get("/about", [SiteController::class, 'about']);
 
 $app->router->get("/order", [SiteController::class, 'order']);

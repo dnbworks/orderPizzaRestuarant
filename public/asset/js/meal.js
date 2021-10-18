@@ -1,5 +1,4 @@
 
-
 class Product {
     constructor(option, value, id){
         this.option = option;
@@ -7,6 +6,8 @@ class Product {
         this.id = id;
     }
 }
+
+
  // add zoom feature
     // var evt = new Event(),
     // m = new Magnifier(evt);
@@ -102,6 +103,9 @@ window.onload = function(){
                 add_to_cart.textContent = "Added to Tray";
                 add_to_cart.disabled = true;
                 var amount = document.querySelector('.amount').textContent = JSON.parse(this.responseText).num_of_cart_items;
+
+                window.location.href = "/cart";
+                
                 // console.log(document.querySelector("h4").id)
                 // console.log(add_to_cart.firstElementChild);
                 // add_to_cart.firstElementChild.style.display = "none";
@@ -157,7 +161,6 @@ window.onload = function(){
             empty_fields: empty_fields
         };
     }
-
 
 
 }

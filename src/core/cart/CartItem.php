@@ -28,8 +28,9 @@ class CartItem
             'title' => $this->product->getTitle(),
             'price' => $this->product->getPrice(),
             'availableQuantity' => $this->product->getAvailableQuantity(),
-            'options' => $this->product->getPrice(),
-            'quantity' => $this->quantity
+            'options' => $this->product->getOption(),
+            'quantity' => $this->quantity,
+            'img' => $this->product->getImg()
         ];
     }
 
