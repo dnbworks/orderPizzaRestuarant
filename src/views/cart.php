@@ -1,6 +1,7 @@
 <?php
     use app\core\Application;
     use app\core\Session;
+    use app\helpers\PriceHelper;
 
     $this->title = 'cart';
 
@@ -27,83 +28,36 @@
                 <div class="d-flex justify-content-between cart-header">
                     <h4>YOUR CART</h4>
                     <div>
-                        <span>Subtotal</span>
-                        <span>$154.00</span>
-                        <a href="#">Check Out</a>
+                        <span>Subtotal: </span>
+                        <span>PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
+                        <!-- <a href="#">Check Out</a> -->
                     </div>
                 </div>
         
                 <div class="cart-body">
+                    <div class="pre-loader">
+                        <img src="asset/img/loader.svg" alt="" srcset="" width="20px">
+                    </div>
                     <?php foreach($items as $item) : ?>
                         <div class="cart-items d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center col-5">
-                                <img src="/asset/img/<?= $item->itemSummary()['img'] ?>" alt="" width="120px">
+                            <div class="d-flex align-items-center col-9 col-md-5" style="padding-left: 5px !important;">
+                                <img src="/asset/img/<?= $item->itemSummary()['img'] ?>" alt="" width="100px" class="pic">
                                 <div class="added-item-details">
-                                    <p><?= $item->itemSummary()['title'] ?></p>
-                                    <span><?= $item->itemSummary()['price'] ?></span>
+                                    <a href="/order"><?= $item->itemSummary()['title'] ?></a>
+                                    <span>PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price']) ?> X (<?= $item->itemSummary()['quantity'] ?>)</span>
+                                    <span>Total: PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price'] * (int)$item->itemSummary()['quantity']) ?></span>
+                                    <span>Addons</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center d-flex justify-content-between col-3">
-                                <div class="quantity">
-                                    <img src="/asset/img/minus.jpg" alt="" srcset="" width="16px">
-                                        <span><?= $item->itemSummary()['quantity'] ?></span>
-                                    <img src="/asset/img/plus.jpg" alt="" srcset="" width="16px">
-                                </div>
+                                <a href="/order?type=<?= $item->itemSummary()['category'] ?>&name=<?= $item->itemSummary()['title'] ?>" id="<?= $item->itemSummary()['id'] ?>">Edit</a>
                                 <div class="total d-flex align-items-center">
-                                    <span><?= $item->itemSummary()['price'] * $item->itemSummary()['quantity'] ?></span>
-                                    <img src="/asset/img/cancel.png" alt="" srcset="" width="20px">
+                                    <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="<?= $item->itemSummary()['id'] ?>" class="delete">
                                 </div>
                             </div>
                         </div> 
                     <?php endforeach ; ?>
-              
-       
-                    <!-- <div class="cart-items d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center col-5">
-                            <img src="../assests/images/male/0023329_traditional-short-sleeve-dress-shirt_360.jpeg" alt="" width="120px">
-                            <div class="added-item-details">
-                                <p>traditional short sleeve dress shirt</p>
-                                <span>$56.00</span>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center d-flex justify-content-between col-3">
-                          
-                            <div class="quantity">
-                               
-                                <img src="../assests/images/minus.jpg" alt="" srcset="" width="16px">
-                                    <span>1</span>
-                                <img src="../assests/images/plus.jpg" alt="" srcset="" width="16px">
-                            </div>
-                            <div class="total d-flex align-items-center">
-                                <span>$159.00</span>
-                                <img src="../assests/images/close.jpg" alt="" srcset="" width="20px">
-                            </div>
-                        </div>
-                    </div>  -->
-                    
-<!--         
-                     <div class="cart-items d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center col-5">
-                            <img src="../assests/images/male/0023329_traditional-short-sleeve-dress-shirt_360.jpeg" alt="" width="120px">
-                            <div class="added-item-details">
-                                <p>traditional short sleeve dress shirt</p>
-                                <span>$56.00</span>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center d-flex justify-content-between col-3">
-                   
-                            <div class="quantity">
-                               
-                                <img src="../assests/images/minus.jpg" alt="" srcset="" width="16px">
-                                    <span>1</span>
-                                <img src="../assests/images/plus.jpg" alt="" srcset="" width="16px">
-                            </div>
-                            <div class="total d-flex align-items-center">
-                                <span>$159.00</span>
-                                <img src="../assests/images/close.jpg" alt="" srcset="" width="20px">
-                            </div>
-                        </div>
-                    </div> -->
+            
                 </div> 
         
             </div>
@@ -117,7 +71,7 @@
                             <a href="#">Calculate Shipping</a>
                         </div>
                         <div>
-                            <span>$332.00</span>
+                        <span>PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
                         </div>
                     </div>
                  

@@ -1,5 +1,7 @@
 <?php
 
+// declare(strict_types = 1);
+
 namespace app\controllers;
 
 use app\core\cart\Cart;
@@ -51,15 +53,15 @@ class ApiController extends Controller
         $pizzaModel = new PizzaModel();
         $item = $pizzaModel->getById((int)$data[0]->id);
 
-        $product = new Product($item[0]['product_id'], $item[0]['title'], $item[0]['price'], 10, $array_options, $item[0]['img']);
+        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
 
         $cart = $_SESSION['cart'];
 
-        $cart->addProduct($product, 1);
+        $cart->addProduct($product, (int)$array_options['number']);
 
         if($data) {
             echo json_encode(
-                array('message' => 'Post Created', 'data' =>  $product->getProduct(), 'options' => $array_options, 'num_of_cart_items' => $_SESSION['cart']->getTotalQuantity(), 'cart' => $_SESSION['cart']->getItems(), 'item' => $_SESSION['cart']->getItems()[$data[0]->id]->itemSummary())
+                array('message' => 'Post Created', 'data' =>  $product->getProduct())
             );
             } else {
             echo json_encode(
@@ -68,6 +70,41 @@ class ApiController extends Controller
         }
         // var_dump($data);
                
+    }
+
+    public function upadte()
+    {
+
+    }
+
+    public function delete()
+    {
+        header('Access-control-Allow-Origin: *');
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
+        $data = json_decode(file_get_contents("php://input"));
+
+        $cart = $_SESSION['cart'];
+
+        $cart->removeItem($data);
+
+        $cartItems = [];
+        $items = $_SESSION['cart']->getItems();
+        foreach($items as $key => $item){
+            $cartItems[] = $item->itemSummary();
+        }
+
+        if($data) {
+            echo json_encode(
+                array('message' => 'removed item', 'data' =>  $data, 'cart' =>$cartItems)
+            );
+            } else {
+            echo json_encode(
+                array('message' => 'Post Not Created')
+            );
+        }
     }
   
 }

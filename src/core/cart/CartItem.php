@@ -27,6 +27,7 @@ class CartItem
             'id' => $this->product->getId(),
             'title' => $this->product->getTitle(),
             'price' => $this->product->getPrice(),
+            'category' => $this->product->getProduct()['category'],
             'availableQuantity' => $this->product->getAvailableQuantity(),
             'options' => $this->product->getOption(),
             'quantity' => $this->quantity,

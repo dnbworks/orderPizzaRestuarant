@@ -64,6 +64,11 @@ class Cart
         unset($this->items[$product->getId()]);
     }
 
+    public function removeItem(string|int $id)
+    {
+        unset($this->items[$id]);
+    }
+
     /**
      * This returns total number of products added in cart
      *

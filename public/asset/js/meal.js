@@ -20,9 +20,32 @@ class Product {
     // });
 
 window.onload = function(){
+
+    /// HTML CSS JSResult Skip Results Iframe
+    const decrease = document.querySelector("#decrease");
+    const increase = document.querySelector("#increase");
+
+    decrease.addEventListener('click', decreaseValue);
+    increase.addEventListener('click', increaseValue);
+
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+    }
+    
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
   
 
     const input_texts = document.querySelectorAll(".input-text");
+    const input_values = document.querySelectorAll('.input');
     const drop_down = document.querySelector(".u-df-mb");
     const lis = drop_down.querySelectorAll("li");
   
@@ -81,7 +104,7 @@ window.onload = function(){
        if(validate.status && (validate.empty_fields.length == 0)){
             // console.log('yes');
             let data_array = [] ;
-            input_texts.forEach(input => {
+            input_values.forEach(input => {
 
                 data_array.push(new Product(input.id, input.value, parseInt(document.querySelector("h4").id)));
             });
@@ -98,7 +121,7 @@ window.onload = function(){
             xhr.onload = function() {
                 // console.log("HELLO")
                 console.log(JSON.parse(this.responseText));
-                // console.log(JSON.parse(this.responseText).data);
+                // console.log(this.responseText);
                 add_to_cart.style.opacity = '1';
                 add_to_cart.textContent = "Added to Tray";
                 add_to_cart.disabled = true;

@@ -33,7 +33,7 @@ lis.forEach(li => {
         // setting query params
         let type = this.id;
         const url = `http://localhost:8080/api?type=${type}`;
-        console.log(url);
+        // console.log(url);
         
         // fetch data for clicked tab
         getMenu(url)
@@ -50,7 +50,7 @@ function render(data, element, type){
 
     var items = Array.from(element.querySelectorAll(".item"));
     var available;
-    console.log(data);
+    // console.log(data);
 
     if(data.data.length < 6){
         available = data.data.length;
@@ -70,7 +70,7 @@ function render(data, element, type){
             item.style.display = "block";
             if(index == i){
                 item.querySelector(".field-content a").href = `/order?type=${product.category}&name=${product.title}`,
-                item.querySelector(".views-field-price__number span").textContent = product.price,
+                item.querySelector(".views-field-price__number span").textContent = 'PHP ' + product.price,
                 item.querySelector(".product-list-title a").textContent = product.title,
                 item.querySelector(".product-list-title a").href = `meal.html?type=${type}&pizza_id=1&pizza_name=${product.title}`,
                 item.querySelector(".media img.media__image").src = `/asset/img/${product.img}`,
