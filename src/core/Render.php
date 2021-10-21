@@ -13,27 +13,27 @@ class Render
     private string $drink = 'Drinks';
 
 
-    public function renderHtml(string $type): string
+    public function renderHtml(string $type, array $params = []): string
     {
         $html = '';
         switch ($type) {
             case $this->pizza:
-                $html = $this->renderPizza();
+                $html = $this->renderPizza($params);
                 break;
             case $this->pasta;
-                $html = $this->renderPasta();
+                $html = $this->renderPasta($params);
                 break;
             case $this->group_meals:
-                $html = $this->renderGroupMeal();
+                $html = $this->renderGroupMeal($params);
                 break;
             case $this->solo_meals:
-                $html = $this->renderSoloMeal();
+                $html = $this->renderSoloMeal($params);
                 break;
             case $this->chicken:
-                $html = $this->renderChicken();
+                $html = $this->renderChicken($params);
                 break;
             case $this->drink:
-                $html = $this->renderDrink();
+                $html = $this->renderDrink($params);
                 break;
             
         }
@@ -42,7 +42,7 @@ class Render
     }
 
 
-    private function renderPizza(): string
+    private function renderPizza($params): string
     {
         $html = <<<HTML
                 <form action="" method="post" id="form_options">
@@ -226,14 +226,32 @@ class Render
         return $html;
     }
 
-    private function renderSoloMeal(): string
+    private function renderSoloMeal($params): string
     {
+        // render form inputs based on whether the user is in update product or just displaying the product using the tenary operator
+
+        // size input
+        $size = isset($params['options']['size']) ? '<input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size" value="' . $params['options']['size'] . '">' : ' <input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size">'; // end size input
+        
+        // instruction input
+        $instruction = isset($params['options']['Instruction']) ? '<textarea name="Instruction" id="Instruction" class="input" placeholder="Add Special Instruction here">'.$params['options']['Instruction'].'</textarea>' : '<textarea name="Instruction" id="Instruction" class="input" placeholder="Add Special Instruction here"></textarea>'; // end instruction input
+
+        // Quantity input
+        $quantity = isset($params['options']['number']) ? '<div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="'. $params['options']['number'].'" /><div class="value-button" id="increase" value="Increase Value">+</div></div>' : ' <div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="1" /><div class="value-button" id="increase" value="Increase Value">+</div></div>'; // end Quantity input
+
+        // button input
+        $button = isset($params['btn']) ? '<button type="submit"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; // end button input
+        
+        
+
         $html = <<<HTML
                 <form action="" method="post" id="form_options">
                     <label for="size">Choose your Plate size</label>
                     <div style="margin-bottom: 10px; position: relative;">
                         <i class="fas fa-angle-down"></i>
-                        <input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size">
+                        <!-- <input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size" value=""> -->
+                        $size
+                     
                         <ul class="[ u-df-mb u-df-mb-fd-c ]">
                             <li class="[ u-df-mb ] " data-combination-value="2205-6846" data-select-value="Regular" data-price-value="210" data-product="14233">
                                 <div class="o-form-dropdown_input--item [ u-df-mb u-df-mb-fd-c u-df-mb-jc-c ]">
@@ -255,18 +273,21 @@ class Render
                     </div>
                 
                     <label for="Instruction">Special Instruction (optional)</label>
-                    <textarea name="Instruction" id="Instruction" class="input" placeholder="Add Special Instruction here"></textarea>
+                    <!-- <textarea name="Instruction" id="Instruction" class="input" placeholder="Add Special Instruction here"></textarea> -->
+                    $instruction
 
                     <label for="number">Quantity</label>
-                    <div class="quantity">
+                    <!-- <div class="quantity">
                         <div class="value-button" id="decrease" value="Decrease Value">-</div>
                         <input type="number" id="number" class="input" value="1" />
                         <div class="value-button" id="increase" value="Increase Value">+</div>
-                    </div>
-                    <button type="submit">
+                    </div> -->
+                    $quantity 
+                    <!-- <button type="submit">
                         <img src="asset/img/loader.svg" alt="" srcset="">
                         Add to Tray
-                    </button>
+                    </button> -->
+                    $button
                 </form>
         HTML;
         return $html;

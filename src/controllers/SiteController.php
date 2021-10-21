@@ -14,8 +14,6 @@ use app\models\UpdateProfileModel;
 use app\models\PizzaModel;
 
 
-
-
 class SiteController extends Controller {
 
     public function __construct()
@@ -23,51 +21,45 @@ class SiteController extends Controller {
         if(Application::IsGuest()){
             $this->setLayout('error');
         } 
+        // add middleware to certain pages
         $this->registerMiddleware(new AuthMiddleware(['edit', 'home', 'questionaire', 'profile', 'mismatch']));
     }
-    
+    // serves the landing page
     public function index(Request $request, Response $response){
         if(!Application::IsGuest()){
             $response->redirect('/home');
             exit;
-        } 
-       
+        }
         $this->setLayout('landingLayout');
         return $this->render('index');
     }
-
-    public function about(Request $request, Response $response){
-        
-        $this->setLayout('main');
-        return $this->render('about');
+    // serves the about page
+    public function about()
+    {
+        $this->setLayout('main'); // sets the layout template to be main layout
+        return $this->render('about'); // renders the about page with its template
     }
-
+    // serves the order page
     public function order(Request $request){
         $PizzaModel = new PizzaModel();
         $this->setLayout('main');
 
-
         if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
-            
             $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
-           
-   
             return $this->render('meal', [
-                'pizza' => $result[0]
+                'pizza' => $result[0],
+                'status' =>  'show'
             ]);
         }
      
-        
         $result = $PizzaModel->offer();
 
-
         return $this->render('order', [
-    
             'pizzas' => $result['data']
         ]);
     }
 
-    public function checkout(Request $request, Response $response)
+    public function checkout(Response $response)
     {
         if(!Application::IsGuest()){
             $response->redirect('/account');
@@ -78,12 +70,32 @@ class SiteController extends Controller {
         return $this->render('checkout');
     }
 
-   
-
-    public function viewProduct(Request $request)
-    {
-        
+    public function viewProduct()
+    {  
         return $this->render('meal');
+    }
+
+    public function editProduct(Request $request)
+    {  
+        $this->setLayout('main');
+        $PizzaModel = new PizzaModel();
+        if(isset($request->getBody()['id']) && isset($request->getBody()['name'])){
+            $result = $PizzaModel->getById($request->getBody()['id']);
+            $items = $_SESSION['cart']->getItems();
+            $item = array_filter($items, fn($item) => $item->itemSummary()['id'] == $request->getBody()['id']);
+            
+            // echo '<pre>';
+            // var_dump( $item[$request->getBody()['id']]->itemSummary()['options']);
+            // echo '</pre>';
+            // exit;
+
+            // echo '<pre>';
+            // var_dump( $result);
+            // echo '</pre>';
+            // exit;
+          
+            return $this->render('meal', ['pizza' => $result[0], 'status' =>  'update', 'options' => $item[$request->getBody()['id']]->itemSummary()['options']]);
+        }
     }
 
     public function account()

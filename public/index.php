@@ -31,6 +31,7 @@ $app->router->get("/about", [SiteController::class, 'about']);
 
 $app->router->get("/order", [SiteController::class, 'order']);
 $app->router->get("/checkout", [SiteController::class, 'checkout']);
+$app->router->get("/edit", [SiteController::class, 'editProduct']);
 
 // $app->router->get("/order/{$type}/{$name}", [SiteController::class, 'viewProduct']);
 

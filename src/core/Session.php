@@ -19,7 +19,8 @@ class Session {
        $_SESSION[self::FLASH_KEY] = $flashMessages;  
 
        if(!isset($_SESSION['cart'])){
-        $_SESSION['cart'] = new Cart;
+            $_SESSION['cart'] = new Cart;
+            $_SESSION['cart_counter'] = 0;
        }
         
    }

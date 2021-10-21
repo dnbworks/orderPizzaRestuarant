@@ -3,6 +3,9 @@
 const deleteBtn = document.querySelectorAll('.delete');
 const preloader = document.querySelector('.pre-loader');
 const cartBody = document.querySelector(".cart-body");
+const subTotals = document.querySelectorAll('.subtotal');
+const amount = document.querySelector('.amount');
+const empty_cart = document.querySelector('.empty-cart-notification');
 
 function format_money(price){
     let price_string = price.toString();
@@ -39,9 +42,11 @@ cartBody.addEventListener('click', function(e){
         xhr.onload = function() {
             preloader.style.display = 'none';
             let cart = JSON.parse(this.responseText).cart;
+            let subtotal = JSON.parse(this.responseText).subtotal;
+            let cart_count = JSON.parse(this.responseText).cartNum;
             let template = '';
             cart.forEach(item => {
-                template = `
+                template += `
                 <div class="cart-items d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center col-9 col-md-5" style="padding-left: 5px !important;">
                         <img src="/asset/img/${item.img}" alt="" width="100px" class="pic">
@@ -62,14 +67,34 @@ cartBody.addEventListener('click', function(e){
                 `
             });
 
+            subTotals.forEach(span => {
+                span.textContent = 'PHP ' + format_money(subtotal);
+            });
+
+            amount.textContent = cart_count;
+
             console.log(JSON.parse(this.responseText));
             cartBody.innerHTML = template;
             preloader.style.display = 'none';
+
+            if(cart_count == 0){
+                cartBody.innerHTML = `   
+                    <div class="empty-cart" style="padding: 50px 0; text-align: center;">
+                        <p>Your cart is currenly empty. It seems the right time to start ordering</p>
+                        <a href="/order">Order here</a>
+                    </div>
+                `;
+            }
+
+            
+            
             
         }
 
     }
 });
+
+console.log(document.querySelector('.empty-cart'));
 
 
 

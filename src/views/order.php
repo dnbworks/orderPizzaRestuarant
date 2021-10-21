@@ -99,8 +99,8 @@
                          
                         </div>
                         <?php endforeach; ?>
-                       
                     </div>
+                    <div class="pagination d-flex justify-content-center"></div>
                 </div>
             </div>
         </div>

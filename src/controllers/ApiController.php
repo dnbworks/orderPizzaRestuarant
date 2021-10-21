@@ -9,11 +9,12 @@ use app\core\cart\Product;
 use app\core\Controller;
 use app\core\Request;
 use app\models\PizzaModel;
+use app\helpers\PaginationLinks;
 
 
 class ApiController extends Controller
 {
-
+    public static int $counter = 0;
     public function type(Request $request)
     {
         header('Access_control-Allow_origin: *');
@@ -23,10 +24,33 @@ class ApiController extends Controller
         $this->setLayout('main');
 
         if(isset($request->getBody()['type'])){
-            
+
+            $current_page = isset($request->getBody()['page']) ? $request->getBody()['page'] : 1;
+            $result_per_page = 6;
+
+            $skip = (($current_page - 1) * $result_per_page);
+
             $result = $PizzaModel->getType($request->getBody()['type']);
 
-            return json_encode($result);
+            $rowCount = count($result['data']);
+            $num_pages = ceil($rowCount / $result_per_page);
+
+            $limit = " LIMIT $skip,  $result_per_page";
+
+            $result = $PizzaModel->getType($request->getBody()['type'],  $limit);
+
+            if($num_pages > 1){
+                // generate pagination links
+                $pagination = new PaginationLinks($current_page, $num_pages, $request->getBody()['type']);
+                $links = $pagination->generate_page_links();
+            } else {
+                $links = '';
+            }
+
+
+            return json_encode(
+                    array('pagination_links' => $links, 'data' => $result['data'])
+                );
         }
      
     }
@@ -58,10 +82,11 @@ class ApiController extends Controller
         $cart = $_SESSION['cart'];
 
         $cart->addProduct($product, (int)$array_options['number']);
-
+        $_SESSION['cart_counter']++;
+        self::$counter++;
         if($data) {
             echo json_encode(
-                array('message' => 'Post Created', 'data' =>  $product->getProduct())
+                array('message' => 'Post Created', 'data' =>  $product->getProduct(), 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity())
             );
             } else {
             echo json_encode(
@@ -92,13 +117,13 @@ class ApiController extends Controller
 
         $cartItems = [];
         $items = $_SESSION['cart']->getItems();
-        foreach($items as $key => $item){
+        foreach($items as $item){
             $cartItems[] = $item->itemSummary();
         }
 
         if($data) {
             echo json_encode(
-                array('message' => 'removed item', 'data' =>  $data, 'cart' =>$cartItems)
+                array('message' => 'removed item', 'data' =>  $data, 'cart' =>$cartItems, 'subtotal' => $_SESSION['cart']->getTotalSum(), 'cartNum' => $_SESSION['cart']->getTotalQuantity())
             );
             } else {
             echo json_encode(

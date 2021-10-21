@@ -209,6 +209,7 @@ footer {
   margin-right: auto;
 }
 
+
 footer .column {
   border-bottom: 1px dotted #686868;
   border-right: none;
@@ -262,6 +263,7 @@ footer p {
   font-family: opensans;
   color: #c2c2c2;
   font-size: 13px;
+  padding-top: 30px;
 }
 
 footer .copyright {

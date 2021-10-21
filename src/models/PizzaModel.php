@@ -65,14 +65,14 @@ class PizzaModel
      
     }
 
-    public function getType(string $type): array
+    public function getType(string $type, string $limit = ''): array
     {
         $sql = "";
       
         if($type == 'Special Offers'){
-            $sql = "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id INNER JOIN offers USING (product_id)";
+            $sql = "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id INNER JOIN offers USING (product_id) $limit";
         } else {
-            $sql =  "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "'";
+            $sql =  "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE c.name ='" . $type . "' $limit";
         }
 
     
@@ -81,14 +81,15 @@ class PizzaModel
         $result = $statement->fetchAll();
         return [
             'data' => $result,
-            'sql' => $sql
+            'sql' => $sql,
+            'count' => count($result)
         ];
     }
 
     public function findOne(string $type, string $name): array
     {
        
-        $sql = "SELECT  p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.title = '" . $name . "'" .  " AND c.name ='" .$type . "'";
+        $sql = "SELECT p.product_id, p.title, p.description, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.title = '" . $name . "'" .  " AND c.name ='" .$type . "'";
 
         $statement = self::prepare($sql);
         
@@ -102,7 +103,7 @@ class PizzaModel
     public function getById(int $id): array
     {
        
-        $sql = "SELECT  p.product_id, p.title, p.price, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.product_id ='" . $id . "'";
+        $sql = "SELECT  p.product_id, p.title, p.price, p.description, p.img, c.name AS category FROM products AS p INNER JOIN category AS c ON c.id = p.category_id WHERE p.product_id ='" . $id . "'";
 
         $statement = self::prepare($sql);
         

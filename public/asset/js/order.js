@@ -4,6 +4,8 @@ var nav = document.querySelector("nav");
 var imgs = document.querySelectorAll('.media img.media__image');
 var lis = ul.querySelectorAll("li");
 var preloader = document.querySelector(".pre-loader");
+var pagination = document.querySelector('.pagination');
+
 
 // asynchronus function
 const getMenu = async (url) => {
@@ -39,6 +41,7 @@ lis.forEach(li => {
         getMenu(url)
         .then(data => render(data, menu, type))
         .catch(err => console.log("error", err));
+        
            
     });
 });
@@ -51,6 +54,12 @@ function render(data, element, type){
     var items = Array.from(element.querySelectorAll(".item"));
     var available;
     // console.log(data);
+    // console.log(data.data.length);
+
+    // pagination
+    if(data.data.length > 6){
+
+    }
 
     if(data.data.length < 6){
         available = data.data.length;
@@ -80,8 +89,27 @@ function render(data, element, type){
       
     });   
 
+    
+    pagination.innerHTML = data.pagination_links;
+    if(pagination.querySelectorAll('a')){
+        let pagination_links = pagination.querySelectorAll('a');
+        pagination_links.forEach(link => {
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                let url = e.target.href;
+
+                getMenu(url)
+                .then(data => render(data, menu, type))
+                .catch(err => console.log("error", err));
+                // console.log(url);
+            });
+        });
+        
+    }
 
 }
+
+
 
 
 imgs.forEach(img => {
@@ -89,6 +117,9 @@ imgs.forEach(img => {
         this.previousElementSibling.style.visibility = 'hidden';
     });
 });
+
+
+
 
 
 

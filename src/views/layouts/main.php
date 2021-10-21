@@ -59,7 +59,7 @@
                             
                         <div class="cartBtn-div">
                             <img src="asset/img/cart.png" alt="" srcset="">
-                            <span class="amount">0</span>
+                            <span class="amount"><?= $_SESSION['cart']->getTotalQuantity() ?></span>
                         </div>
                     </div>
                     <?php

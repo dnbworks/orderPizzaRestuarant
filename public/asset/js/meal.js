@@ -52,6 +52,7 @@ window.onload = function(){
     const add_to_cart = document.querySelector("#form_options button");
     const img = document.querySelector("figure #thumb");
     const loader = document.querySelector(".loader-div");
+    const amount = document.querySelector('.amount');
     
     setTimeout(function(){
         loader.style.display = "none";
@@ -121,13 +122,19 @@ window.onload = function(){
             xhr.onload = function() {
                 // console.log("HELLO")
                 console.log(JSON.parse(this.responseText));
+                let cart_count = JSON.parse(this.responseText).cartNum;
                 // console.log(this.responseText);
                 add_to_cart.style.opacity = '1';
                 add_to_cart.textContent = "Added to Tray";
                 add_to_cart.disabled = true;
-                var amount = document.querySelector('.amount').textContent = JSON.parse(this.responseText).num_of_cart_items;
+                var amount = document.querySelector('.amount');
 
-                window.location.href = "/cart";
+                if(JSON.parse(this.responseText).counter == 1){
+                    window.location.href = "/cart";
+                }
+
+                amount.textContent = cart_count;
+                
                 
                 // console.log(document.querySelector("h4").id)
                 // console.log(add_to_cart.firstElementChild);

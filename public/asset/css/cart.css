@@ -9,6 +9,11 @@ main {
     position: relative;
 }
 
+.empty-cart {
+    padding: 50px 0;
+    text-align: center;
+}
+
 .pre-loader {
     position: absolute;
     top: 0;

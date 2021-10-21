@@ -29,12 +29,20 @@
                     <h4>YOUR CART</h4>
                     <div>
                         <span>Subtotal: </span>
-                        <span>PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
+                        <span class="subtotal">PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
                         <!-- <a href="#">Check Out</a> -->
                     </div>
                 </div>
-        
+         
                 <div class="cart-body">
+                    <div class="empty-cart-notification"></div>
+                    <?php if($_SESSION['cart']->getTotalQuantity() == 0) : ?>
+                        <div class="empty-cart">
+                            <p>Your cart is currenly empty. It seems the right time to start ordering</p>
+                            <a href="/order">Order here</a>
+                        </div>
+                    <?php endif ?>
+                    
                     <div class="pre-loader">
                         <img src="asset/img/loader.svg" alt="" srcset="" width="20px">
                     </div>
@@ -50,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center d-flex justify-content-between col-3">
-                                <a href="/order?type=<?= $item->itemSummary()['category'] ?>&name=<?= $item->itemSummary()['title'] ?>" id="<?= $item->itemSummary()['id'] ?>">Edit</a>
+                                <a href="/edit?id=<?= $item->itemSummary()['id'] ?>&name=<?= $item->itemSummary()['title'] ?>" id="<?= $item->itemSummary()['id'] ?>">Edit</a>
                                 <div class="total d-flex align-items-center">
                                     <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="<?= $item->itemSummary()['id'] ?>" class="delete">
                                 </div>
@@ -71,7 +79,7 @@
                             <a href="#">Calculate Shipping</a>
                         </div>
                         <div>
-                        <span>PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
+                        <span class="subtotal">PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
                         </div>
                     </div>
                  
