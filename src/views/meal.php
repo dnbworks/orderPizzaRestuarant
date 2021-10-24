@@ -26,11 +26,11 @@
                     <!-- <?= $status ?> -->
                     <p><?= $pizza["description"] ?></p>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5">
+                <div class="col-12 col-md-5 col-lg-5" id="form_container">
                     <?php if($isCart): ?>
                         <div class="tabs d-flex justify-content-between">
-                            <a href="#" id="update" class="tab-btn active">Update Order</a>
-                            <a href="#" id="add" lass="tab-btn">Add product differently</a>
+                            <a href="#" id="update" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>" class="tab-btn active">Update Order</a>
+                            <a href="#" id="add" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>" class="tab-btn">Add product differently</a>
                         </div>
                     <?php endif; ?>
                     <span class="title">Select your options</span>

@@ -23,6 +23,7 @@ $app->router->get("/api", [ApiController::class, 'type']);
 $app->router->post("/api/create", [ApiController::class, 'post']);
 $app->router->post("/api/update", [ApiController::class, 'update']);
 $app->router->post("/api/delete", [ApiController::class, 'delete']);
+$app->router->get("/api/render", [ApiController::class, 'renderForm']);
 
 $app->router->get("/", [SiteController::class, 'index']);
 $app->router->get("/index", [SiteController::class, 'index']);

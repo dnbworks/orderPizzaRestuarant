@@ -12,6 +12,7 @@ use app\models\PizzaModel;
 use app\helpers\PaginationLinks;
 
 
+
 class ApiController extends Controller
 {
     public static int $counter = 0;
@@ -166,6 +167,30 @@ class ApiController extends Controller
                 array('message' => 'Post Not Created')
             );
         }
+    }
+
+    public function renderForm(Request $request)
+    {
+        if(isset($request->getBody()['status']) && isset($request->getBody()['category'])){
+            $htmlForm = '';
+
+            if($request->getBody()['status'] == 'add'){
+                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['category']);
+            } else {
+                $items = $_SESSION['cart']->getItems()[$request->getBody()['id']]->itemSummary()['options'];
+               
+                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['category'], ['btn' => 'Update Order', 'options' => $items]);
+            }
+
+           
+
+            return json_encode(
+                array('message' => 'listened to api', 'form' => $htmlForm, 'category' => $request->getBody()['category'])
+            );
+                
+        }
+    
+        
     }
   
 }
