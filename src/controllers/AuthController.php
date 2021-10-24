@@ -50,7 +50,7 @@ class AuthController extends Controller{
             $response->redirect('/home');
             exit;
         } 
-        $this->setLayout('Auth');
+        $this->setLayout('main');
 
         $registerModel = new UserModel();
         if($request->isPost()){

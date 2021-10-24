@@ -12,6 +12,30 @@ p {
     hyphens: auto;
 }
 
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tabs a {
+    padding: 12.5px;
+    width: 200px;
+    background-color: #d3d3d3;
+    text-decoration: none;
+    color: #111;
+    display: block;
+    font-family: "Circular Std", sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    border: 1px solid #eee;
+    position: relative;
+}
+
+.tabs a.active {
+    background-color: #F5B335;
+}
+
 /* .quantity {
     text-align: center;
 } */

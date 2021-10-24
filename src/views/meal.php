@@ -2,7 +2,13 @@
 <?php
     use app\core\Application;
     $this->title = 'meal';
+
+    // echo '<pre>';
+    // var_dump($isCart);
+    // echo '</pre>';
 ?>
+
+
 <main>
     <div class="shadow"></div>
     <div class="container" style="padding-top: 30px !important; padding-bottom: 30px !important;">
@@ -17,12 +23,22 @@
                     </figure>
                     <!-- <div class="magnifier-preview" id="preview" style="width: 200px; height: 133px"></div> -->
                     <h4 id="<?= $pizza["product_id"] ?>"><?= $pizza["title"] ?></h4>
-                    <?= $status ?>
+                    <!-- <?= $status ?> -->
                     <p><?= $pizza["description"] ?></p>
                 </div>
                 <div class="col-12 col-md-5 col-lg-5">
+                    <?php if($isCart): ?>
+                        <div class="tabs d-flex justify-content-between">
+                            <a href="#" id="update" class="tab-btn active">Update Order</a>
+                            <a href="#" id="add" lass="tab-btn">Add product differently</a>
+                        </div>
+                    <?php endif; ?>
                     <span class="title">Select your options</span>
-                    <?= Application::$app->render->renderHtml($pizza["category"]) ?>
+                    <?php if($isCart): ?>
+                        <?= Application::$app->render->renderHtml($pizza["category"], ['btn' => 'Update Order', 'options' => $options]) ?>
+                    <?php else: ?>
+                        <?= Application::$app->render->renderHtml($pizza["category"]) ?>
+                    <?php endif; ?>
                 </div>
             <?php else : ?>
                 <div class="col-12 col-md-5 col-lg-5">
@@ -37,10 +53,11 @@
                     <!-- <?= $status ?> -->
                     <p><?= $pizza["description"] ?></p>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5">
+                <div class="col-12 col-md-5 col-lg-5">  
                     <span class="title">Select your options</span>
                     <?= Application::$app->render->renderHtml($pizza["category"], ['btn' => 'Update Order', 'options' => $options]) ?>
                 </div>
+               
             <?php endif; ?>
             
         </div>

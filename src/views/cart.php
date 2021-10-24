@@ -48,13 +48,18 @@
                     </div>
                     <?php foreach($items as $item) : ?>
                         <div class="cart-items d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center col-9 col-md-5" style="padding-left: 5px !important;">
+                            <div class="d-flex align-items-center col-9 col-md-6" style="padding-left: 5px !important;">
                                 <img src="/asset/img/<?= $item->itemSummary()['img'] ?>" alt="" width="100px" class="pic">
                                 <div class="added-item-details">
                                     <a href="/order"><?= $item->itemSummary()['title'] ?></a>
                                     <span>PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price']) ?> X (<?= $item->itemSummary()['quantity'] ?>)</span>
                                     <span>Total: PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price'] * (int)$item->itemSummary()['quantity']) ?></span>
                                     <span>Addons</span>
+                                    <div class="addons">
+                                        <?php foreach($item->itemSummary()['options'] as $key => $option): ?>
+                                            <span><b><?= $key ?></b>: <?= $option ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center d-flex justify-content-between col-3">

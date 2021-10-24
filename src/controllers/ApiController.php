@@ -97,9 +97,45 @@ class ApiController extends Controller
                
     }
 
-    public function upadte()
+    public function update()
     {
+        header('Access-control-Allow-Origin: *');
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+        $data = json_decode(file_get_contents("php://input"));
+        $data[0]->id;
+
+        $array_options = [];
+        foreach((array) $data as $option){
+            $array_options[$option->option] = $option->value;
+        }
+
+        // get the session cart
+        $cart = $_SESSION['cart'];
+        // remove item
+        $cart->removeItem($data[0]->id);
+
+        $pizzaModel = new PizzaModel();
+        $item = $pizzaModel->getById((int)$data[0]->id);
+
+        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
+
+        // add the updated version of the item
+        $cart->addProduct($product, (int)$array_options['number']);
+
+        // update product goal minimalist code
+        // $_SESSION['cart']->getItems()[$data[0]->id]->itemSummary()['options'] = $array_options;
+        if($data) {
+            echo json_encode(
+                array('message' => 'updated Created', 'data' =>  $data, 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity(), 'item' => $_SESSION['cart']->getItems()[$data[0]->id]->itemSummary()['options'], 'option' => $array_options)
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Post Not Created')
+            );
+        }
     }
 
     public function delete()

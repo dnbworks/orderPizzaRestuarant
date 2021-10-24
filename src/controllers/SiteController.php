@@ -46,10 +46,31 @@ class SiteController extends Controller {
 
         if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
             $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
-            return $this->render('meal', [
-                'pizza' => $result[0],
-                'status' =>  'show'
-            ]);
+
+            $is_product_in_cart = isset($_SESSION['cart']->getItems()[$result[0]['product_id']]) ?? false;
+
+            $items = $_SESSION['cart']->getItems();
+            $item = array_filter($items, fn($item) => $item->itemSummary()['id'] == $result[0]['product_id']);
+
+            if($is_product_in_cart){
+                return $this->render('meal', [
+                    'pizza' => $result[0],
+                    'status' =>  'show',
+                    'isCart' => $is_product_in_cart,
+                    'options' => $item[$result[0]['product_id']]->itemSummary()['options']
+                ]);
+                exit;
+            } else {
+                return $this->render('meal', [
+                    'pizza' => $result[0],
+                    'status' =>  'show',
+                    'isCart' => $is_product_in_cart
+                ]);
+            }
+
+          
+
+            
         }
      
         $result = $PizzaModel->offer();

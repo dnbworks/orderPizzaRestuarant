@@ -99,7 +99,7 @@ window.onload = function(){
 
     add_to_cart.addEventListener("click", function(e){
         e.preventDefault();
-
+        console.log(e.target.id)
        let validate = checkValidation(input_texts);
 
        if(validate.status && (validate.empty_fields.length == 0)){
@@ -110,8 +110,17 @@ window.onload = function(){
                 data_array.push(new Product(input.id, input.value, parseInt(document.querySelector("h4").id)));
             });
 
+            let url = '';
+            if(e.target.id == 'add'){
+                url = 'http://localhost:8080/api/create';
+            } else {
+                url = 'http://localhost:8080/api/update';
+            }
+
+            console.log(url);
+
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/api/create", true);
+            xhr.open("POST", url, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(data_array));
 
@@ -122,10 +131,17 @@ window.onload = function(){
             xhr.onload = function() {
                 // console.log("HELLO")
                 console.log(JSON.parse(this.responseText));
+                
                 let cart_count = JSON.parse(this.responseText).cartNum;
                 // console.log(this.responseText);
                 add_to_cart.style.opacity = '1';
-                add_to_cart.textContent = "Added to Tray";
+
+                if(e.target.id == 'add'){
+                    add_to_cart.textContent = "Added to Tray";
+                } else {
+                    add_to_cart.textContent = "Updated your order";
+                }
+                
                 add_to_cart.disabled = true;
                 var amount = document.querySelector('.amount');
 

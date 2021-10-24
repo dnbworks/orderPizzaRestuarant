@@ -4,7 +4,7 @@
 
     $this->title = 'order';
     // echo '<pre>';
-    // var_dump($_SESSION['cart']);
+    // var_dump($cart);
     // echo '</pre>';
 
 ?>

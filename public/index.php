@@ -18,8 +18,10 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 
+// api requests
 $app->router->get("/api", [ApiController::class, 'type']);
 $app->router->post("/api/create", [ApiController::class, 'post']);
+$app->router->post("/api/update", [ApiController::class, 'update']);
 $app->router->post("/api/delete", [ApiController::class, 'delete']);
 
 $app->router->get("/", [SiteController::class, 'index']);
