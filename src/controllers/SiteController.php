@@ -45,30 +45,61 @@ class SiteController extends Controller {
         $this->setLayout('main');
 
         if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
+
             $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
 
-            $is_product_in_cart = isset($_SESSION['cart']->getItems()[$result[0]['product_id']]) ?? false;
+            $cart = $_SESSION['cart']->getItems();
 
-            $items = $_SESSION['cart']->getItems();
-            $item = array_filter($items, fn($item) => $item->itemSummary()['id'] == $result[0]['product_id']);
+            $keyId = [];
 
-            if($is_product_in_cart){
-                return $this->render('meal', [
-                    'pizza' => $result[0],
-                    'status' =>  'show',
-                    'isCart' => $is_product_in_cart,
-                    'options' => $item[$result[0]['product_id']]->itemSummary()['options']
-                ]);
+            foreach($cart as $key => $item){
+                if($item->getProduct()->getId() == $result[0]['product_id']){
+                    $keyId[] = $key;
+                }
+            }
+
+
+
+            if(count($keyId) == 1){
+                $item = $cart[$keyId[0]];
+
+                return $this->render('meal', 
+                    [
+                        'pizza' => $result[0],
+                        'status' =>  'show',
+                        'isCart' => true,
+                        'options' => $item->getProduct()->getProductAttributes()['options'],
+                        'item' => $item->getProduct()->getProductAttributes()
+                    ]
+                );
                 exit;
+                
+            } else if(count($keyId) > 1){
+
+                $optionList = [];
+
+                foreach($cart as $key => $item){
+                    $optionList[$key] = $item->getProduct()->getProductAttributes()['options'];
+                }
+
+                return $this->render('meal', 
+                    [
+                        'pizza' => $result[0],
+                        'status' =>  'show',
+                        'isCart' => true,
+                        'options' => $item->getProduct()->getProductAttributes()['options'],
+                        'optionList' => $optionList 
+                    ]
+                );
+                exit;
+
             } else {
                 return $this->render('meal', [
                     'pizza' => $result[0],
                     'status' =>  'show',
-                    'isCart' => $is_product_in_cart
+                    'isCart' => false
                 ]);
             }
-
-          
 
             
         }
@@ -99,23 +130,27 @@ class SiteController extends Controller {
     public function editProduct(Request $request)
     {  
         $this->setLayout('main');
-        $PizzaModel = new PizzaModel();
         if(isset($request->getBody()['id']) && isset($request->getBody()['name'])){
-            $result = $PizzaModel->getById($request->getBody()['id']);
-            $items = $_SESSION['cart']->getItems();
-            $item = array_filter($items, fn($item) => $item->itemSummary()['id'] == $request->getBody()['id']);
-            
+
+            $item = $_SESSION['cart']->getItems()[$request->getBody()['id']]->getProduct()->getProductAttributes();
+ 
             // echo '<pre>';
-            // var_dump( $item[$request->getBody()['id']]->itemSummary()['options']);
+            // var_dump( $item);
             // echo '</pre>';
             // exit;
 
             // echo '<pre>';
-            // var_dump( $result);
+            // var_dump( $item['options']);
             // echo '</pre>';
             // exit;
           
-            return $this->render('meal', ['pizza' => $result[0], 'status' =>  'update', 'options' => $item[$request->getBody()['id']]->itemSummary()['options']]);
+            return $this->render('meal', 
+                [
+                    'pizza' => $item, 
+                    'status' =>  'update', 
+                    'options' => $item['options']
+                ]
+            );
         }
     }
 

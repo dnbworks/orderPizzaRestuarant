@@ -22,6 +22,7 @@ $app = new Application(dirname(__DIR__), $config);
 $app->router->get("/api", [ApiController::class, 'type']);
 $app->router->post("/api/create", [ApiController::class, 'post']);
 $app->router->post("/api/update", [ApiController::class, 'update']);
+$app->router->post("/api/addDiff", [ApiController::class, 'addDiff']);
 $app->router->post("/api/delete", [ApiController::class, 'delete']);
 $app->router->get("/api/render", [ApiController::class, 'renderForm']);
 

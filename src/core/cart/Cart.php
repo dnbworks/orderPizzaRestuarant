@@ -40,16 +40,41 @@ class Cart
     public function addProduct(Product $product, int $quantity)
     {
         // find product in cart
-        $cartItem = $this->findCartItem($product->getId());
+        $cartItem = $this->findCartItem($product->getCartItemId());
+
         if ($cartItem === null){
             $cartItem = new CartItem($product, 0);
-            $this->items[$product->getId()] = $cartItem;
+            $this->items[$product->getCartItemId()] = $cartItem;
+        }
+
+        $cartItem->increaseQuantity($quantity);
+        return $cartItem;
+    }
+
+    public function updateProduct($id, $product, $quantity)
+    {
+        $cartItem = $this->findCartItem($id);
+        if($cartItem){
+            $cartItem = new CartItem($product, 0);
+            $this->items[$id] = $cartItem;
         }
         $cartItem->increaseQuantity($quantity);
         return $cartItem;
     }
 
-    private function findCartItem(int $productId)
+    public function addDiff(string $key, Product $product, int $quantity)
+    {
+        // find product in cart
+        $cartItem = $this->findCartItem($key);
+        if ($cartItem === null){
+            $cartItem = new CartItem($product, 0);
+            $this->items[$key] = $cartItem;
+        }
+        $cartItem->increaseQuantity($quantity);
+        return $cartItem;
+    }
+
+    private function findCartItem(int|string $productId)
     {
         return $this->items[$productId] ?? null;
     }

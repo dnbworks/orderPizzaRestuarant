@@ -77,21 +77,35 @@ function handleAddCart(e){
 
     console.log(e.target.id)
    let validate = checkValidation(input_texts);
+   const input_values = document.querySelectorAll('.input');
 
    if(validate.status && (validate.empty_fields.length == 0)){
         let data_array = [] ;
-        input_values.forEach(input => {
-            data_array.push(new Product(input.id, input.value, parseInt(document.querySelector("h4").id)));
-        });
 
+        if(e.target.id == 'add' || e.target.id == 'addDiff'){
+            input_values.forEach(input => {
+                data_array.push(new Product(input.id, input.value, parseInt(document.querySelector("h4").id)));
+            });
+        } else if(e.target.id == 'update'){
+            input_values.forEach(input => {
+                data_array.push(new Product(input.id, input.value, document.querySelector(".text").id));
+            });
+        }
+       
         let url = '';
         if(e.target.id == 'add'){
             url = 'http://localhost:8080/api/create';
-        } else {
+        } else if(e.target.id == 'update'){
             url = 'http://localhost:8080/api/update';
+        } else {
+            url = 'http://localhost:8080/api/addDiff';
         }
 
+      
+
         console.log(url);
+        console.log(data_array);
+        // console.log(document.querySelector(".text"));
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
@@ -101,27 +115,30 @@ function handleAddCart(e){
         this.style.opacity = '0.6';
         this.firstElementChild.style.display = "block";
 
+        let button = this;
+
         xhr.onload = function() {
             console.log(JSON.parse(this.responseText));
             
             let cart_count = JSON.parse(this.responseText).cartNum;
             // console.log(this.responseText);
-            add_to_cart.style.opacity = '1';
+            button.style.opacity = '1';
 
-            if(e.target.id == 'add'){
-                add_to_cart.textContent = "Added to Tray";
+            if(e.target.id == 'update'){
+                button.textContent = "Updated your order";
             } else {
-                add_to_cart.textContent = "Updated your order";
+                button.textContent = "Added to Tray";
             }
             
-            add_to_cart.disabled = true;
+            button.disabled = true;
             var amount = document.querySelector('.amount');
-
-            if(JSON.parse(this.responseText).counter == 1){
-                window.location.href = "/cart";
-            }
-
             amount.textContent = cart_count;
+
+            // if(JSON.parse(this.responseText).counter == 1){
+            //     window.location.href = "/cart";
+            // }
+
+            
             
         }
 
@@ -157,18 +174,21 @@ function handleFormContainer(e){
     if(e.target.classList.contains('tab-btn')){
         e.preventDefault();
 
-        let url = `/api/render?id=${e.target.dataset.id}&status=${e.target.id}&category=${e.target.dataset.category}`;
+        let url = `/api/render?id=${e.target.dataset.id}&status=${e.target.id}&category=${e.target.dataset.category}&cartItemId=${e.target.dataset.cartitemid}`;
 
+        console.log(url);
+        console.log(e.target.dataset.cartitemid);
         var xhr3 = new XMLHttpRequest();
         xhr3.open("GET", url, true);
         xhr3.send(null);
 
         xhr3.onreadystatechange = function(){
             if(xhr3.readyState == 4 && xhr3.status == 200 ){
+                console.log(JSON.parse(this.responseText));
                 let template = `
                     <div class="tabs d-flex justify-content-between">
-                        <a href="#" id="update" data-category="${e.target.dataset.category}" data-id="${e.target.dataset.id}" class="tab-btn active">Update Order</a>
-                        <a href="#" id="add" data-category="${e.target.dataset.category}" data-id="${e.target.dataset.id}" class="tab-btn">Add product differently</a>
+                        <a href="#" id="update" data-category="${e.target.dataset.category}" data-id="${e.target.dataset.id}" data-cartitemid="${e.target.dataset.cartitemid}" class="tab-btn active">Update Order</a>
+                        <a href="#" id="addDiff" data-category="${e.target.dataset.category}" data-id="${e.target.dataset.id}" data-cartitemid="${e.target.dataset.cartitemid}" class="tab-btn">Add product differently</a>
                     </div>
                     <span class="title">Select your options</span>
                     ${JSON.parse(this.responseText).form}
@@ -187,7 +207,7 @@ function handleFormContainer(e){
                     input.addEventListener('focus', handleFocus);
                     input.addEventListener('blur', handleBlur);
                 });
-                console.log(form_container.querySelectorAll(".input-text")[0]);
+                // console.log(form_container.querySelectorAll(".input-text")[0]);
             } // end if
         } // end XMLHttpRequest
     } // end if

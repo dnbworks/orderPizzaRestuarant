@@ -1,6 +1,5 @@
 <?php
 
-// declare(strict_types = 1);
 
 namespace app\controllers;
 
@@ -10,12 +9,13 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\PizzaModel;
 use app\helpers\PaginationLinks;
+use app\helpers\RandomString;
 
 
 
 class ApiController extends Controller
 {
-    public static int $counter = 0;
+
     public function type(Request $request)
     {
         header('Access_control-Allow_origin: *');
@@ -51,21 +51,20 @@ class ApiController extends Controller
 
             return json_encode(
                     array('pagination_links' => $links, 'data' => $result['data'])
-                );
+            );
         }
      
     }
 
     public function post()
     {
-        // session_start();
+
         header('Access-control-Allow-Origin: *');
         header('Content-type: application/json');
         header('Access-Control-Allow-Methods: POST');
         header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
         // get the raw posted data
-        
         $data = json_decode(file_get_contents("php://input"));
         $data[0]->id;
 
@@ -74,28 +73,28 @@ class ApiController extends Controller
             $array_options[$option->option] = $option->value;
         }
 
+        $pizzaModel = new PizzaModel(); // instantiate Pizza model
+        $item = $pizzaModel->getById((int)$data[0]->id); // get item from db by id
 
-        $pizzaModel = new PizzaModel();
-        $item = $pizzaModel->getById((int)$data[0]->id);
+        $cartItemId = RandomString::rand(3); // generate a random cartitemid string to uniquely identify items in the cart
 
-        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
+        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category'], $item[0]['description'], $cartItemId);
 
-        $cart = $_SESSION['cart'];
+        $cart = $_SESSION['cart']; // call the cart session
 
         $cart->addProduct($product, (int)$array_options['number']);
+
         $_SESSION['cart_counter']++;
-        self::$counter++;
+
         if($data) {
             echo json_encode(
-                array('message' => 'Post Created', 'data' =>  $product->getProduct(), 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity())
+                array('message' => 'item add to cart', 'data' =>  $product->getProductAttributes(), 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity())
             );
             } else {
             echo json_encode(
                 array('message' => 'Post Not Created')
             );
-        }
-        // var_dump($data);
-               
+        }          
     }
 
     public function update()
@@ -115,28 +114,77 @@ class ApiController extends Controller
 
         // get the session cart
         $cart = $_SESSION['cart'];
-        // remove item
-        $cart->removeItem($data[0]->id);
 
-        $pizzaModel = new PizzaModel();
-        $item = $pizzaModel->getById((int)$data[0]->id);
 
-        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
+        $item = $_SESSION['cart']->getItems()[$data[0]->id]->getProduct()->getProductAttributes();
 
-        // add the updated version of the item
-        $cart->addProduct($product, (int)$array_options['number']);
 
-        // update product goal minimalist code
-        // $_SESSION['cart']->getItems()[$data[0]->id]->itemSummary()['options'] = $array_options;
+        $product = new Product($item['id'], $item['title'], (float) $item['price'], $item['availableQuantity'], $array_options, $item['img'], $item['category'], $item['description'], $item['CartItemId']);
+
+        // update the product
+        $cart->updateProduct($data[0]->id, $product, (int)$array_options['number']);
+  
+
         if($data) {
             echo json_encode(
-                array('message' => 'updated Created', 'data' =>  $data, 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity(), 'item' => $_SESSION['cart']->getItems()[$data[0]->id]->itemSummary()['options'], 'option' => $array_options)
+                array('message' => 'updated Created', 'data' =>  $data, 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity(), 'item' => $_SESSION['cart']->getItems()[$data[0]->id]->getProduct()->getProductAttributes(), 'option' => $array_options, 'cartItems' => $cart->getItems())
             );
         } else {
             echo json_encode(
                 array('message' => 'Post Not Created')
             );
         }
+    }
+
+    public function addDiff()
+    {
+        header('Access-control-Allow-Origin: *');
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
+        $data = json_decode(file_get_contents("php://input"));
+
+        $array_options = [];
+        foreach((array) $data as $option){
+            $array_options[$option->option] = $option->value;
+        }
+
+        // get the session cart
+        $cart = $_SESSION['cart'];
+
+        $is_product_in_cart = isset($cart->getItems()[$data[0]->id]) ?? false;
+
+        // if($is_product_in_cart){
+        //     $key = $data[0]->id . RandomString::rand(3);
+        // }
+
+        $key = $is_product_in_cart ? $data[0]->id . RandomString::rand(3) :  $data[0]->id;
+
+        $key_is_set = isset($cart->getItems()[$key]) ?? false;
+
+
+        $pizzaModel = new PizzaModel();
+        $item = $pizzaModel->getById((int)$data[0]->id);
+
+        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
+
+        if(!$key_is_set){
+            $cart->addDiff($key, $product, (int)$array_options['number']);
+        }
+        
+        
+        if($data) {
+            echo json_encode(
+                array('message' => 'added differently', 'data' =>  $product->getProduct(), 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity(), 'options' => $array_options, 'is_in_cart' => $key_is_set, 'key' => $key)
+            );
+            } else {
+            echo json_encode(
+                array('message' => 'Post Not Created')
+            );
+        }
+
+
     }
 
     public function delete()
@@ -174,18 +222,16 @@ class ApiController extends Controller
         if(isset($request->getBody()['status']) && isset($request->getBody()['category'])){
             $htmlForm = '';
 
-            if($request->getBody()['status'] == 'add'){
-                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['category']);
+            if($request->getBody()['status'] == 'addDiff'){
+                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['category'], ['btn' => 'Add To Tray']);
             } else {
-                $items = $_SESSION['cart']->getItems()[$request->getBody()['id']]->itemSummary()['options'];
+                $items = $_SESSION['cart']->getItems()[$request->getBody()['cartItemId']]->getProduct()->getProductAttributes()['options'];
                
                 $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['category'], ['btn' => 'Update Order', 'options' => $items]);
             }
 
-           
-
             return json_encode(
-                array('message' => 'listened to api', 'form' => $htmlForm, 'category' => $request->getBody()['category'])
+                array('message' => 'listened to api', 'form' => $htmlForm, 'category' => $request->getBody()['category'], 'cartId' => $request->getBody()['cartItemId'])
             );
                 
         }

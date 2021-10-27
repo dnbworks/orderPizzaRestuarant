@@ -6,6 +6,11 @@
     // echo '<pre>';
     // var_dump($isCart);
     // echo '</pre>';
+
+    // echo '<pre>';
+    // var_dump( $pizza);
+    // echo '</pre>';
+    // exit;
 ?>
 
 
@@ -23,14 +28,17 @@
                     </figure>
                     <!-- <div class="magnifier-preview" id="preview" style="width: 200px; height: 133px"></div> -->
                     <h4 id="<?= $pizza["product_id"] ?>"><?= $pizza["title"] ?></h4>
-                    <!-- <?= $status ?> -->
-                    <p><?= $pizza["description"] ?></p>
+                    <?php if($isCart): ?>
+                        <p id="<?= $item["CartItemId"] ?>" class="text"><?= $pizza["description"] ?></p>
+                    <?php else: ?>
+                        <p><?= $pizza["description"] ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="col-12 col-md-5 col-lg-5" id="form_container">
                     <?php if($isCart): ?>
                         <div class="tabs d-flex justify-content-between">
-                            <a href="#" id="update" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>" class="tab-btn active">Update Order</a>
-                            <a href="#" id="add" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>" class="tab-btn">Add product differently</a>
+                            <a href="#" id="update" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>" data-cartitemid="<?= $item["CartItemId"] ?>" class="tab-btn active">Update Order</a>
+                            <a href="#" id="addDiff" data-category="<?= $pizza["category"] ?>" data-id="<?= $pizza["product_id"] ?>"  data-cartitemid="<?= $item["CartItemId"] ?>" class="tab-btn">Add product differently</a>
                         </div>
                     <?php endif; ?>
                     <span class="title">Select your options</span>
@@ -41,7 +49,7 @@
                     <?php endif; ?>
                 </div>
             <?php else : ?>
-                <div class="col-12 col-md-5 col-lg-5">
+                <div class="col-12 col-md-5 col-lg-5" id="form_container">
                     <figure>
                         <div class="loader-div">
                             <img src="asset/img/loader.svg" alt="" srcset="" id="loader">
@@ -49,9 +57,9 @@
                         <img src="/asset/img/<?= $pizza["img"] ?>" alt="" srcset="" id="thumb">
                     </figure>
                     <!-- <div class="magnifier-preview" id="preview" style="width: 200px; height: 133px"></div> -->
-                    <h4 id="<?= $pizza["product_id"] ?>"><?= $pizza["title"] ?></h4>
-                    <!-- <?= $status ?> -->
-                    <p><?= $pizza["description"] ?></p>
+                    <h4 id="<?= $pizza["id"] ?>"><?= $pizza["title"] ?></h4>
+                    
+                    <p id="<?= $pizza["CartItemId"] ?>" class="text"><?= $pizza["description"] ?></p>
                 </div>
                 <div class="col-12 col-md-5 col-lg-5">  
                     <span class="title">Select your options</span>

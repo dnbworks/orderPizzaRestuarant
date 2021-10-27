@@ -50,9 +50,9 @@ class Render
         $size = isset($params['options']['size']) ? '<input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size" value="' . $params['options']['size'] . '">' : ' <input type="text" name="size" class="input-text input" placeholder="Choose your size" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size">'; // end size input
         
         // size input
-        $condiments = isset($params['options']['condiments']) ? '<input type="text" name="condiments" class="input-text input" placeholder="Choose your condiments" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size" value="' . $params['options']['condiments'] . '">' : ' <input type="text" name="condiments" class="input-text input" placeholder="Choose your condiments" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="condiments">'; // end size input
+        $condiments = isset($params['options']['condiments']) ? '<input type="text" name="condiments" class="input-text input" placeholder="Choose your condiments" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="condiments" value="' . $params['options']['condiments'] . '">' : ' <input type="text" name="condiments" class="input-text input" placeholder="Choose your condiments" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="condiments">'; // end size input
 
-        $pizza_cut = isset($params['options']['pizza_cut']) ? '<input type="text" name="pizza_cut" class="input-text input" placeholder="Choose your pizza cut" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="size" value="' . $params['options']['pizza_cut'] . '">' : ' <input type="text" name="pizza_cut" class="input-text input" placeholder="Choose your pizza cut" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="pizza_cut">';
+        $pizza_cut = isset($params['options']['pizza_cut']) ? '<input type="text" name="pizza_cut" class="input-text input" placeholder="Choose your pizza cut" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="pizza_cut" value="' . $params['options']['pizza_cut'] . '">' : ' <input type="text" name="pizza_cut" class="input-text input" placeholder="Choose your pizza cut" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="pizza_cut">';
         
 
         // instruction input
@@ -62,7 +62,16 @@ class Render
         $quantity = isset($params['options']['number']) ? '<div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="'. $params['options']['number'].'" /><div class="value-button" id="increase" value="Increase Value">+</div></div>' : ' <div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="1" /><div class="value-button" id="increase" value="Increase Value">+</div></div>'; // end Quantity input
 
         // button input
-        $button = isset($params['btn']) ? '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; // end button input
+        $button = '';
+        if(isset($params['btn']) && $params['btn'] == 'Update Order'){
+            $button = '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>';
+        } elseif(isset($params['btn']) && $params['btn'] == 'addDiff'){
+            $button = '<button type="submit" id="addDiff"><img src="asset/img/loader.svg" alt="" srcset="">Add Differently to tray</button>';
+        } else {
+            $button = ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>';
+        }
+
+        // $button = isset($params['btn']) ? '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; 
         $html = <<<HTML
                 <form action="" method="post" id="form_options">
                     <label for="size">Choose your pizza size</label>
@@ -174,7 +183,14 @@ class Render
         $quantity = isset($params['options']['number']) ? '<div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="'. $params['options']['number'].'" /><div class="value-button" id="increase" value="Increase Value">+</div></div>' : ' <div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="1" /><div class="value-button" id="increase" value="Increase Value">+</div></div>'; // end Quantity input
 
         // button input
-        $button = isset($params['btn']) ? '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; // end button input
+        $button = '';
+        if(isset($params['btn']) && $params['btn'] == 'Update Order'){
+            $button = '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>';
+        } elseif(isset($params['btn']) && $params['btn'] == 'addDiff'){
+            $button = '<button type="submit" id="addDiff"><img src="asset/img/loader.svg" alt="" srcset="">Add Differently to tray</button>';
+        } else {
+            $button = ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>';
+        } // end button input
         $html = <<<HTML
                 <form action="" method="post" id="form_options">
                     <label for="size">Choose your Plate size</label>
@@ -235,7 +251,14 @@ class Render
         $quantity = isset($params['options']['number']) ? '<div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="'. $params['options']['number'].'" /><div class="value-button" id="increase" value="Increase Value">+</div></div>' : ' <div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="1" /><div class="value-button" id="increase" value="Increase Value">+</div></div>'; // end Quantity input
 
         // button input
-        $button = isset($params['btn']) ? '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; // end button input
+        $button = '';
+        if(isset($params['btn']) && $params['btn'] == 'Update Order'){
+            $button = '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>';
+        } elseif(isset($params['btn']) && $params['btn'] == 'addDiff'){
+            $button = '<button type="submit" id="addDiff"><img src="asset/img/loader.svg" alt="" srcset="">Add Differently to tray</button>';
+        } else {
+            $button = ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>';
+        } // end button input
 
         $html = <<<HTML
                 <form action="" method="post" id="form_options">
@@ -299,7 +322,14 @@ class Render
         $quantity = isset($params['options']['number']) ? '<div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="'. $params['options']['number'].'" /><div class="value-button" id="increase" value="Increase Value">+</div></div>' : ' <div class="quantity"><div class="value-button" id="decrease" value="Decrease Value">-</div><input type="number" id="number" class="input" value="1" /><div class="value-button" id="increase" value="Increase Value">+</div></div>'; // end Quantity input
 
         // button input
-        $button = isset($params['btn']) ? '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>' : ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>'; // end button input
+        $button = '';
+        if(isset($params['btn']) && $params['btn'] == 'Update Order'){
+            $button = '<button type="submit" id="update"><img src="asset/img/loader.svg" alt="" srcset="">'. $params['btn'] . '</button>';
+        } elseif(isset($params['btn']) && $params['btn'] == 'addDiff'){
+            $button = '<button type="submit" id="addDiff"><img src="asset/img/loader.svg" alt="" srcset="">Add Differently to tray</button>';
+        } else {
+            $button = ' <button type="submit" id="add"><img src="asset/img/loader.svg" alt="" srcset="">Add to Tray</button>';
+        } // end button input
         
         
 

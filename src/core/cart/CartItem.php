@@ -27,11 +27,12 @@ class CartItem
             'id' => $this->product->getId(),
             'title' => $this->product->getTitle(),
             'price' => $this->product->getPrice(),
-            'category' => $this->product->getProduct()['category'],
+            'category' => $this->product->getProductAttributes()['category'],
             'availableQuantity' => $this->product->getAvailableQuantity(),
             'options' => $this->product->getOption(),
             'quantity' => $this->quantity,
-            'img' => $this->product->getImg()
+            'img' => $this->product->getImg(),
+            'cartItemId' => ''
         ];
     }
 

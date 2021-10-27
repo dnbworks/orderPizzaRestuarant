@@ -46,7 +46,8 @@
                     <div class="pre-loader">
                         <img src="asset/img/loader.svg" alt="" srcset="" width="20px">
                     </div>
-                    <?php foreach($items as $item) : ?>
+                    <?php foreach($items as $id => $item) : ?>
+                        <!-- <?= $key ?> -->
                         <div class="cart-items d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center col-9 col-md-6" style="padding-left: 5px !important;">
                                 <img src="/asset/img/<?= $item->itemSummary()['img'] ?>" alt="" width="100px" class="pic">
@@ -63,9 +64,9 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center d-flex justify-content-between col-3">
-                                <a href="/edit?id=<?= $item->itemSummary()['id'] ?>&name=<?= $item->itemSummary()['title'] ?>" id="<?= $item->itemSummary()['id'] ?>">Edit</a>
+                                <a href="/edit?id=<?= $id ?>&name=<?= $item->itemSummary()['title'] ?>" id="<?= $item->itemSummary()['id'] ?>">Edit</a>
                                 <div class="total d-flex align-items-center">
-                                    <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="<?= $item->itemSummary()['id'] ?>" class="delete">
+                                    <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="<?= $id ?>" class="delete">
                                 </div>
                             </div>
                         </div> 
