@@ -11,49 +11,44 @@ class UserModel extends DbModel
     public string $firstname = "";
     public string $lastname = "";
     public string $gender = "";
-    public string $day = "";
-    public string $month = "";
-    public string $year = "";
+
     public string $city = "";
-    public string $state = "";
-    // public string $picture = "";
-    // public array $pictureArray = [];
-    public string $old_image = "";
+    public string $province = "";
+    public string $postal_code = "";
+    public string $address = "";
+    public string $phone_number = "";
+
     public string $email = "";
     public string $password = "";
     public string $confirmPassword = "";
-    public string $birthdate = "";
-
 
 
 
     public function register()
     {
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        // $this->birthdate =  $this->month . "-" . $this->day . "-" . $this->year;
-        // echo $this->password;
-        // exit;
+
         return $this->save();
     }
 
     public function updateProfile()
     {
-        return $this->update();
+        // return $this->update();
     }
 
     public static function tableName(): string
     {
-        return 'mismatch_users';
+        return 'customers';
     }
 
     public function attributes(): array
     {
-        return ['firstname', 'lastname', 'gender', 'password', 'birthdate', 'email', 'state', 'city'];
+        return ['firstname', 'lastname', 'gender', 'password', 'email', 'province', 'address', 'postal_code', 'phone_number', 'city'];
     }
 
     public function updateAttributes(): array
     {
-        return ['firstname', 'lastname', 'gender', 'birthdate', 'state', 'city', 'picture'];
+        return ['firstname', 'lastname', 'gender', 'password', 'email', 'province', 'address', 'postal_code', 'phone_number', 'city'];
     }
       
 
@@ -63,11 +58,11 @@ class UserModel extends DbModel
             'firstname' => [self::RULE_REQUIRED],
             'lastname' => [self::RULE_REQUIRED],
             'gender' => [self::RULE_REQUIRED],
-            'day' => [self::RULE_REQUIRED],
-            'month' => [self::RULE_REQUIRED],
-            'year' => [self::RULE_REQUIRED],
             'city' => [self::RULE_REQUIRED],
-            'state' => [self::RULE_REQUIRED],
+            'province' => [self::RULE_REQUIRED],
+            'postal_code' => [self::RULE_REQUIRED],
+            'address' => [self::RULE_REQUIRED],
+            'phone_number' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 11], [self::RULE_MAX, 'max' => 11]],
             'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 20]],
             'confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
@@ -76,7 +71,7 @@ class UserModel extends DbModel
 
     public static function primaryKey(): string
     {
-        return 'user_id';
+        return 'customer_id';
     }
 
     public function getDisplayName()

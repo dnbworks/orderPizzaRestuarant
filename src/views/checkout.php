@@ -1,5 +1,11 @@
 <?php
     $this->title = 'checkout';
+  
+
+    $items = $cart->getItems();
+    // echo '<pre>';
+    // var_dump($items);
+    // echo '</pre>';
 ?>
 
  <!--Main layout-->
@@ -9,33 +15,69 @@
 
       <!-- Heading -->
       <h2 class="my-4 h2 text-center">Checkout form</h2>
+        <div class="coupon">
+          <span>Have a coupon? <a href="#">Click here to enter your code</a></span>
+          <!-- Promo code -->
+          <form action="/coupon" method="post">
+            <p>If you have a coupon code, please apply it below.</p>
+            <div class="input-group d-flex">
+              <input type="text" class="form-control" placeholder="Coupon code" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <button class="btn btn-secondary" type="button" width="200px">Apply Coupon</button>
+            </div>
+          </form>
+          <!-- Promo code -->
+        </div>
+        
       
       <!--Grid row-->
-      <div class="row">
+      <form class="card-body" action="/place-order" method="post" id="place_order">
+        <p>How do you want us to serve you</p>
+          <div class="my-3 d-flex">
+            <div class="custom-control custom-radio mr-3 ml-0">
+              <input id="delivery" name="deliveryMethod" type="radio" class="custom-control-input" value="2" checked required>
+              <label class="custom-control-label" for="delivery">Delivery</label>
+            </div>
+            <div class="custom-control custom-radio mx-3">
+              <input id="pickup" name="deliveryMethod" type="radio" class="custom-control-input" value="1" required>
+              <label class="custom-control-label" for="pickup">PickUp</label>
+            </div>
+          </div>
+         
+      <div class="row justify-content-between">
 
         <!--Grid column-->
-        <div class="col-md-8 mb-4">
+        <div class="col-md-6 mb-4">
           <hr class="mb-4">
           <!--Card-->
           <div class="card">
-
             <!--Card content-->
-            <form class="card-body">
-              <div>
-                <p>How do you want us to serve you</p>
-                <div class="my-3 d-flex">
-                <div class="custom-control custom-radio mr-3 ml-0">
-                  <input id="delivery" name="deliveryMethod" type="radio" class="custom-control-input" checked required>
-                  <label class="custom-control-label" for="delivery">Delivery</label>
-                </div>
-                <div class="custom-control custom-radio mx-3">
-                  <input id="pickup" name="deliveryMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="pickup">PickUp</label>
-                </div>
-  
+              <div class="billing-info">
+                <p>Your Billing Information</p>
+                <table class="table table-striped">
+                   <tr>
+                      <td>Full name: </td>
+                      <td><?php echo $user->firstname; ?> <?php echo $user->lastname; ?></td>
+                  </tr>
+                  <tr>
+                      <td>City: </td>
+                      <td><?php echo $user->city; ?></td>
+                  </tr>
+                  <tr>
+                      <td>Province: </td>
+                      <td><?php echo $user->province; ?></td>
+                  </tr>
+                  <tr>
+                      <td>Address: </td>
+                      <td><?php echo $user->address; ?></td>
+                  </tr>
+                  <tr>
+                      <td>Postal code: </td>
+                      <td><?php echo $user->postal_code; ?></td>
+                  </tr>
+                </table>
               </div>
-              </div>
-              <p>Payment Method</p>
+
+              <!-- <p>Payment Method</p>
               <div class="my-3 d-flex">
                 <div class="custom-control custom-radio mr-3 ml-0">
                   <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
@@ -81,11 +123,8 @@
                     Security code required
                   </div>
                 </div>
-              </div>
+              </div> -->
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">checkout</button>
-
-            </form>
 
           </div>
           <!--/.Card-->
@@ -94,66 +133,65 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-5 mb-5">
 
           <!-- Heading -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="text-muted">Your Order</span>
+            <span class="badge badge-secondary badge-pill"><?= $_SESSION['cart']->getTotalQuantity() ?></span>
           </h4>
 
           <!-- Cart -->
-          <ul class="list-group mb-3 z-depth-1">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
+            <table class="table">
+              <thead>
+              <tr>
+                <th class="product-name">Product</th>
+                <th class="product-total">Subtotal</th>
+              </tr>
+              </thead>
+              <tbody>
+                <?php foreach($items as $item): ?>
+                  <tr class="cart_item">
+                    <td class="product-name">
+                      <div class="d-flex align-items-center">
+                        <img src="asset/img/<?= $item->getProduct()->getProductAttributes()['img'] ?>" alt="" srcset="" width="30px" style="margin-right: 5px;">
+                        <span><?= $item->getProduct()->getProductAttributes()['title'] ?></span>&nbsp;<strong class="product-quantity">×&nbsp;<?= $item->getProduct()->getProductAttributes()['options']['number'] ?></strong>
+                      </div>	
+                    </td>
+                    <td class="product-total">
+                      <div class="d-flex align-items-center">
+                        <span class="Price-amount">
+                            <span class="Price-currencySymbol">PHP</span> <?= app\helpers\PriceHelper::formatMoney((float)$item->getProduct()->getProductAttributes()['price'] * (int)$item->getProduct()->getProductAttributes()['options']['number']) ?>
+                        </span>	
+                      </div>	
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr class="cart-subtotal">
+                  <th>Subtotal</th>
+                  <td><span class="Price-amount"><bdi><span class="Price-currencySymbol">PHP </span><?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></bdi></span></td>
+                </tr>
+                <tr class="order-total">
+                  <th>Total</th>
+                  <td><strong><span class="Price-amount"><bdi><span class="Price-currencySymbol">PHP </span><?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></bdi></span></strong> </td>
+                </tr>
+              </tfoot>
+            </table>
           <!-- Cart -->
 
-          <!-- Promo code -->
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code" aria-label="Recipient's username" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Redeem</button>
-              </div>
-            </div>
-          </form>
-          <!-- Promo code -->
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
+          <div class="woocommerce-privacy-policy-text">
+            <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="http://localhost/wordpress/?page_id=3" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
+        </div>
 
         </div>
         <!--Grid column-->
 
       </div>
+    </form>
       <!--Grid row-->
 
     </div>

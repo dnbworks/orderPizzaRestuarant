@@ -7,29 +7,21 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\core\middleware\AuthMiddleware;
-use app\models\UserModel;
-use app\models\QuestionModel;
-use app\models\MismatchModel;
-use app\models\UpdateProfileModel;
 use app\models\PizzaModel;
+use app\libs\Captcha;
+use app\models\UserModel;
 
-
-class SiteController extends Controller {
+class SiteController extends Controller 
+{
 
     public function __construct()
     {
-        if(Application::IsGuest()){
-            $this->setLayout('error');
-        } 
         // add middleware to certain pages
-        $this->registerMiddleware(new AuthMiddleware(['edit', 'home', 'questionaire', 'profile', 'mismatch']));
+        $this->registerMiddleware(new AuthMiddleware(['edit', 'dashboard']));
     }
     // serves the landing page
-    public function index(Request $request, Response $response){
-        if(!Application::IsGuest()){
-            $response->redirect('/home');
-            exit;
-        }
+    public function index(Request $request, Response $response)
+    {
         $this->setLayout('landingLayout');
         return $this->render('index');
     }
@@ -40,7 +32,8 @@ class SiteController extends Controller {
         return $this->render('about'); // renders the about page with its template
     }
     // serves the order page
-    public function order(Request $request){
+    public function order(Request $request)
+    {
         $PizzaModel = new PizzaModel();
         $this->setLayout('main');
 
@@ -57,8 +50,6 @@ class SiteController extends Controller {
                     $keyId[] = $key;
                 }
             }
-
-
 
             if(count($keyId) == 1){
                 $item = $cart[$keyId[0]];
@@ -88,7 +79,8 @@ class SiteController extends Controller {
                         'status' =>  'show',
                         'isCart' => true,
                         'options' => $item->getProduct()->getProductAttributes()['options'],
-                        'optionList' => $optionList 
+                        'optionList' => $optionList,
+                        'item' => $item->getProduct()->getProductAttributes()
                     ]
                 );
                 exit;
@@ -111,15 +103,33 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function checkout(Response $response)
+    public function dashboard(Request $request, Response $response)
     {
-        if(!Application::IsGuest()){
-            $response->redirect('/account');
+        $this->setLayout('main');
+        if(Application::IsGuest()){
+            $response->redirect('/login');
             exit;
         } 
-       
+        
+        return $this->render('dashboard');
+    }
+
+    public function checkout(Request $request, Response $response)
+    {
         $this->setLayout('main');
-        return $this->render('checkout');
+        if(Application::IsGuest()){
+            $_SESSION['url'] = 'checkout';
+            $response->redirect('/login');
+            exit;
+        } 
+
+        $cart = $_SESSION['cart'];
+        $UserModel = new UserModel();
+        $user = $UserModel::findOne([
+            'customer_id' => $request->getBody()['id'] ?? Application::$app->user->customer_id
+        ]);
+
+        return $this->render('checkout', ['cart' => $cart, 'user' => $user]);
     }
 
     public function viewProduct()
@@ -131,19 +141,8 @@ class SiteController extends Controller {
     {  
         $this->setLayout('main');
         if(isset($request->getBody()['id']) && isset($request->getBody()['name'])){
-
             $item = $_SESSION['cart']->getItems()[$request->getBody()['id']]->getProduct()->getProductAttributes();
  
-            // echo '<pre>';
-            // var_dump( $item);
-            // echo '</pre>';
-            // exit;
-
-            // echo '<pre>';
-            // var_dump( $item['options']);
-            // echo '</pre>';
-            // exit;
-          
             return $this->render('meal', 
                 [
                     'pizza' => $item, 
@@ -154,12 +153,6 @@ class SiteController extends Controller {
         }
     }
 
-    public function account()
-    {
-        $this->setLayout('main');
-        return $this->render('account');
-    }
-
     public function cart()
     {
         $cart = $_SESSION['cart'];
@@ -167,144 +160,114 @@ class SiteController extends Controller {
         return $this->render('cart', ['cart' => $cart]);
     }
 
-    public function home(){
-        $this->setLayout('main');
-        $UserModel = new UserModel();
-        $QuestionModel = new QuestionModel();
-
-        $count = $QuestionModel::getQuestions([
-            'user_id' => Application::$app->user->user_id
-        ])['responseCount'];
-
-        $users = $UserModel::findAll();
-      
-        return $this->render('home', [
-            'users' => $users,
-            'responseCount' => $count
-        ]);
+    public function captcha()
+    {
+        return Captcha::generateCaptcha();
     }
 
-    public function edit(Request $request)
+    public function place_order(Request $request, Response $response)
     {
-        $UserModel = new UpdateProfileModel();
-        $user = $UserModel::findOne([
-            'user_id' => Application::$app->user->user_id
-        ]);
+        $sql = "";
+        if(isset($request->getBody()['deliveryMethod']) && $request->getBody()['deliveryMethod'] == '1'){
+           $order_id = '';
+            try {
+                // start transaction
+                Application::$app->db->pdo->beginTransaction();
+                 // strtotime();
+                $sql = "INSERT INTO `orders`(`order_date`, `delivery_id`, `customer_id`, `pickup_branch_id`, `total`) VALUES (NOW(), :delivery_id, :customer_id, :branch_id, :total)";
+                $statement = Application::$app->db->pdo->prepare($sql);
+                $statement->bindValue(':delivery_id', $request->getBody()['deliveryMethod']);
+                $statement->bindValue(':customer_id', Application::$app->user->customer_id);
+                $statement->bindValue(':branch_id', $request->getBody()['branch_id']);
+                $statement->bindValue(':total', \app\helpers\PriceHelper::formatMoney($_SESSION['cart']->getTotalSum()));
+                $statement->execute();
 
-        if($request->isPost()){
-            $UserModel->loadData($request->getBody());
-            
-            if($UserModel->validate()){
-               
-                if ($UserModel->pictureArray && $UserModel->pictureArray['tmp_name']) {
-                    
-                    if ($UserModel->old_image) {
-                    
-                        unlink(Application::$ROOT_DIR . '/public/uploads/' . $UserModel->old_image);
-                    }
-
-                    $UserModel->picture = Application::$app->user->user_id . '-' . $UserModel->picture;
-
-                    
-
-                    move_uploaded_file($UserModel->pictureArray['tmp_name'], Application::$ROOT_DIR . '/public/uploads/' . $UserModel->picture);
-
-                    
-                    
-                    $sql = "UPDATE `mismatch_users` SET `firstname`= :firstname,`lastname`= :lastname, `gender`= :gender, `birthdate`= :birthdate, `city`= :city,`state`= :state, `picture`= :picture WHERE user_id = '" . Application::$app->user->user_id ."'";
-
-                    $attributes = ['firstname', 'lastname', 'gender', 'birthdate', 'city', 'state', 'picture'];
-                } else {
-                    $attributes = ['firstname', 'lastname', 'gender', 'birthdate', 'city', 'state'];
-                    $sql = "UPDATE `mismatch_users` SET `firstname`= :firstname,`lastname`= :lastname, `gender`= :gender, `birthdate`= :birthdate, `city`= :city,`state`= :state WHERE user_id = '" . Application::$app->user->user_id ."'";
-                } 
-                
-
-                if($UserModel->updateProfile($attributes)){
-                    Application::$app->session->setFlash("success", "Your profile has been update. ");
-                    Application::$app->response->redirect("/edit-profile");
+                $order_id = Application::$app->db->pdo->lastInsertId();
+                $order_item_query = "INSERT INTO `order_items` (`order_id`, `cart_item_id`, `product_id`, `quantity`, `addon`, `subtotal`) VALUES ";
+                $values_array = [];
+                foreach($_SESSION['cart']->getItems() as $item){
+                    $values_array[] = "('" . Application::$app->db->pdo->lastInsertId() . "', '" . $item->getProduct()->getProductAttributes()['CartItemId'] . "', '" . $item->getProduct()->getProductAttributes()['id'] . "', '" . $item->getProduct()->getProductAttributes()['options']['number'] . "', '" . json_encode($item->getProduct()->getProductAttributes()['options']) . "', '" . \app\helpers\PriceHelper::formatMoney((float)$item->getProduct()->getProductAttributes()['price'] * (int)$item->getProduct()->getProductAttributes()['options']['number']). "')";
                 }
+
+                $final_query = $order_item_query . implode(", ", $values_array);
+
+                // echo $final_query;
+                // exit;
+
+                $stmt = Application::$app->db->pdo->prepare($final_query);
+                $stmt->execute();
+                
+                Application::$app->db->pdo->commit();
+            } catch (\Throwable $e) {
+                if(Application::$app->db->pdo->inTransaction()){
+                    Application::$app->db->pdo->rollBack();
+                }
+            }
             
-
-            }
-
+            $order_summary = "SELECT `order_id`, o.order_date, o.delivery_id, o.payment_id, o.pickup_branch_id, o.total, oi.product_id, p.img, p.title, oi.quantity, oi.subtotal FROM `orders` AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN products AS p USING (product_id) WHERE order_id = '$order_id'";
+            $statement = Application::$app->db->pdo->prepare($order_summary);
+            $statement->execute();
+            $order_details = $statement->fetchAll();
            
-            return $this->render('edit-profile', ["user" => $UserModel]);
-        
-        }
 
-        $this->setLayout('main');
-        return $this->render('edit-profile', [
-            'user' => $user
-        ]);
-    }
-
-    public function questionaire(Request $request)
-    {
-        $this->setLayout('main');
-
-        $QuestionModel = new QuestionModel();
-        $responses = $QuestionModel::getQuestions([
-            'user_id' => Application::$app->user->user_id
-        ])['responses'];
-
-        if($request->isPost()){
-            // $QuestionModel->loadData($request->getBody());
-
-            if($QuestionModel->register()){
-                Application::$app->session->setFlash("success", "Your responses have been saved. ");
-                Application::$app->response->redirect("/questionaire");
-
-            }
-
-            return $this->render('questionaire', ["responses" => $responses ]);
-        }
-
-        
-        return $this->render('questionaire', ["responses" => $responses ]);
-    }
-
-    public function profile(Request $request, Response $response)
-    {   
-     
-        $UserModel = new UserModel();
-        $user = $UserModel::findOne([
-            'user_id' => $request->getBody()['id'] ?? Application::$app->user->user_id
-        ]);
-
-        $this->setLayout('main');
-        return $this->render('view-profile', [
-            'user' => $user
-        ]);
-    }
-
-    public function mismatch()
-    {
-        $mismatchModel = new MismatchModel();
-
-        $data = $mismatchModel::fetchResponse();
-        $this->setLayout('main');
-
-        if(isset($data['errors'])){
-            return $this->render('mismatch', [
-                'errors' => $data['errors']
-            ]);
             // echo '<pre>';
-            // var_dump( $data);
+            // var_dump($order_details);
             // echo '</pre>';
-            // // echo $data;
-            exit;
-        }
+            // exit;
+            // if all transaction success then redirect to confirm info page
+
+            // make sure cart has items to display the checkout page
+            
         
-        return $this->render('mismatch', [
-            'user' => $data['user'][0],
-            'topics' => $data['topics'],
-        ]);
+            $_SESSION['cart']->setItems([]);
+            $response->redirect('/order_success', $order_details);
+            exit;
+        } 
+
+        if(isset($request->getBody()['deliveryMethod']) && $request->getBody()['deliveryMethod'] == '2'){
+            try {
+                Application::$app->db->pdo->beginTransaction();
+
+                $sql = "INSERT INTO `orders`(`order_date`, `delivery_id`, `customer_id`, `total`) VALUES (NOW(), :delivery_id, :customer_id, :total)";
+                $statement = Application::$app->db->pdo->prepare($sql);
+                $statement->bindValue(':delivery_id', $request->getBody()['deliveryMethod']);
+                $statement->bindValue(':customer_id', Application::$app->user->customer_id);
+                $statement->bindValue(':total', \app\helpers\PriceHelper::formatMoney($_SESSION['cart']->getTotalSum()));
+                $statement->execute();
+
+                $order_item_query = "INSERT INTO `order_items` (`order_id`, `cart_item_id`, `product_id`, `quantity`, `addon`) VALUES ";
+                $values_array = [];
+                foreach($_SESSION['cart']->getItems() as $item){
+                    $values_array[] = "('" . Application::$app->db->pdo->lastInsertId() . "', '" . $item->getProduct()->getProductAttributes()['CartItemId'] . "', '" . $item->getProduct()->getProductAttributes()['id'] . "', '" . $item->getProduct()->getProductAttributes()['options']['number'] . "', '" . json_encode($item->getProduct()->getProductAttributes()['options']) . "')";
+                }
+
+                $final_query = $order_item_query . implode(", ", $values_array);
+
+                $stmt = Application::$app->db->pdo->prepare($final_query);
+                $stmt->execute();
+                
+                Application::$app->db->pdo->commit();
+            } catch (\Throwable $e) {
+                if(Application::$app->db->pdo->inTransaction()){
+                    Application::$app->db->pdo->rollBack();
+                }
+            }
+            
+    
+            $_SESSION['cart']->setItems([]);    
+            $response->redirect('/order_success');
+        } 
+
     }
 
-    
+    public function order_success()
+    {
+        $order_details = null;
+        if(Application::$app->session->getFlash('order_details')){
+            $order_details = Application::$app->session->getFlash('order_details') ?? null;
+        }
+
+        return $this->render('confirmation_page', ['order_details' => $order_details]);
+    }
+
 }
-
-
-
-

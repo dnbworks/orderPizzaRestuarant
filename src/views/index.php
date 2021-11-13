@@ -1,7 +1,5 @@
 <?php
     $this->title = '';
-
-  
 ?>
 
     <div class="wrapper">
@@ -11,16 +9,14 @@
                 <li class="threes items" style="display:none;">
                     <div class="banner-content">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-12 col-md-6 col-lg-6 offset-md-6 ad">
-                                    <h2>Best Pizzas in the Philippines</h2>
-                                    <p>Find the full list of places to eat in Amadeo complete with address, phone, ratings and full menu with prices. You can also choose to eat in some restaurants</p>
-                                </div>
-                            </div>
+                            <h2>Welcome to Pizza.co</h2>
+                            <p>Place where you can find the best Pizza in Luzon</p>
+                            <hr>
+                            <a href="/order">order online</a>
                         </div>
                     </div>
                 </li>
-                <li class="twos items" style="display:none;">
+                <!-- <li class="twos items" style="display:none;">
                     <div class="banner-content">
                         <div class="container">
                             <div class="row">
@@ -31,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
     <!-- 
             <div class="arrow-and-dots">
@@ -49,32 +45,20 @@
         <main>
             <div class="container">
                 <h4>Our Specialities</h4>
-                <div class="row justify-content-center">
-                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
-                        <div class="img-container one">
-                            <a href="#" >Vegan</a >
-                        </div>
+                <div class="specialities">
+                    <div class="img-container one">
+                        <a href="#" >Vegan</a >
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
-                        <div class="img-container two">
-                            <a href="#" >Meat</a >
-                        </div>
-                
+                    <div class="img-container two">
+                        <a href="#" >Meat</a >
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
-                        <div class="img-container three">
-                            <a href="#" >Veggie</a >
-                        </div>
-                        
+                    <div class="img-container three">
+                        <a href="#" >Veggie</a >
                     </div>
-                    <div class="col-6 col-md-6 col-lg-5 d-flex justify-content-center">
-                        <div class="img-container four">
-                            <a href="#" >Vegan</a >
-                        </div>
-                        
+                    <div class="img-container four">
+                        <a href="#" >Vegan</a >
                     </div>
                 </div>
-                <a href="order.html">View Menu</a>
             </div>
         </main>
     
@@ -106,20 +90,17 @@
                         <p>Spaghetti with meat sauce marinara</p>
                     </div>
                 </div>
-                <a href="order.html">View Menu</a>
             </div>
         </div>
     
         <div class="testimory d-flex align-items-center">
             <div class="container">
-    
                 <h3>Since 1996</h3>
                 <p>29 years storng. A testament to our strength in customer satisfaction and loyalty. Rest assured that we are practicing extreme safety measures to porivide you with clean & delicious meals</p>
             </div>
         </div>
     
         <div class="map-section">
-            
             <div class="container-fluid">
                 <h3>Our location</h3>
                 <div class="row justify-content-center align-items-center">
@@ -144,7 +125,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>

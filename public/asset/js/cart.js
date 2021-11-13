@@ -7,6 +7,62 @@ const subTotals = document.querySelectorAll('.subtotal');
 const amount = document.querySelector('.amount');
 const empty_cart = document.querySelector('.empty-cart-notification');
 
+const layout = {
+    pizza: function(size, condiments, pizza_cut, Instruction, quantity){
+        let template = `
+            <span><b>size</b>: ${size}</span>
+            <span><b>condiments</b>: ${condiments}</span>
+            <span><b>pizza cut</b>: ${pizza_cut}</span>
+            <span><b>Instruction</b>: ${Instruction}</span>
+            <span><b>Quantity</b>: ${quantity}</span>
+        `;
+        return template;
+    },
+    solo_meals: function(size, Instruction, quantity){
+        let template = `
+                <span><b>Plate size</b>: ${size}</span>
+                <span><b>Instruction</b>: ${Instruction}</span>
+                <span><b>Quantity</b>: ${quantity}</span>
+            `;
+        return template;
+    },
+    pasta: function(size, Instruction, quantity){
+        let template = `
+            <span><b>Plate size</b>: ${size}</span>
+            <span><b>Instruction</b>: ${Instruction}</span>
+            <span><b>Quantity</b>: ${quantity}</span>
+        `;
+         return template;
+    },
+    group_meals: function(size, Instruction, quantity){
+        let template = `
+                <span><b>Plate size</b>: ${size}</span>
+                <span><b>Instruction</b>: ${Instruction}</span>
+                <span><b>Quantity</b>: ${quantity}</span>
+            `;
+        return template;
+    }
+};
+
+function generateAddons(category, options){
+    let template;
+    switch(category){
+        case 'Pizza':
+            template = layout.pizza(options.size, options.condiments, options.pizza_cut, options.Instruction, options.number);
+        break;
+        case 'Pasta':
+            template = layout.pasta(options.size, options.Instruction, options.number);
+        break;
+        case 'Group Meals':
+            template = layout.group_meals(options.size, options.Instruction, options.number);
+        break;
+        case 'Solo Meals':
+            template = layout.solo_meals(options.size, options.Instruction, options.number);
+        break;
+    }
+    return template;
+}
+
 function format_money(price){
     let price_string = price.toString();
     if(price_string.indexOf('.') > -1){
@@ -45,6 +101,7 @@ cartBody.addEventListener('click', function(e){
             let subtotal = JSON.parse(this.responseText).subtotal;
             let cart_count = JSON.parse(this.responseText).cartNum;
             let template = '';
+
             cart.forEach(item => {
                 template += `
                 <div class="cart-items d-flex justify-content-between align-items-center">
@@ -52,15 +109,18 @@ cartBody.addEventListener('click', function(e){
                         <img src="/asset/img/${item.img}" alt="" width="100px" class="pic">
                         <div class="added-item-details">
                             <a href="/order">${item.title}</a>
-                            <span>PHP ${format_money(item.price)} X (${item.quantity})</span>
-                            <span>Total: PHP ${format_money(item.price * item.quantity)}</span>
+                            <span>PHP ${format_money(item.price)} X (${item.options.number})</span>
+                            <span>Total: PHP ${format_money(item.price * item.options.number)}</span>
                             <span>Addons</span>
+                            <div class="addons">
+                                ${generateAddons(item.category, item.options)}
+                            </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center d-flex justify-content-between col-3">
                         <a href="/order?type=${item.category}&name=${item.title}" id="${item.id}">Edit</a>
                         <div class="total d-flex align-items-center">
-                            <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="${item.id}" class="delete">
+                            <img src="/asset/img/cancel.png" alt="" srcset="" width="15px" id="${item.CartItemId}" class="delete">
                         </div>
                     </div>
                 </div> 

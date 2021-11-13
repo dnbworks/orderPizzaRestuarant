@@ -4,26 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find a Date - <?php echo $this->title; ?></title>
+    <title>Pizza | <?= $this->title; ?></title>
 
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="shortcut icon" href="/assets/img/favicon.jpg" type="image/jpg">
+    
+    <link rel="stylesheet" href="asset/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="asset/css/header.css">
+
+    <link rel="stylesheet" href="asset/css/<?= $this->title ?>.css">
+    <link rel="stylesheet" href="asset/css/global.css">
+    <link rel="shortcut icon" href="asset/img/logo.png" type="image/png">
+
+    <script src="asset/js/font_awesome.js"></script>
+    <script src="asset/js/global.js" defer></script>
 </head>
 <body>
-    <div class="banner">
-        <div class="container">
-            <nav class="d-flex justify-content-between align-items-center">
-                <a href="/" class="logo">FindMyDate</a>
-                <div>
-                    <a href="/login" class="signin" style="margin-right:20px;">Sign In</a>
-                    <a href="/register" class="signin">Sign Up</a>
-                </div>
-                
-            </nav>
-            {{content}}
-        </div>
+    <?php
+        include_once dirname(__DIR__). "/partials/nav.php";
+    ?>  
+ 
+    {{content}}
 
-    </div>
+    <?php
+        include_once dirname(__DIR__). "/partials/footer.php";
+        include_once dirname(__DIR__). "/partials/sidenav.php";
+    ?>  
+    
 </body>
 </html>

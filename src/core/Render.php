@@ -3,6 +3,7 @@
 
 namespace app\core;
 
+
 class Render 
 {
     private string $pizza = 'Pizza';
@@ -11,9 +12,11 @@ class Render
     private string $solo_meals = 'Solo Meals';
     private string $chicken = 'Chicken';
     private string $drink = 'Drinks';
+    private Application $app;
+    
 
 
-    public function renderHtml(string $type, array $params = []): string
+    public function renderHtml(string $type, array $params = [])
     {
         $html = '';
         switch ($type) {
@@ -34,6 +37,12 @@ class Render
                 break;
             case $this->drink:
                 $html = $this->renderDrink($params);
+                break;
+            case 'pickup':
+                $html = $this->renderPickUpInput();
+                break;
+            case 'delivery':
+                $html = $this->renderDeliveryInput();
                 break;
             
         }
@@ -449,6 +458,77 @@ class Render
         HTML;
         return $html;
     }
+
+    public function renderPickUpInput()
+    {
+        $sql = "SELECT * FROM pickup_branches";
+        $statement = Application::$app->db->pdo->prepare($sql);
+        $statement->execute();
+        $Results = $statement->fetchAll();
+        $lis = "";
+        foreach($Results as $result){
+            $lis .= "<li data-branch=" . $result['pickup_branch_id'] . "><h3>". $result['city'] . " - " . $result['branch_location'] . "</h3><span>" . $result['operating_time'] . "</span></li>";
+                
+        }
+        $template = <<<HTML
+            <div class="store-branches">
+                <label for="size">Choose your desired pickup branch</label>
+                    <input type="hidden" name="branch_id" id="pickup_id" value="">
+                    <div style="margin-bottom: 10px; position: relative;">
+                        <i class="fas fa-angle-down"></i>
+                        <input type="text" name="branch" class="input-text input" placeholder="Choose your branch" data-listen="input" autocomplete="off" readonly="" data-required-validate="true" id="pickup_address">
+                    
+                        <ul>
+                            $lis
+                        </ul>
+                    </div>
+              </div>
+        HTML;
+
+        return $template;
+    }
+
+    public function renderDeliveryInput()
+    {
+        if(isset(Application::$app->user->customer_id)){
+            $fullname = Application::$app->user->firstname . ' ' . Application::$app->user->lastname;
+            $province = Application::$app->user->province;
+            $city = Application::$app->user->city;
+            $address = Application::$app->user->address;
+            $postal_code = Application::$app->user->postal_code;
+            $template = <<<HTML
+                   <div class="billing-info">
+                        <p>Your Billing Information</p>
+                        <table class="table table-striped">
+                        <tr>
+                            <td>Full name: </td>
+                            <td>$fullname</td>
+                        </tr>
+                        <tr>
+                            <td>City: </td>
+                            <td>$city</td>
+                        </tr>
+                        <tr>
+                            <td>Province: </td>
+                            <td>$province</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>$address</td>
+                        </tr>
+                        <tr>
+                            <td>Postal code: </td>
+                            <td>$postal_code</td>
+                        </tr>
+                
+                        </table>
+                    </div>
+            HTML;
+            return $template;
+        }
+    }
+
+    
 
 }
 

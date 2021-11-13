@@ -53,7 +53,7 @@
                                 <img src="/asset/img/<?= $item->itemSummary()['img'] ?>" alt="" width="100px" class="pic">
                                 <div class="added-item-details">
                                     <a href="/order"><?= $item->itemSummary()['title'] ?></a>
-                                    <span>PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price']) ?> X (<?= $item->itemSummary()['quantity'] ?>)</span>
+                                    <span>PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price']) ?> × <strong><?= $item->itemSummary()['quantity'] ?></strong></span>
                                     <span>Total: PHP <?= app\helpers\PriceHelper::formatMoney((float)$item->itemSummary()['price'] * (int)$item->itemSummary()['quantity']) ?></span>
                                     <span>Addons</span>
                                     <div class="addons">
@@ -81,16 +81,25 @@
                     <div class="d-flex justify-content-between ">
                         <div>
                             <h4>Subtotal</h4>
-                            <p>Shipping & taxes calculated at Checkout</p>
-                            <a href="#">Calculate Shipping</a>
+                            <!-- <a href="#">Calculate Shipping</a> -->
                         </div>
                         <div>
-                        <span class="subtotal">PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
+                            <span class="subtotal">PHP <?= app\helpers\PriceHelper::formatMoney($cart->getTotalSum()) ?></span>
                         </div>
                     </div>
                  
+                      <!-- Promo code -->
+                    <form action="" method="post">
+                        <p>If you have a coupon code, please apply it below.</p>
+                        <div class="input-group d-flex">
+                        <input type="text" class="form-control" placeholder="Coupon code" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <button class="btn btn-secondary" type="button" width="200px">Apply Coupon</button>
+                        </div>
+                    </form>
+                    <!-- Promo code -->
+                    <p>Shipping & taxes calculated at Checkout</p>
                     <div class="mt-4">
-                        <a href="/checkout" class="checkout">Check Out</a>
+                        <a href="/checkout" class="checkout">Proceed to Checkout</a>
                         <a href="/order" class="shop">Continue ordering</a>
                     </div>
                 </div>

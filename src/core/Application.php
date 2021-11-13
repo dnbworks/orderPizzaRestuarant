@@ -67,10 +67,11 @@ class Application {
             echo $this->router->resolve();
         }catch(\Exception $e){
             $this->response->setStatusCode($e->getCode());
+           
             echo $this->view->renderView('_error', [
                 'exception' => $e,
             ]);
+            
         }
-        
     }
 }

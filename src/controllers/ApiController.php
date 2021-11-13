@@ -3,7 +3,6 @@
 
 namespace app\controllers;
 
-use app\core\cart\Cart;
 use app\core\cart\Product;
 use app\core\Controller;
 use app\core\Request;
@@ -73,16 +72,20 @@ class ApiController extends Controller
             $array_options[$option->option] = $option->value;
         }
 
+        $cart = $_SESSION['cart']; // call the cart session
+
         $pizzaModel = new PizzaModel(); // instantiate Pizza model
         $item = $pizzaModel->getById((int)$data[0]->id); // get item from db by id
 
         $cartItemId = RandomString::rand(3); // generate a random cartitemid string to uniquely identify items in the cart
+    
+        $is_product_in_cart = isset($cart->getItems()[$cartItemId]) ?? false;
 
-        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category'], $item[0]['description'], $cartItemId);
+        if(!$is_product_in_cart){
+            $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category'], $item[0]['description'], $cartItemId);
 
-        $cart = $_SESSION['cart']; // call the cart session
-
-        $cart->addProduct($product, (int)$array_options['number']);
+            $cart->addProduct($product, (int)$array_options['number']);
+        }
 
         $_SESSION['cart_counter']++;
 
@@ -136,57 +139,6 @@ class ApiController extends Controller
         }
     }
 
-    public function addDiff()
-    {
-        header('Access-control-Allow-Origin: *');
-        header('Content-type: application/json');
-        header('Access-Control-Allow-Methods: POST');
-        header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With');
-
-        $data = json_decode(file_get_contents("php://input"));
-
-        $array_options = [];
-        foreach((array) $data as $option){
-            $array_options[$option->option] = $option->value;
-        }
-
-        // get the session cart
-        $cart = $_SESSION['cart'];
-
-        $is_product_in_cart = isset($cart->getItems()[$data[0]->id]) ?? false;
-
-        // if($is_product_in_cart){
-        //     $key = $data[0]->id . RandomString::rand(3);
-        // }
-
-        $key = $is_product_in_cart ? $data[0]->id . RandomString::rand(3) :  $data[0]->id;
-
-        $key_is_set = isset($cart->getItems()[$key]) ?? false;
-
-
-        $pizzaModel = new PizzaModel();
-        $item = $pizzaModel->getById((int)$data[0]->id);
-
-        $product = new Product($item[0]['product_id'], $item[0]['title'], (float) $item[0]['price'], 10, $array_options, $item[0]['img'], $item[0]['category']);
-
-        if(!$key_is_set){
-            $cart->addDiff($key, $product, (int)$array_options['number']);
-        }
-        
-        
-        if($data) {
-            echo json_encode(
-                array('message' => 'added differently', 'data' =>  $product->getProduct(), 'counter' => $_SESSION['cart_counter'], 'cartNum' =>  $_SESSION['cart']->getTotalQuantity(), 'options' => $array_options, 'is_in_cart' => $key_is_set, 'key' => $key)
-            );
-            } else {
-            echo json_encode(
-                array('message' => 'Post Not Created')
-            );
-        }
-
-
-    }
-
     public function delete()
     {
         header('Access-control-Allow-Origin: *');
@@ -203,7 +155,7 @@ class ApiController extends Controller
         $cartItems = [];
         $items = $_SESSION['cart']->getItems();
         foreach($items as $item){
-            $cartItems[] = $item->itemSummary();
+            $cartItems[] = $item->getProduct()->getProductAttributes();
         }
 
         if($data) {
@@ -238,6 +190,34 @@ class ApiController extends Controller
     
         
     }
+
+    public function checkoutForm(Request $request)
+    {
+        header('Access_control-Allow_origin: *');
+        header('Content-type: application/json');
+
+        if(isset($request->getBody()['method'])){
+            $htmlForm = '';
+
+            if($request->getBody()['method'] == 'pickup'){
+                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['method']);
+            } else {
+               
+                $htmlForm = \app\core\Application::$app->render->renderHtml($request->getBody()['method']);
+            }
+
+            return json_encode(
+                array('message' => 'listened to api', 'form' => $htmlForm, 'method' => $request->getBody()['method'])
+            );
+                
+        }
+     
+        
+    }
   
 }
+
+
+
+
 

@@ -42,10 +42,6 @@ class Request {
             foreach($_POST as $key => $value){
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);       
             }
-
-            $body['picture'] = $_FILES['picture']['name'] ?? null;
-            $body['pictureArray'] = $_FILES['picture'] ?? null;
-        
         }
         
         return $body;

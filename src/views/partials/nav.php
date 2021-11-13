@@ -1,31 +1,7 @@
-<?php
-    use app\core\Application;
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza | <?= $this->title; ?></title>
-
-    
-    <link rel="stylesheet" href="/asset/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="/asset/css/header.css">
-
-    <link rel="stylesheet" href="/asset/css/<?= $this->title ?>.css">
-    <link rel="stylesheet" href="/asset/css/global.css">
-    <link rel="shortcut icon" href="/asset/img/logo.png" type="image/png">
-
-    <script src="/asset/js/font_awesome.js"></script>
-    <script src="/asset/js/global.js" defer></script>
-</head>
-<body>
-    <nav>
+<nav>
         <div class="container-fluid logo-menu-container">
             <a href="/" class="logo">
-                <img src="/asset/img/logopizzas.png" alt="" srcset="">
+                <img src="asset/img/logopizzas.png" alt="" srcset="">
             </a>
     
             <div class="row align-items-center justify-content-end">
@@ -53,12 +29,12 @@
                             <li><span><i class="fab fa-twitter"></i></span></li>
                             <li><span><i class=" fab fa-instagram"></i></span></li>
                         </ul>
-                        <a href="/login" class="account" style="display: inline-block;">
-                            <img src="/asset/img/account.png" alt="" srcset="" width="24px">
+                        <a href="/account" class="account" style="display: inline-block;">
+                            <img src="asset/img/account.png" alt="" srcset="" width="24px">
                         </a>
                             
                         <div class="cartBtn-div">
-                            <img src="/asset/img/cart.png" alt="" srcset="">
+                            <img src="asset/img/cart.png" alt="" srcset="">
                             <span class="amount"><?= $_SESSION['cart']->getTotalQuantity() ?></span>
                         </div>
                     </div>
@@ -88,15 +64,3 @@
             </div>
         </div>
     </nav>
-  
-        {{content}}
-   
-    <?php
-        include_once dirname(__DIR__). "/partials/footer.php";
-        include_once dirname(__DIR__). "/partials/sidenav.php";
-    ?>
-    <script src="/asset/js/Event.js"></script>
-    <script src="/asset/js/Magnifier.js"></script>
-    <script src="/asset/js/<?= $this->title ?>.js"></script>
-</body>
-</html>

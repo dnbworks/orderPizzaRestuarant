@@ -1,5 +1,8 @@
 <?php
     $this->title = 'register';
+    use app\libs\Captcha;
+    use app\core\Application;
+
 ?>
 
 <div class="container">
@@ -45,9 +48,9 @@
                         <div class="form-group">
                             <label for="province">Province</label>
                             <div>
-                                <input type="text" class="form-control <?php echo $model->hasError("province") ? 'isInvalid' : ''; ?>" id="province" placeholder="Type province" name="province" value="<?php echo $model->state; ?>" > 
+                                <input type="text" class="form-control <?php echo $model->hasError("province") ? 'isInvalid' : ''; ?>" id="province" placeholder="Type province" name="province" value="<?php echo $model->province; ?>" > 
                             </div>
-                            <p class="invalid"><?php echo $model->getFirstError("state"); ?></p>
+                            <p class="invalid"><?php echo $model->getFirstError("province"); ?></p>
                         </div>
                     </div> 
                     <div class="col">
@@ -66,27 +69,27 @@
                         <div class="form-group">
                             <label for="postal_code">Postal Code</label>
                             <div>
-                                <input type="text" class="form-control <?php echo $model->hasError("postal_code") ? 'isInvalid' : ''; ?>" id="postal_code" placeholder="Type postal code" name="postal_code" value="<?php echo $model->state; ?>" > 
+                                <input type="text" class="form-control <?php echo $model->hasError("postal_code") ? 'isInvalid' : ''; ?>" id="postal_code" placeholder="Type postal code" name="postal_code" value="<?php echo $model->postal_code; ?>" > 
                             </div>
-                            <p class="invalid"><?php echo $model->getFirstError("state"); ?></p>
+                            <p class="invalid"><?php echo $model->getFirstError("postal_code"); ?></p>
                         </div>
                     </div> 
                     <div class="col">
                         <div class="form-group">
                             <label for="address">Address</label>
                             <div>
-                                <input type="text" class="form-control <?php echo $model->hasError("city") ? 'isInvalid' : ''; ?>" id="address" placeholder="A subdivision/Barangay/block" name="address" value="<?php echo $model->city; ?>" >
+                                <input type="text" class="form-control <?php echo $model->hasError("address") ? 'isInvalid' : ''; ?>" id="address" placeholder="A subdivision/Barangay/block" name="address" value="<?php echo $model->address; ?>" >
                             </div>
-                            <p class="invalid"><?php echo $model->getFirstError("city"); ?></p>
+                            <p class="invalid"><?php echo $model->getFirstError("address"); ?></p>
                         </div>
                     </div> 
                 </div>
                 <div class="form-group">
                     <label for="mobile_number">Mobile Number</label>
                     <div>
-                        <input type="text" class="form-control <?php echo $model->hasError("city") ? 'isInvalid' : ''; ?>" id="mobile_number" placeholder="Type Mobile Number" name="mobile_number" value="<?php echo $model->city; ?>" >
+                        <input type="text" class="form-control <?php echo $model->hasError("phone_number") ? 'isInvalid' : ''; ?>" id="mobile_number" placeholder="Type Mobile Number" name="phone_number" value="<?php echo $model->phone_number; ?>" >
                     </div>
-                    <p class="invalid"><?php echo $model->getFirstError("city"); ?></p>
+                    <p class="invalid"><?php echo $model->getFirstError("phone_number"); ?></p>
                 </div>
             </div>
             
@@ -106,7 +109,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <div>
-                                <input type="password" class="form-control <?php echo $model->hasError("email") ? 'isInvalid' : ''; ?>" id="password" placeholder="Password" name="password" value="" required>
+                                <input type="password" class="form-control <?php echo $model->hasError("password") ? 'isInvalid' : ''; ?>" id="password" placeholder="Password" name="password" value="" required>
                                 <!-- <small id="input-helpBlock" class="form-text">Password must be atleast 8 characters long.</small> -->
                                 <p class="invalid"><?php echo $model->getFirstError("password"); ?></p>
                             </div>
@@ -116,24 +119,24 @@
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
                             <div>
-                                <input type="password" class="form-control <?php echo $model->hasError("email") ? 'isInvalid' : ''; ?>" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword" required>
+                                <input type="password" class="form-control <?php echo $model->hasError("confirmPassword") ? 'isInvalid' : ''; ?>" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword" required>
                             </div>
                             <p class="invalid"><?php echo $model->getFirstError("confirmPassword"); ?></p>
                         </div>
                     </div> 
                 </div>
             </div>
+
             <div class="type_captcha">
                 <label for="password">Type Captcha</label>
-                <div class="row">
-                    <div class="col col-md-4 col-lg-4">
-
+                <div class="row align-items-center">
+                    <div class="col col-md-3 col-lg-3">
+                        <img src="/captcha" alt="Verification pass-phrase" srcset="" width="150px">
                     </div>
                     <div class="col col-md-4 col-lg-4">
                         <div class="form-group">
-                            
                             <div>
-                                <input type="password" class="form-control <?php echo $model->hasError("email") ? 'isInvalid' : ''; ?>" id="password" placeholder="Type Captcha" name="password" value="" required>
+                                <input type="text" class="form-control <?php echo $model->hasError("password") ? 'isInvalid' : ''; ?>" id="password" placeholder="Type Captcha" name="Captcha" value="" required>
                                 <!-- <small id="input-helpBlock" class="form-text">Password must be atleast 8 characters long.</small> -->
                                 <p class="invalid"><?php echo $model->getFirstError("password"); ?></p>
                             </div>
@@ -146,21 +149,16 @@
 
             <div class="term_&_conditions">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="horizontalCheckbox">
+                    <input type="checkbox" class="form-check-input" id="horizontalCheckbox" name="policy_sms[]">
                     <label class="form-check-label" for="horizontalCheckbox">I agree with the terms and condition and Privacy policy of Pizza.com</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="horizontalCheckbox">
+                    <input type="checkbox" class="form-check-input" id="horizontalCheckbox" name="policy_sms[]">
                     <label class="form-check-label" for="horizontalCheckbox">I want to receive access to special offers, news and updates from Pizza.co.</label>
                 </div>
                 <p>Would you like to receive access to special offers, news and updates from Pizza.co. Please check to apply</p>
             </div>
-            
-            
-            
-           
 
-          
             
             <div class="form-group">
                 <div>

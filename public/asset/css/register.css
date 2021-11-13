@@ -79,8 +79,26 @@ form label {
     outline: 0;
 }
 
+.isInvalid {
+    border: 1px solid rgb(255, 78, 78);
+}
+
+.invalid {
+    color: rgb(255, 78, 78);
+}
+
+button {
+    font-weight: bold;  
+    padding: 15px 20px;
+    border: 0;
+    text-transform: uppercase;
+    background-color: #F5B335;
+    margin-bottom: 15px;
+}
+
 @media screen and (max-width: 576px) {
     p {
         width: 100%;
     }
   }
+

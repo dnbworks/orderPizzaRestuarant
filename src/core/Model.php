@@ -20,15 +20,24 @@ abstract class Model {
             $this->{$key} = $value;
            }
        }
+    //    return [
+    //        'firstname' => $this->firstname,
+    //        'lastname' => $this->lastname,
+    //        'email' => $this->email,
+    //        'gender' => $this->gender,
+    //        'province' => $this->province,
+    //        'postal_code' => $this->postal_code,
+    //        'address' => $this->address,
+    //        'phone_number' => $this->phone_number,
+    //        'password' => $this->password
+    //    ];
+
    }
 
    abstract function Rules(): array;
 
    public function validate()
    {
-       if(property_exists($this, "month") && property_exists($this, "day") && property_exists($this, "year") && property_exists($this, "birthdate")){
-        $this->birthdate =  $this->month . "/" . $this->day . "/" . $this->year;
-       }
        
        foreach($this->Rules() as $attribute => $rules){
            $value = $this->{$attribute};

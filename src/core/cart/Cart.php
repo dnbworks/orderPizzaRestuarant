@@ -62,17 +62,6 @@ class Cart
         return $cartItem;
     }
 
-    public function addDiff(string $key, Product $product, int $quantity)
-    {
-        // find product in cart
-        $cartItem = $this->findCartItem($key);
-        if ($cartItem === null){
-            $cartItem = new CartItem($product, 0);
-            $this->items[$key] = $cartItem;
-        }
-        $cartItem->increaseQuantity($quantity);
-        return $cartItem;
-    }
 
     private function findCartItem(int|string $productId)
     {

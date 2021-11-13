@@ -34,15 +34,22 @@
             </a>
             
             <div class="row align-items-center justify-content-end">
-                <div class="col-3 d-flex justify-content-end">
+                <div class="col-3 d-flex justify-content-end align-items-center ">
+                    <!-- <a href="/login" class="account" style="display: inline-block;">
+                        <img src="asset/img/account.png" alt="" srcset="" width="24px">
+                    </a>
+                        
+                    <div class="cartBtn-div">
+                        <img src="asset/img/cart.png" alt="" srcset="">
+                        <span class="amount"><?= $_SESSION['cart']->getTotalQuantity() ?></span>
+                    </div> -->
                     <div class="menu-container">
                         <div class="menu">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
-                    </div>
-                    
+                    </div>   
                  </div>
                  <div class="col-9 nav-container">
                      <div class="top-section">
@@ -58,7 +65,7 @@
                              <li><span><i class="fab fa-twitter"></i></span></li>
                              <li><span><i class=" fab fa-instagram"></i></span></li>
                          </ul>
-                         <a href="/account" class="account" style="display: inline-block;">
+                         <a href="/login" class="account" style="display: inline-block;">
                             <img src="asset/img/account.png" alt="" srcset="" width="24px">
                         </a>
                          <div class="cartBtn-div">
