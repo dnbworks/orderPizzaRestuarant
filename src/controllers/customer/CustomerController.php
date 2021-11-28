@@ -78,10 +78,24 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function orders()
+    public function orders(Request $request, Response $response)
     {
+        
         $sql = "SELECT o.order_id, o.order_date, o.total, SUM(oi.quantity) AS quantity, os.name AS order_status FROM orders AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN order_statuses AS os on (order_status = os.order_status_id) WHERE customer_id = '" . Application::$app->user->customer_id . "' GROUP BY(o.order_id)";
         
+        $statement = Application::$app->db->pdo->prepare($sql);
+        $statement->execute();
+        $orders = $statement->fetchAll();
+
+     
+        $this->setLayout('main');
+        return $this->render('customer/orders', ['orders' => $orders]);
+    }
+
+    public function view_order(Request $request, Response $response, $param)
+    {
+        $sql = "SELECT `order_id`, o.order_date, o.delivery_id, o.payment_id, os.name AS status, o.pickup_branch_id, o.total, oi.product_id, p.img, p.title, oi.quantity, oi.subtotal, d.delivery_method FROM `orders` AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN products AS p USING (product_id) INNER JOIN order_statuses AS os ON (order_status = os.order_status_id) INNER JOIN delivery AS d USING (delivery_id) WHERE customer_id = '" . Application::$app->user->customer_id . "' AND  order_id = '" . $param . "'";
+
         $statement = Application::$app->db->pdo->prepare($sql);
         $statement->execute();
         $orders = $statement->fetchAll();
@@ -90,8 +104,9 @@ class CustomerController extends Controller
         // var_dump($orders);
         // echo '</pre>';
         // exit;
+
         $this->setLayout('main');
-        return $this->render('customer/orders', ['orders' => $orders]);
+        return $this->render('customer/view-order', ['orders' => $orders]);
     }
 
 

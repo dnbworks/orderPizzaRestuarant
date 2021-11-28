@@ -34,7 +34,20 @@ class Router {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
 
-        $callback = $this->routes[$method][$path] ?? false;
+        if(count(explode('/', $path)) > 2){
+            if(explode('/', $path)[2] == "view-order" && (isset(explode('/', $path)[3]) && !empty(explode('/', $path)[3]))){
+                $param = substr($path, -1);
+                $defined_path = substr($path, 0,-1) . ':id';
+                $callback = $this->routes[$method][$defined_path] ?? false;
+    
+            }
+        }
+          
+        $newPath = $defined_path ?? $path;
+        $param = $param ?? null;
+
+        $callback = $this->routes[$method][$newPath] ?? false;
+        
 
         if($callback === false){
             throw new NotFoundException();
@@ -56,8 +69,12 @@ class Router {
             }
         }
 
-
-        return call_user_func($callback, $this->request, $this->response);
+        // echo '<pre>';
+        // var_dump($callback);
+        // echo '<pre>';
+        // exit;
+    
+        return call_user_func($callback, $this->request, $this->response, $param);
      
     }
 

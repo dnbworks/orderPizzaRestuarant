@@ -1,16 +1,25 @@
 <?php
-
+    $this->title = 'View-order';
 ?>
 
-
-<div class="woocommerce-MyAccount-content">
+<?php
+    // foreach($orders as $order){
+    //     echo $order['title'] . '<br>';
+    //     echo $order['subtotal'] . '<br>';
+    //     echo $order['quantity'] . '<br>';
+    // }
+        // echo '<pre>';
+        // var_dump($orders);
+        // echo '</pre>';
+    ?>
+<div class="woocommerce-MyAccount-content container">
 	<div class="woocommerce-notices-wrapper"></div>
-    <p>Order #<mark class="order-number">30</mark> was placed on <mark class="order-date">October 28, 2021</mark> and is currently <mark class="order-status">Processing</mark>.</p>
+    <p class="entry-content">Order #<mark class="order-number">30</mark> was placed on <mark class="order-date">October 28, 2021</mark> and is currently <mark class="order-status">Processing</mark>.</p>
 
     <section class="woocommerce-order-details">
 	    <h2 class="woocommerce-order-details__title">Order details</h2>
 
-        <table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+        <table class="table order_details">
 
             <thead>
                 <tr>
@@ -20,20 +29,22 @@
             </thead>
 
             <tbody>
+            <?php foreach($orders as $order): ?>
                 <tr class="woocommerce-table__line-item order_item">
                     <td class="woocommerce-table__product-name product-name">
-                        <a href="http://localhost/wordpress/product/gig-shorts/">gig shorts</a> <strong class="product-quantity">×&nbsp;2</strong>	
+                        <a href="http://localhost/wordpress/product/gig-shorts/"><?= $order['title'] ?></a> <strong class="product-quantity">×&nbsp;<?= $order['quantity'] ?></strong>	
                     </td>
                     <td class="woocommerce-table__product-total product-total">
-                        <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>46</bdi></span>	
+                        <span class="woocommerce-Price-amount"><bdi><span class="woocommerce-Price-currencySymbol">PHP </span><?= $order['subtotal'] ?></bdi></span>	
                     </td>
                 </tr>
+            <?php endforeach; ?>
             </tbody>
 
 		    <tfoot>
                 <tr>
                     <th scope="row">Subtotal:</th>
-                    <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>46</span></td>
+                    <td><span class="woocommerce-Price-amount"><span class="woocommerce-Price-currencySymbol">PHP </span><?= $orders[0]['total'] ?></span></td>
                 </tr>
                 <tr>
                     <th scope="row">Payment method:</th>
@@ -41,7 +52,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Total:</th>
-                    <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>46</span></td>
+                    <td><span class="woocommerce-Price-amount"><span class="woocommerce-Price-currencySymbol">PHP </span><?= $orders[0]['total'] ?></span></td>
                 </tr>
 			</tfoot>
 	    </table>
@@ -52,10 +63,14 @@
 	    <h2 class="woocommerce-column__title">Billing address</h2>
 
         <address>
-		John Denver<br>Maralique highway<br>liro unit 1<br>Sampaloc<br>Rizal<br>2342
-					<p class="woocommerce-customer-details--phone">09477705099</p>
-		
-					<p class="woocommerce-customer-details--email">johndenver@gamil.com</p>
+		    John Denver<br>
+            Maralique highway<br>
+            liro unit 1<br>
+            Sampaloc<br>
+            Rizal<br>
+            2342
+            <p class="woocommerce-customer-details--phone">09477705099</p>
+            <p class="woocommerce-customer-details--email">johndenver@gamil.com</p>
 		</address>
 	</section>
 </div>

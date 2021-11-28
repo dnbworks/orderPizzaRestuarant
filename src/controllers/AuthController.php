@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         // if user is already logged in redirect user to dashboard
         if(!Application::IsGuest()){
-            $response->redirect('/dashboard');
+            $response->redirect('/my-account');
             exit;
         } 
 
@@ -30,7 +30,7 @@ class AuthController extends Controller
                     $response->redirect('/checkout');
                     return;
                 }
-                $response->redirect('/dashboard');
+                $response->redirect('/my-account');
                 return;
             }
 

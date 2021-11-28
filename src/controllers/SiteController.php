@@ -22,6 +22,7 @@ class SiteController extends Controller
     // serves the landing page
     public function index(Request $request, Response $response)
     {
+
         $this->setLayout('landingLayout');
         return $this->render('index');
     }

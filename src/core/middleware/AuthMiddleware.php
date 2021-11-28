@@ -5,7 +5,8 @@ namespace app\core\middleware;
 use app\core\Application;
 use app\core\exception\ForbiddenException;
 
-class AuthMiddleware extends BaseMiddleware{
+class AuthMiddleware extends BaseMiddleware 
+{
     protected array $actions = [];
 
     public function __construct($actions = [])

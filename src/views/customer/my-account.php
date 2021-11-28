@@ -24,7 +24,7 @@
                     <a href="/my-account/edit-account">Account details</a>
                 </li>
                 <li class="MyAccount-navigation-link MyAccount-navigation-link--customer-logout">
-                    <form action="dashboard/logout" method="post" class="nostyle">
+                    <form action="/logout" method="post" class="nostyle">
                         <button type="submit" class="btn"> Logout</button>
                     </form>
                 </li>
