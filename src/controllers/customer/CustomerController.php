@@ -94,11 +94,15 @@ class CustomerController extends Controller
 
     public function view_order(Request $request, Response $response, $param)
     {
-        $sql = "SELECT `order_id`, o.order_date, o.delivery_id, o.payment_id, os.name AS status, o.pickup_branch_id, o.total, oi.product_id, p.img, p.title, oi.quantity, oi.subtotal, d.delivery_method FROM `orders` AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN products AS p USING (product_id) INNER JOIN order_statuses AS os ON (order_status = os.order_status_id) INNER JOIN delivery AS d USING (delivery_id) WHERE customer_id = '" . Application::$app->user->customer_id . "' AND  order_id = '" . $param . "'";
+        // $sql = "SELECT `order_id`, o.order_date, o.delivery_id, o.payment_id, os.name AS status, o.pickup_branch_id, o.total, oi.product_id, p.img, p.title, oi.quantity, oi.subtotal, d.delivery_method FROM `orders` AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN products AS p USING (product_id) INNER JOIN order_statuses AS os ON (order_status = os.order_status_id) INNER JOIN delivery AS d USING (delivery_id) WHERE customer_id = '" . Application::$app->user->customer_id . "' AND  order_id = '" . $param . "'";
+
+        $sql = "SELECT `order_id`, o.order_date, o.delivery_id, o.payment_id, os.name AS status, o.pickup_branch_id, o.total, oi.product_id, p.img, p.title, oi.quantity, oi.subtotal, d.delivery_method, c.firstname, c.lastname, c.email, c.province, c.city, c.postal_code, c.address, c.phone_number FROM `orders` AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN products AS p USING (product_id) INNER JOIN order_statuses AS os ON (order_status = os.order_status_id) INNER JOIN delivery AS d USING (delivery_id) INNER JOIN customers AS c USING (customer_id) WHERE customer_id = '" . Application::$app->user->customer_id . "' AND  order_id = '" . $param . "'";
 
         $statement = Application::$app->db->pdo->prepare($sql);
         $statement->execute();
         $orders = $statement->fetchAll();
+
+        $userQuery = "SELECT `customer_id`, `firstname`, `lastname`, `email`, `province`, `city`, `postal_code`, `address`, `phone_number` FROM `customers` WHERE `customer_id` = '" .Application::$app->user->customer_id . "'";
 
         // echo '<pre>';
         // var_dump($orders);
@@ -108,6 +112,7 @@ class CustomerController extends Controller
         $this->setLayout('main');
         return $this->render('customer/view-order', ['orders' => $orders]);
     }
+    
 
 
 }
@@ -121,3 +126,6 @@ class CustomerController extends Controller
 
 
 // SELECT o.order_id, o.order_date, o.total, SUM(oi.quantity) AS quantity, os.name AS order_status FROM orders AS o INNER JOIN order_items AS oi USING (order_id) INNER JOIN order_statuses AS os on (order_status = os.order_status_id) WHERE customer_id = 1 GROUP BY(o.order_id)
+
+// select customer details
+// SELECT `customer_id`, `firstname`, `lastname`, `email`, `province`, `city`, `postal_code`, `address`, `phone_number` FROM `customers` WHERE `customer_id` = ;
