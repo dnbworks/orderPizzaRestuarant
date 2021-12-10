@@ -112,6 +112,12 @@ class CustomerController extends Controller
         $this->setLayout('main');
         return $this->render('customer/view-order', ['orders' => $orders]);
     }
+
+    public function editAccount()
+    {
+        $this->setLayout('main');
+        return $this->render('customer/edit-address');
+    }
     
 
 

@@ -304,6 +304,7 @@ nav ul.links li a:hover {
   background-repeat: no-repeat;
   background-size: 320%;
   height: calc(100vh - 170px);
+  /* height: 100vh; */
   max-height: 600px;
   position: relative;
 }
@@ -350,8 +351,8 @@ nav ul.links li a:hover {
 
 @media screen and (min-width: 576px) {
   .slider li {
-    background-position: right top;
-    background-size: 200%;
+    background-position: center;
+    background-size: cover;
   }
   .banner-content h2 {
     font-size: 2rem;
@@ -364,25 +365,27 @@ nav ul.links li a:hover {
 
 @media screen and (min-width: 768px) {
   .slider li {
-    background-position: right -100px;
-    background-size: 150%;
+    background-position: center;
+    /* background-size: 150%; */
+    background-size: cover;
   }
 }
 
 @media screen and (min-width: 992px) {
   .slider li {
-    background-position: center -100px;
-    background-size: 100%;
+    background-position: center ;
+    /* background-size: 100%; */
+    background-size: cover;
   }
 }
 
 .ones {
-  background-image: url("../img/restuarnt.jpg");
+  background-image: url("../img/web-banner.jpg");
 }
 
 @media screen and (min-width: 576px) {
   .ones {
-    background-image: url("../img/banner.jpg");
+    background-image: url("../img/web-banner.jpg");
   }
 }
 
@@ -390,10 +393,14 @@ nav ul.links li a:hover {
   background-image: url("../img/banner3.jpg");
 }
 
-.threes {
+/* .threes {
   background-image: url("../img/banner4.jpg");
-}
+} */
 
+
+.threes {
+  background-image: url("../img/web-banner1.jpg");
+}
 
 
 .slick-dots {

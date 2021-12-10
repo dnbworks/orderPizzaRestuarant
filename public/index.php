@@ -57,6 +57,7 @@ $app->router->post("/place-order", [SiteController::class, 'place_order']);
 $app->router->get("/my-account", [CustomerController::class, 'my_account']);
 $app->router->get("/my-account/orders", [CustomerController::class, 'orders']);
 $app->router->get("/my-account/view-order/:id", [CustomerController::class, 'view_order']);
+$app->router->get("/my-account/edit-account", [CustomerController::class, 'editAccount']);
 
 
 

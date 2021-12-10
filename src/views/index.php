@@ -9,9 +9,9 @@
                 <li class="threes items" style="display:none;">
                     <div class="banner-content">
                         <div class="container">
-                            <h2>Welcome to Pizza.co</h2>
+                            <!-- <h2>Welcome to Pizza.co</h2>
                             <p>Place where you can find the best Pizza in Luzon</p>
-                            <hr>
+                            <hr> -->
                             <a href="/order">order online</a>
                         </div>
                     </div>
