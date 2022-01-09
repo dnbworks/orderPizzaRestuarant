@@ -94,11 +94,11 @@ function handleAddCart(e){
        
         let url = '';
         if(e.target.id == 'add'){
-            url = 'http://localhost:8080/api/create';
+            url = '/api/create';
         } else if(e.target.id == 'update'){
-            url = 'http://localhost:8080/api/update';
+            url = '/api/update';
         } else {
-            url = 'http://localhost:8080/api/addDiff';
+            url = '/api/addDiff';
         }
 
       

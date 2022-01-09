@@ -21,10 +21,13 @@ class ApiController extends Controller
         header('Content-type: application/json');
 
         $PizzaModel = new PizzaModel();
-        $this->setLayout('main');
+        // $this->setLayout('main');
+       
 
         if(isset($request->getBody()['type'])){
-
+           
+            // var_dump($request->getBody());
+            // exit;
             $current_page = isset($request->getBody()['page']) ? $request->getBody()['page'] : 1;
             $result_per_page = 6;
 

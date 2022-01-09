@@ -10,8 +10,9 @@ var pagination = document.querySelector('.pagination');
 // asynchronus function
 const getMenu = async (url) => {
     const response = await fetch(url);
+
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
     return data;
 };
 
@@ -34,8 +35,8 @@ lis.forEach(li => {
 
         // setting query params
         let type = this.id;
-        const url = `http://localhost:8080/api?type=${type}`;
-        // console.log(url);
+        const url = `/api?type=${type}`;
+        console.log(url);
         
         // fetch data for clicked tab
         getMenu(url)
@@ -50,6 +51,7 @@ lis.forEach(li => {
 
 
 function render(data, element, type){
+    console.log('hi');
 
     var items = Array.from(element.querySelectorAll(".item"));
     var available;

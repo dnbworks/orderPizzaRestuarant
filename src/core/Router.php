@@ -33,6 +33,9 @@ class Router {
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
+        // var_dump($this->request->getBody());
+        // exit;
+    
 
         if(count(explode('/', $path)) > 2){
             if(explode('/', $path)[2] == "view-order" && (isset(explode('/', $path)[3]) && !empty(explode('/', $path)[3]))){

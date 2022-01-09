@@ -1,0 +1,24 @@
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /pizza.test/ 
+
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)  /index.php?$1  [L]
+
+    ## Begin - Security
+    # Block all direct access for these folders
+    RewriteRule ^(\.git|bin|tmp|Storage|webserver-configs|tests)/(.*) error [F]
+    # Block access to specific file types for these system folders
+    RewriteRule ^(core|vendor)/(.*)\.(txt|xml|md|html|yaml|yml|php|pl|py|cgi|twig|sh|bat)$ error [F]
+    # Block access to specific file types for these user folders
+    RewriteRule ^(public)/(.*)\.(txt|md|yaml|yml|php|pl|py|cgi|twig|sh|bat)$ error [F]
+    # Block all direct access to .md files:
+    RewriteRule \.md$ error [F]
+    # Block all direct access to files and folders beginning with a dot
+    RewriteRule (^|/)\.(?!well-known) - [F]
+ 
+
+</IfModule>

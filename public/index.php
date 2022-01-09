@@ -16,6 +16,7 @@ $config = [
     'db' => []
 ];
 
+
 $app = new Application(dirname(__DIR__), $config);
 
 // api requests
