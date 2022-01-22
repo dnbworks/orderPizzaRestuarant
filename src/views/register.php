@@ -8,6 +8,7 @@
 <div class="container">
 <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-8">
+        <!-- <?= $_SESSION['pass_phrase']?> -->
         <h3>Register new customer</h3>
         <p>Please confirm that all the information is correct. The company will not be liable if delivery information does not match</p>
         <hr>
@@ -128,7 +129,7 @@
             </div>
 
             <div class="type_captcha">
-                <label for="password">Type Captcha</label>
+                <label for="captcha">Type Captcha</label>
                 <div class="row align-items-center">
                     <div class="col col-md-3 col-lg-3">
                         <img src="/captcha" alt="Verification pass-phrase" srcset="" width="150px">
@@ -136,14 +137,12 @@
                     <div class="col col-md-4 col-lg-4">
                         <div class="form-group">
                             <div>
-                                <input type="text" class="form-control <?php echo $model->hasError("password") ? 'isInvalid' : ''; ?>" id="password" placeholder="Type Captcha" name="Captcha" value="" required>
-                                <!-- <small id="input-helpBlock" class="form-text">Password must be atleast 8 characters long.</small> -->
-                                <p class="invalid"><?php echo $model->getFirstError("password"); ?></p>
+                                <input type="text" class="form-control <?php echo $model->hasError("captcha") ? 'isInvalid' : ''; ?>" id="captcha" placeholder="Type Captcha" name="captcha" value="" required>
+                                <p class="invalid"><?php echo $model->getFirstError("captcha"); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
             
 

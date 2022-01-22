@@ -10,6 +10,8 @@ abstract class Model {
    const RULE_MATCH = 'match';
    const RULE_UNIQUE = 'unique';
    const RULE_OPTIONAL = 'optional';
+   const RULE_NUMBER = 'number';
+   const RULE_CAPTCHA = 'captcha';
 
    public array $errors = [];
 
@@ -20,18 +22,6 @@ abstract class Model {
             $this->{$key} = $value;
            }
        }
-    //    return [
-    //        'firstname' => $this->firstname,
-    //        'lastname' => $this->lastname,
-    //        'email' => $this->email,
-    //        'gender' => $this->gender,
-    //        'province' => $this->province,
-    //        'postal_code' => $this->postal_code,
-    //        'address' => $this->address,
-    //        'phone_number' => $this->phone_number,
-    //        'password' => $this->password
-    //    ];
-
    }
 
    abstract function Rules(): array;
@@ -41,7 +31,7 @@ abstract class Model {
        
        foreach($this->Rules() as $attribute => $rules){
            $value = $this->{$attribute};
-    
+          
             foreach($rules as $rule){
                 $ruleName = $rule;
 
@@ -59,18 +49,32 @@ abstract class Model {
                     $this->addErrorForRule($attribute, self::RULE_EMAIL);
                 }
                 // checks whether the value passes the required min length
-                if($ruleName === self::RULE_MIN && strlen($value) < $rule['min']){
+                if($ruleName === self::RULE_MIN && strlen(preg_replace('/\s/', '', trim($value))) < $rule['min']){
                     $this->addErrorForRule($attribute, self::RULE_MIN, $rule);
                 }
                 // checks whether the value surpasses the required max length
-                if($ruleName === self::RULE_MAX && strlen($value) > $rule['max']){
+                if($ruleName === self::RULE_MAX && strlen(preg_replace('/\s/', '', trim($value))) > $rule['max']){
                     $this->addErrorForRule($attribute, self::RULE_MAX, $rule);
                 }
                 // checks whether the password matches the confirm password
                 if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}){
                     $this->addErrorForRule($attribute, self::RULE_MATCH, $rule);
                 }
+                // checks whether the pass phrase matches the captcha
+                if($ruleName === self::RULE_CAPTCHA &&  sha1($value) !== $this->{$rule['match']}){
+                    $this->addErrorForRule($attribute, self::RULE_CAPTCHA, $rule);
+                }
+                // checks whether the phone number has 11 digits
+                if($ruleName === self::RULE_NUMBER ){
+                    $number = preg_replace('/\s/', '', trim($value));
+                    if(!preg_match('/^(09)\d{9}$/', $number)){
+                        $this->addErrorForRule($attribute, self::RULE_NUMBER);
+                    }
+                }
 
+                // echo $_SESSION['pass_phrase'];
+                // exit;
+    
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
                     $uniqueAttr = $rule['attribute'] ?? $attribute;
@@ -99,6 +103,8 @@ abstract class Model {
         self::RULE_MAX => 'Min length of this field must be {max}',
         self::RULE_MATCH => 'This field must be the same as {match}',
         self::RULE_UNIQUE => 'Record with this {field} already exists',
+        self::RULE_NUMBER => 'Invalid phone number',
+        self::RULE_CAPTCHA => 'This field must be the same as {match}'
        ];
    }
 

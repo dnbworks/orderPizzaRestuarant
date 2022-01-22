@@ -2,14 +2,21 @@
 
 declare(strict_types = 1);
 
-use app\controllers\AuthController;
-use app\core\Application;
-use app\controllers\SiteController;
-use app\controllers\ApiController;
+defined('ROOT_PATH') or define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
+
+$composer = ROOT_PATH . '/vendor/autoload.php';
+
+if (is_file($composer)) {
+    require_once $composer;
+}
+
 use app\controllers\customer\CustomerController;
-
-require_once __DIR__ ."/../vendor/autoload.php";
-
+use app\controllers\admin\DashboardController;
+use app\controllers\customer\AuthController;
+use app\controllers\client\SiteController;
+use app\controllers\admin\AdminController;
+use app\controllers\apis\ApiController;
+use app\core\Application;
 
 $config = [
     'userClass' => \app\models\UserModel::class,
@@ -61,8 +68,11 @@ $app->router->get("/my-account/view-order/:id", [CustomerController::class, 'vie
 $app->router->get("/my-account/edit-account", [CustomerController::class, 'editAccount']);
 
 
+$app->router->get("/admin", [AdminController::class, 'login']);
+$app->router->get("/admin/login", [AdminController::class, 'login']);
+$app->router->get("/admin/register", [AdminController::class, 'login']);
+$app->router->get("/admin/dashboard", [DashboardController::class, 'index']);
 
 
-// $app->router->get("/order/{$type}/{$name}", [SiteController::class, 'viewProduct']);
 $app->run();
 

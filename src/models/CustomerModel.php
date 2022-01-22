@@ -5,11 +5,18 @@ namespace app\models;
 use app\core\DbModel;
 
 
-class UserModel extends DbModel
+class CustomerModel extends DbModel
 {
     
     public string $firstname = "";
     public string $lastname = "";
+    public string $gender = "";
+
+    public string $city = "";
+    public string $province = "";
+    public string $postal_code = "";
+    public string $address = "";
+    public string $phone_number = "";
 
     public string $email = "";
     public string $password = "";

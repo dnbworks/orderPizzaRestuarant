@@ -92,6 +92,13 @@ function render(data, element, type){
     });   
 
     
+    imgs.forEach(img => {
+        img.onload = function(){
+            this.previousElementSibling.style.visibility = 'hidden';
+        }
+        
+    });
+   
     pagination.innerHTML = data.pagination_links;
     if(pagination.querySelectorAll('a')){
         let pagination_links = pagination.querySelectorAll('a');
@@ -112,13 +119,15 @@ function render(data, element, type){
 }
 
 
+window.onload = function(){
 
-
-imgs.forEach(img => {
-    img.addEventListener('load', function(){
-        this.previousElementSibling.style.visibility = 'hidden';
+    imgs.forEach(img => {
+        // console.log(img.src);
+        img.previousElementSibling.style.visibility = 'hidden';
     });
-});
+    console.log('hello world');
+}
+
 
 
 

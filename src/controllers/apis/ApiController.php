@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\controllers;
+namespace app\controllers\apis;
 
 use app\core\cart\Product;
 use app\core\Controller;
@@ -22,12 +22,9 @@ class ApiController extends Controller
 
         $PizzaModel = new PizzaModel();
         // $this->setLayout('main');
-       
-
+        
         if(isset($request->getBody()['type'])){
            
-            // var_dump($request->getBody());
-            // exit;
             $current_page = isset($request->getBody()['page']) ? $request->getBody()['page'] : 1;
             $result_per_page = 6;
 
@@ -40,8 +37,9 @@ class ApiController extends Controller
 
             $limit = " LIMIT $skip,  $result_per_page";
 
-            $result = $PizzaModel->getType($request->getBody()['type'],  $limit);
-
+            $result = $PizzaModel->getType(preg_replace('/%20/', ' ', $request->getBody()['type']),  $limit);
+            
+        
             if($num_pages > 1){
                 // generate pagination links
                 $pagination = new PaginationLinks($current_page, $num_pages, $request->getBody()['type']);
@@ -49,7 +47,6 @@ class ApiController extends Controller
             } else {
                 $links = '';
             }
-
 
             return json_encode(
                     array('pagination_links' => $links, 'data' => $result['data'])

@@ -91,7 +91,7 @@ cartBody.addEventListener('click', function(e){
         preloader.style.display = 'block';
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/delete", true);
+        xhr.open("POST", "/api/delete", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(e.target.id));
 
@@ -101,6 +101,7 @@ cartBody.addEventListener('click', function(e){
             let subtotal = JSON.parse(this.responseText).subtotal;
             let cart_count = JSON.parse(this.responseText).cartNum;
             let template = '';
+            console.log(cart_count);
 
             cart.forEach(item => {
                 template += `

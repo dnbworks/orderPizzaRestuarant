@@ -1,6 +1,6 @@
 <?php
  
-namespace app\controllers;
+namespace app\controllers\client;
 
 use app\core\Application;
 use app\core\Controller;
@@ -37,10 +37,12 @@ class SiteController extends Controller
     {
         $PizzaModel = new PizzaModel();
         $this->setLayout('main');
-
+        
+   
         if(isset($request->getBody()['type']) && isset($request->getBody()['name']) && (!empty($request->getBody()['name'])) && (!empty($request->getBody()['type']))){
-
-            $result = $PizzaModel->findOne($request->getBody()['type'], $request->getBody()['name']);
+            // var_dump( preg_replace('/%20/', ' ', $request->getBody()['name']));
+            // exit;
+            $result = $PizzaModel->findOne(preg_replace('/%20/', ' ', $request->getBody()['type']), preg_replace('/%20/', ' ', $request->getBody()['name']));
 
             $cart = $_SESSION['cart']->getItems();
 
@@ -94,7 +96,6 @@ class SiteController extends Controller
                 ]);
             }
 
-            
         }
      
         $result = $PizzaModel->offer();

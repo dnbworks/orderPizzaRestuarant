@@ -49,7 +49,7 @@ final class Captcha
         }
     
         // draw the pass-phrase string
-        imagettftext($img, 18, 0, 5, self::CAPTCHA_HEIGHT - 5, $text_color, "asset/fonts/OpenSans-Regular.ttf", Captcha::$instance->pass_phrase);
+        imagettftext($img, 16, 0, 8, self::CAPTCHA_HEIGHT - 5, $text_color, "asset/fonts/OpenSans-Regular.ttf", Captcha::$instance->pass_phrase);
     
         header("Content-Type: image/png");
     
