@@ -1,5 +1,5 @@
 <?php
-    $this->title = 'Admin';
+    $this->title = 'login';
     use app\core\Application;
 ?>
 

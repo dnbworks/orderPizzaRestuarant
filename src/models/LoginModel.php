@@ -5,7 +5,7 @@ namespace app\models;
 use app\core\Model;
 use app\core\Application;
 
-class LoginModel extends Model{
+class LoginModel extends Model {
     
     public string $email = "";
     public string $password = "";
@@ -13,6 +13,7 @@ class LoginModel extends Model{
     public function signIn()
     {
         $user = UserModel::findOne(['email' => $this->email]);
+      
         if(!$user){
             $this->addError('email', 'User does not exist with this email');
             return false;

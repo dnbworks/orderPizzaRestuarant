@@ -33,8 +33,6 @@ class Router {
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-        // var_dump($this->request->getBody());
-        // exit;
     
 
         if(count(explode('/', $path)) > 2){
@@ -71,11 +69,6 @@ class Router {
                 $middleware->execute();
             }
         }
-
-        // echo '<pre>';
-        // var_dump($callback);
-        // echo '<pre>';
-        // exit;
     
         return call_user_func($callback, $this->request, $this->response, $param);
      

@@ -19,21 +19,32 @@ class AuthController extends Controller
         } 
 
         $this->setLayout('Auth');
-        $loginModel = new LoginModel();
+        $loginModel = new LoginModel(); 
+  
+        return $this->render('login', ["model" => $loginModel]);
+    }
+
+    public function store(Request $request, Response $response) 
+    {
+        $loginModel = new LoginModel(); 
+        
         if($request->isPost()){
+          
             $loginModel->loadData($request->getBody());
+           
             if($loginModel->validate() && $loginModel->signIn()){
-                if(isset($_SESSION['url'])){
-                    $response->redirect('/checkout');
-                    return;
-                }
+                // if(isset($_SESSION['url'])){
+                //     $response->redirect('/checkout');
+                //     return;
+                // }
+                       
+               
                 $response->redirect('/my-account');
                 return;
             }
+            
             return $this->render('login', ["model" => $loginModel]);
         }
-
-        return $this->render('login', ["model" => $loginModel]);
     }
 
     public function register(Request $request, Response $response)

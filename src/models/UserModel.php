@@ -20,7 +20,7 @@ class UserModel extends DbModel
 
     public function __construct()
     {
-        $this->pass_prase = $_SESSION['pass_phrase'];
+        // $this->pass_prase = $_SESSION['pass_phrase'];
     }
 
     public function register()

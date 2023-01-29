@@ -122,7 +122,7 @@ class SiteController extends Controller
         if(Application::IsGuest()){
             $_SESSION['url'] = 'checkout';
             $response->redirect('/login');
-            exit;
+            return;
         } 
 
         $cart = $_SESSION['cart'];

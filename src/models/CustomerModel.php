@@ -23,11 +23,11 @@ class CustomerModel extends DbModel
     public string $confirmPassword = "";
 
     public string $captcha = "";
-    public string $pass_prase = "";
+    public ?string $pass_prase = "";
 
     public function __construct()
     {
-        $this->pass_prase = $_SESSION['pass_phrase'];
+        // $this->pass_prase = $_SESSION['pass_phrase'];
     }
 
     public function register()

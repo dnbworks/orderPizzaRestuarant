@@ -52,7 +52,7 @@ $app->router->get("/edit", [SiteController::class, 'editProduct']);
 $app->router->get("/order_success", [SiteController::class, 'order_success']);
 
 $app->router->get("/login", [AuthController::class, 'login']);
-$app->router->post("/login", [AuthController::class, 'login']);
+$app->router->post("/login", [AuthController::class, 'store']);
 
 $app->router->get("/register", [AuthController::class, 'register']);
 $app->router->post("/register", [AuthController::class, 'register']);

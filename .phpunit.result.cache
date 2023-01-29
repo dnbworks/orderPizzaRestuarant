@@ -1,1 +1,1 @@
-{"version":1,"defects":{"tests\\unit\\RouterTest::it_registers_router":5},"times":{"tests\\unit\\RouterTest::it_registers_router":0.004}}
+{"version":1,"defects":{"tests\\unit\\RouterTest::it_registers_router":5,"tests\\unit\\AuthTest::it_login":4},"times":{"tests\\unit\\RouterTest::it_registers_router":0,"tests\\unit\\AuthTest::it_login":0.032}}
